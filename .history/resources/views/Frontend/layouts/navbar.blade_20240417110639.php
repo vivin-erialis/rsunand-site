@@ -32,7 +32,7 @@
                     {{-- <a href="404.html" class="dropdown-item">404 Page</a> --}}
                 </div>
             </div>
-            <a href="/kontak" class="nav-item nav-link  {{Request::is('kontak') ? 'active' : ''}}">Kontak</a>
+            <a href="/kontak" class="nav-item nav-link  {{Request::is('kontak') ? 'active' : ''}}">Tentang Kami</a>
         </div>
         <a href="/booking" class="btn btn-primary py-2 px-4 d-none d-lg-block">Booking Online</a>
     </div>

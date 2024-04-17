@@ -11,18 +11,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'homePage']);
-// Informasi
 Route::get('tentang-kami', [TentangKamiController::class, 'tentangKami']);
 Route::get('jadwal-dokter', [InformasiController::class, 'jadwalDokter']);
 Route::get('informasi-dokter', [InformasiController::class, 'informasiDokter']);
 Route::get('bagian-instalasi', [InformasiController::class, 'bagianInstalasi']);
-
-// Artikel
 Route::get('berita', [ArtikelController::class, 'berita']);
 Route::get('ilmiah', [ArtikelController::class, 'ilmiah']);
-Route::get('pendidikan-pelatihan', [ArtikelController::class, 'pendidikanPelatihan']);
-Route::get('penyakit-pengobatan', [ArtikelController::class, 'penyakitPengobatan']);
-
-Route::get('kontak', [HomeController::class, 'kontak']);
-Route::get('informasi', [HomeController::class, 'informasi']);
-Route::get('/karir', [HomeController::class, 'karir']);
+Route::get('pendikan-pelatihan', [ArtikelController::class, 'pendidikanPelatihan']);

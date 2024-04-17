@@ -24,5 +24,3 @@ Route::get('pendidikan-pelatihan', [ArtikelController::class, 'pendidikanPelatih
 Route::get('penyakit-pengobatan', [ArtikelController::class, 'penyakitPengobatan']);
 
 Route::get('kontak', [HomeController::class, 'kontak']);
-Route::get('informasi', [HomeController::class, 'informasi']);
-Route::get('/karir', [HomeController::class, 'karir']);

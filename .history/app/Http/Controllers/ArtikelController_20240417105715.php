@@ -23,10 +23,4 @@ class ArtikelController extends Controller
             'headerStart' => 'Pendidikan & Pelatihan'
         ]);
     }
-
-    public function penyakitPengobatan() {
-        return view('Frontend.artikel.penyakit-pengobatan', [
-            'headerStart' => 'Penyakit & Pengobatan'
-        ]);
-    }
 }

@@ -20,13 +20,7 @@ class ArtikelController extends Controller
     }
     public function pendidikanPelatihan() {
         return view('Frontend.artikel.pendidikan-pelatihan', [
-            'headerStart' => 'Pendidikan & Pelatihan'
-        ]);
-    }
-
-    public function penyakitPengobatan() {
-        return view('Frontend.artikel.penyakit-pengobatan', [
-            'headerStart' => 'Penyakit & Pengobatan'
+            'headerStart' => 'Pendidikan dan Pelatihan'
         ]);
     }
 }

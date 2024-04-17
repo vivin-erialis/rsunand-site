@@ -21,10 +21,4 @@ class HomeController extends Controller
             'headerStart' => 'Informasi'
         ]);
     }
-
-    public function karir() {
-        return view('Frontend.karir', [
-            'headerStart' => 'Karir'
-        ]);
-    }
 }

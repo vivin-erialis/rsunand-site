@@ -16,15 +16,4 @@ class HomeController extends Controller
             'headerStart' => 'Kontak'
         ]);
     }
-    public function informasi() {
-        return view('Frontend.informasi', [
-            'headerStart' => 'Informasi'
-        ]);
-    }
-
-    public function karir() {
-        return view('Frontend.karir', [
-            'headerStart' => 'Karir'
-        ]);
-    }
 }
