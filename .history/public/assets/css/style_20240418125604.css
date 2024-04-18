@@ -631,8 +631,8 @@ h6,
 
   /* CSS Dropdown Menu Dokter */
   /* Style untuk dropdown toggle button */
-.toggle-dokter {
-    background-color: #1C7C3D; /* Warna latar belakang */
+.dropdown-toggle {
+    background-color: #333; /* Warna latar belakang */
     color: #fff; /* Warna teks */
     border: none; /* Hapus border */
     padding: 8px 16px; /* Padding tombol */
@@ -641,8 +641,13 @@ h6,
     transition: background-color 0.3s ease; /* Efek transisi untuk perubahan warna latar belakang */
 }
 
+/* Hover effect untuk dropdown toggle button */
+.dropdown-toggle:hover {
+    background-color: #1C7C3D; /* Warna latar belakang saat hover */
+}
+
 /* Style untuk dropdown menu */
-.menu-dokter {
+.dropdown-menu {
     background-color: #f8f9fa; /* Warna latar belakang */
     border: 1px solid #ced4da; /* Border */
     border-radius: 4px; /* Tambahkan sedikit border-radius */
@@ -650,7 +655,7 @@ h6,
 }
 
 /* Style untuk item dropdown */
-.item-dokter {
+.dropdown-item {
     color: #343a40; /* Warna teks */
     padding: 8px 16px; /* Padding item dropdown */
     transition: background-color 0.3s ease; /* Efek transisi untuk perubahan warna latar belakang */

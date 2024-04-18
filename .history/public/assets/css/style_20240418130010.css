@@ -630,8 +630,7 @@ h6,
   /* End CSS Berita dan Artikel */
 
   /* CSS Dropdown Menu Dokter */
-  /* Style untuk dropdown toggle button */
-.toggle-dokter {
+.dropdown-dokter {
     background-color: #1C7C3D; /* Warna latar belakang */
     color: #fff; /* Warna teks */
     border: none; /* Hapus border */
@@ -657,7 +656,7 @@ h6,
 }
 
 /* Hover effect untuk item dropdown */
-.dropdown-item:hover {
+.item-dokter:hover {
     background-color: #e9ecef; /* Warna latar belakang saat hover */
 }
 
