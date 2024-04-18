@@ -1,7 +1,5 @@
-<div class="nav-item dropdown text-center">
-    <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-        Pilih Spesialisasi
-    </button>
+
+<div class="nav-item dropdown">
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li><a class="dropdown-item" href="#tab-pane-1">Dokter Umum</a></li>
         <li><a class="dropdown-item" href="#tab-pane-2">Dokter Gigi & Mulut</a></li>

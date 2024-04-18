@@ -1,5 +1,5 @@
-<div class="nav-item dropdown text-center">
-    <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="nav-item dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         Pilih Spesialisasi
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">

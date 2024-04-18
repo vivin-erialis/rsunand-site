@@ -1,4 +1,4 @@
-<div class="nav-item dropdown text-center">
+<div class="nav-item dropdown form-control">
     <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         Pilih Spesialisasi
     </button>

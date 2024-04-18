@@ -643,7 +643,7 @@ h6,
 
 /* Hover effect untuk dropdown toggle button */
 .dropdown-toggle:hover {
-    background-color: #1C7C3D; /* Warna latar belakang saat hover */
+    background-color: #0056b3; /* Warna latar belakang saat hover */
 }
 
 /* Style untuk dropdown menu */
@@ -666,4 +666,4 @@ h6,
     background-color: #e9ecef; /* Warna latar belakang saat hover */
 }
 
-/* End CSS Menu Dokter */
+/* End Menu Dokter */
