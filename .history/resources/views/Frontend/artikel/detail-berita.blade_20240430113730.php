@@ -1,0 +1,1 @@
+<p>{{$berita->title}}</p>
