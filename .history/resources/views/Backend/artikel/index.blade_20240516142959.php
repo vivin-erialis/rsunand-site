@@ -84,7 +84,7 @@
                                                     data-target="#editModal"> <i class="fa fa-edit text-xs me-2"></i>
                                                     Edit
                                                 </button>
-                                                <button class="btn btn-sm btn-success delete-btn"
+                                                <button class="btn btn-sm btn-success edit-btn"
                                                     data-id="{{ $data->id }}" data-toggle="modal"
                                                     data-target="#deleteModal"> <i class="fa fa-trash text-xs me-2"></i>
                                                     Edit

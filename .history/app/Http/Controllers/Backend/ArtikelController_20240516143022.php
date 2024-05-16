@@ -118,6 +118,6 @@ class ArtikelController extends Controller
     // Simpan pesan dalam sesi
     session()->flash('toast_message', 'Artikel berhasil dihapus.');
 
-    return response()->json();
+    return response()->json(['message' => 'Artikel berhasil dihapus.']);
 }
 }
