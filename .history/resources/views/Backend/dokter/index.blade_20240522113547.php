@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        @include('Backend.dokter.create')
+        {{-- @include('Backend.dokter.create') --}}
         {{-- @include('Backend.dokter.edit') --}}
         {{-- @include('Backend.dokter.hapus') --}}
         <script>
@@ -58,14 +58,14 @@
                 var table = $('#myTable').DataTable();
 
                 // Fungsi untuk memuat
-                function loadData() {
+                function loadArticles() {
 
                     $.ajax({
                         url: "{{ route('getDokter') }}",
                         type: 'GET',
                         dataType: 'json',
                         success: function(response) {
-                            console.log('Success:', response.dokter); // Debugging
+                            console.log('Success:', response); // Debugging
                             let html = '';
                             response.dokter.forEach(function(dokter) {
                                 html += '<tr>';
@@ -96,14 +96,50 @@
                     });
                 }
 
-                // tambah data dokter
-                $('#addForm').on('submit', function(e) {
+                $(document).on('click', '.change-status', function(event) {
+                    event.preventDefault();
+
+                    var articleId = $(this).data('id');
+                    var newStatus = $(this).data('status');
+                    console.log(articleId);
+
+                    $.ajax({
+                        url: '/admin/artikel/' + articleId + '/status',
+                        type: 'PUT',
+                        data: {
+                            status: newStatus
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // Update tampilan tombol sesuai dengan status baru
+                            if (newStatus == 1) {
+                                $(this).removeClass('btn-success').addClass('btn-danger').text(
+                                    'Non Aktif').data('status', 0);
+                            } else {
+                                $(this).removeClass('btn-danger').addClass('btn-success').text(
+                                    'Aktif').data('status', 1);
+                            }
+                            toastr.success(response.message);
+
+                            loadArticles();
+                            // Atau Anda bisa melakukan penyesuaian tampilan lain sesuai kebutuhan
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+
+                // Event handler untuk form submit
+                $('#artikelForm').on('submit', function(e) {
                     e.preventDefault();
 
                     var formData = new FormData(this);
 
                     $.ajax({
-                        url: '/admin/dokter',
+                        url: '/admin/artikel',
                         method: 'POST',
                         data: formData,
                         processData: false,
@@ -146,9 +182,7 @@
                         }
                     });
                 });
-                // end tambah data dokter
 
-                //inisialisasi ckeditor
                 ClassicEditor
                     .create(document.querySelector('#isiArtikel'))
                     .then(editor => {
@@ -158,9 +192,7 @@
                     .catch(error => {
                         console.error(error);
                     });
-                // end inisialisasi ckeditor
-
-                // klik button edit data
+                // Event delegation for delete button
                 $(document).on('click', '.edit-btn', function() {
                     var artikelId = $(this).data('id');
                     console.log("Edit button clicked, artikelId:", artikelId); // Debugging
@@ -192,9 +224,7 @@
                         }
                     });
                 });
-                // end klik button edit data
 
-                // simpan perubahan data
                 $('#editArtikelForm').on('submit', function(event) {
                     event.preventDefault();
 
@@ -235,9 +265,8 @@
                         }
                     });
                 });
-                // end simpan perubahan data
 
-                // delete data
+                // Event delegation for delete button
                 $(document).on('click', '.delete-btn', function() {
                     var artikelId = $(this).data('id');
                     console.log("Delete button clicked, artikelId:", artikelId); // Debugging
@@ -265,9 +294,8 @@
                         });
                     });
                 });
-                // end delete data
 
-                loadData();
+                loadArticles();
             });
         </script>
 

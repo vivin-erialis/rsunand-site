@@ -54,10 +54,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // dokter
     Route::get('/dokter', [DokterController::class, 'indexDokter']);
     Route::post('/dokter', [DokterController::class, 'saveDokter']);
-    Route::get('/dokter/{id}/edit', [DokterController::class, 'getDataforEdit']);
-    Route::put('/dokter/{id}/status', [DokterController::class, 'editStatus']);
-    Route::put('/dokter/{id}', [DokterController::class, 'updateDataArtikel']);
-    Route::delete('/dokter/{id}', [DokterController::class, 'hapusDataArtikel']);
+    Route::get('/artikel/{id}/edit', [DokterController::class, 'getDataforEdit']);
+    Route::put('/artikel/{id}/status', [DokterController::class, 'editStatus']);
+    Route::put('/artikel/{id}', [DokterController::class, 'updateDataArtikel']);
+    Route::delete('/artikel/{id}', [DokterController::class, 'hapusDataArtikel']);
 });
 
 

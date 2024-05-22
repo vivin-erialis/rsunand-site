@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dokter;
-use App\Models\spesialis;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class DokterController extends Controller
 {
@@ -15,8 +13,7 @@ class DokterController extends Controller
     {
         return view('Backend.dokter.index', [
             'active' => 'admin/dokter',
-            'dokter' => Dokter::all(),
-            'spesialis' => spesialis::all()
+            'dokter' => Dokter::all()
         ]);
     }
 

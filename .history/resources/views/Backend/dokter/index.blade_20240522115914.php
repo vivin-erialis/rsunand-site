@@ -61,13 +61,13 @@
                 function loadData() {
 
                     $.ajax({
-                        url: "{{ route('getDokter') }}",
+                        url: "{{ route('getArtikel') }}",
                         type: 'GET',
                         dataType: 'json',
                         success: function(response) {
-                            console.log('Success:', response.dokter); // Debugging
+                            console.log('Success:', response); // Debugging
                             let html = '';
-                            response.dokter.forEach(function(dokter) {
+                            response.artikel.forEach(function(dokter) {
                                 html += '<tr>';
 
                                 html += '<td><p class="px-3 mb-0">' + dokter.nama +

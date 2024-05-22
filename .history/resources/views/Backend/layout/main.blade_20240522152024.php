@@ -72,11 +72,30 @@
         @include('Backend.layout.navbar')
         @yield('content')
     </main>
-    <!--   Core JS Files   -->
-    <script src="/../assets/backend/js/core/popper.min.js"></script>
-    <script src="/../assets/backend/js/core/bootstrap.min.js"></script>
-    <script src="/../assets/backend/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/../assets/backend/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor-2'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor3'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -88,54 +107,25 @@
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Corporate UI Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="/../assets/backend/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
 
     {{-- datatables --}}
+    <script src="/../assets/backend/assets/js/datatables.min.js"></script>
+    <script src="/../assets/backend/assets/js/datatables.js"></script>
 
-    {{-- <script src="https://cdn.tiny.cloud/1/vvjvlt7hei8al7pa5khj9072zbnz0a12ohzazcwprn14k0cl/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> --}}
     <script src="https://cdn.tiny.cloud/1/3ermfi9smgwonw9urelswo0xbj2yte3esuh0nh2tjz7850xe/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
-
-        <script>
-            ClassicEditor
-                .create(document.querySelector('#editor'))
-                .catch(error => {
-                    console.error(error);
-                });
-        </script>
-        <script>
-            ClassicEditor
-                .create(document.querySelector('#editor-2'))
-                .catch(error => {
-                    console.error(error);
-                });
-        </script>
-
-     <script>
-            var win = navigator.platform.indexOf('Win') > -1;
-            if (win && document.querySelector('#sidenav-scrollbar')) {
-                var options = {
-                    damping: '0.5'
-                }
-                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-            }
-        </script>
-
-     <script src="https://cdn.tiny.cloud/1/3ermfi9smgwonw9urelswo0xbj2yte3esuh0nh2tjz7850xe/tinymce/6/tinymce.min.js"
-            referrerpolicy="origin"></script>
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <!-- DataTables JS -->
-        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-        <!-- Bootstrap JS (Opsional) -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <!-- Initialize DataTables -->
-        <script>
-            $(document).ready(function() {
-                $('#myTable').DataTable();
-            });
-        </script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap JS (Opsional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Initialize DataTables -->
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
 </body>
 
 </html>

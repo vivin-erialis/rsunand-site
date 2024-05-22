@@ -9,7 +9,7 @@ aria-hidden="true">
             </button>
         </div>
         <div class="modal-body">
-            <form id="addForm" enctype="multipart/form-data">
+            <form id="artikelForm" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -54,11 +54,11 @@ aria-hidden="true">
 
                         <div class="">
                             <button type="submit"
-                                class="btn btn-success btn-sm w-13 mt-4 mb-3 float-end"> <i class="fa fa-save me-1 text-xs"></i>Simpan</button>
+                                class="btn btn-success btn-sm w-13 mt-4 mb-3 float-end"> <i class="fa fa-save me-1"></i>Simpan</button>
                         </div>
                         <div class="">
                             <a href="/admin/dokter"
-                                    class="btn btn-dark btn-sm w-13 mt-4 mb-3 float-end mx-2"> <i class="fa fa-times me-1 text-xs"></i>Batal
+                                    class="btn btn-dark btn-sm w-13 mt-4 mb-3 float-end mx-2"> <i class="fa fa-times me-1"></i>Batal
                             </a>
                         </div>
                     </div>

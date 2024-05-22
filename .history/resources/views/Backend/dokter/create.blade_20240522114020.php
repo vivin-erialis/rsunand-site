@@ -9,7 +9,7 @@ aria-hidden="true">
             </button>
         </div>
         <div class="modal-body">
-            <form id="addForm" enctype="multipart/form-data">
+            <form id="artikelForm" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">

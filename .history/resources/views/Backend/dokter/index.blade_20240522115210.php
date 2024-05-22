@@ -58,14 +58,14 @@
                 var table = $('#myTable').DataTable();
 
                 // Fungsi untuk memuat
-                function loadData() {
+                function loadArticles() {
 
                     $.ajax({
                         url: "{{ route('getDokter') }}",
                         type: 'GET',
                         dataType: 'json',
                         success: function(response) {
-                            console.log('Success:', response.dokter); // Debugging
+                            console.log('Success:', response); // Debugging
                             let html = '';
                             response.dokter.forEach(function(dokter) {
                                 html += '<tr>';
@@ -158,9 +158,7 @@
                     .catch(error => {
                         console.error(error);
                     });
-                // end inisialisasi ckeditor
-
-                // klik button edit data
+                // Event delegation for delete button
                 $(document).on('click', '.edit-btn', function() {
                     var artikelId = $(this).data('id');
                     console.log("Edit button clicked, artikelId:", artikelId); // Debugging
@@ -192,9 +190,7 @@
                         }
                     });
                 });
-                // end klik button edit data
 
-                // simpan perubahan data
                 $('#editArtikelForm').on('submit', function(event) {
                     event.preventDefault();
 
@@ -235,9 +231,8 @@
                         }
                     });
                 });
-                // end simpan perubahan data
 
-                // delete data
+                // Event delegation for delete button
                 $(document).on('click', '.delete-btn', function() {
                     var artikelId = $(this).data('id');
                     console.log("Delete button clicked, artikelId:", artikelId); // Debugging
@@ -265,9 +260,8 @@
                         });
                     });
                 });
-                // end delete data
 
-                loadData();
+                loadArticles();
             });
         </script>
 

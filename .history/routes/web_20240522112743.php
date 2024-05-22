@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Backend\ArtikelController as BackendArtikelController;
 use App\Http\Controllers\Backend\DireksiController;
-use \App\Http\Controllers\Backend\DokterController ;
+use \App\Http\Controllers\Backend\DokterController;
 use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Frontend\ArtikelController;
 use App\Http\Controllers\HomeController;
@@ -43,24 +43,19 @@ Route::get('/karir', [HomeController::class, 'karir']);
 
 //
 Route::prefix('admin')->middleware('auth')->group(function () {
-    // artikel
+    // Route::resource('/artikel', BackendArtikelController::class);
+    // Route::get('/artikel', [BackendArtikelController::class, 'getDataArtikel']);
     Route::get('/artikel', [BackendArtikelController::class, 'indexArtikel']);
     Route::post('/artikel', [BackendArtikelController::class, 'saveDataArtikel']);
     Route::get('/artikel/{id}/edit', [BackendArtikelController::class, 'getDataforEdit']);
     Route::put('/artikel/{id}/status', [BackendArtikelController::class, 'editStatus']);
     Route::put('/artikel/{id}', [BackendArtikelController::class, 'updateDataArtikel']);
     Route::delete('/artikel/{id}', [BackendArtikelController::class, 'hapusDataArtikel']);
-
-    // dokter
-    Route::get('/dokter', [DokterController::class, 'indexDokter']);
-    Route::post('/dokter', [DokterController::class, 'saveDokter']);
-    Route::get('/dokter/{id}/edit', [DokterController::class, 'getDataforEdit']);
-    Route::put('/dokter/{id}/status', [DokterController::class, 'editStatus']);
-    Route::put('/dokter/{id}', [DokterController::class, 'updateDataArtikel']);
-    Route::delete('/dokter/{id}', [DokterController::class, 'hapusDataArtikel']);
+    Route::resource('/dokter', DokterController::class);
+    Route::resource('/direksi', DireksiController::class);
 });
 
 
 // ajax
 Route::get('/get-data-artikel', [BackendArtikelController::class, 'getArtikel'])->name('getArtikel');
-Route::get('/get-data-dokter', [DokterController::class, 'getDokter'])->name('getDokter');
+Route::get('/get-data-dokter', [BackendDokterController::class, 'getDokter'])->name('getDokter');

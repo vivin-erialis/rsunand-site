@@ -18,60 +18,43 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="apple-touch-icon" sizes="76x76" href="/../assets/backend/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="/../assets/backend/img/favicon.png">
+    <link rel="stylesheet" href="/css/lib/css/normalize.css">
+    <link rel="stylesheet" href="/css/lib/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/lib/datatable/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/css/lib/datatable/buttons.bootstrap.min.css">
+    <link rel="stylesheet" href="/css/lib/datatable/buttons.dataTables.min.css">
 
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Pastikan jQuery dimasukkan -->
+    {{-- Fontawesome --}}
+    <link rel="stylesheet" type="text/css" href="/fontawesome/css/all.css">
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<link rel="apple-touch-icon" sizes="76x76" href="/../assets/backend/img/apple-icon.png">
-<link rel="icon" type="image/png" href="/../assets/backend/img/rsunandlogo.png">
-{{-- <link rel="stylesheet" href="/../assets/backend/assets/css/lib/css/normalize.css"> --}}
-<link rel="stylesheet" href="/../assets/backend/assets/css/table.css">
-{{-- <link rel="stylesheet" href="/../assets/backend/assets/css/lib/css/bootstrap.css"> --}}
-{{-- <link rel="stylesheet" href="/../assets/backend/assets/css/datatables.min.css"> --}}
-{{-- <link rel="stylesheet" href="/../assets/backend/assets/css/datatables.css"> --}}
-<!-- DataTables CSS -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-<!-- Bootstrap CSS (Opsional) -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-{{-- <link rel="stylesheet" href="/../assets/backend/assets/css/buttons.bootstrap.min.css"> --}}
-{{-- <link rel="stylesheet" href="/../assets/backend/assets/css/buttons.dataTables.min.css"> --}}
 
-{{-- Fontawesome --}}
-{{-- <link rel="stylesheet" type="text/css" href="/fontawesome/css/all.css"> --}}
-<title>Admin | @yield('title', 'Pendaftaran')</title>
+    <title>@yield('title', 'Pendaftaran')</title>
 
-<!--     Fonts and icons     -->
-<link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700"
-    rel="stylesheet" />
-<!-- Nucleo Icons -->
-<link href="/../assets/backend/img/rsunandlogo.png" rel="stylesheet" />
-<link href="/../assets/backend/img/rsunandlogo.png" rel="stylesheet" />
-<!-- Font Awesome Icons -->
-<script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
-<link href="/../assets/backend/img/rsunandlogo.png" rel="stylesheet" />
-<!-- CSS Files -->
-<link id="pagestyle" href="/../assets/backend/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet" />
-{{-- CK Editor --}}
-<script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
-{{-- Data Tables --}}
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css" />
-
+    <!--     Fonts and icons     -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700"
+        rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="/../assets/backend/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/../assets/backend/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
+    <link href="/../assets/backend/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="/../assets/backend/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
     {{-- Sidebar --}}
-    @include('Backend.layout.sidebar')
+    @include('backend.layout.sidebar')
     {{-- End Sidebar --}}
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        @include('Backend.layout.navbar')
+        @include('backend.layout.navbar')
         @yield('content')
     </main>
+
     <!--   Core JS Files   -->
     <script src="/../assets/backend/js/core/popper.min.js"></script>
     <script src="/../assets/backend/js/core/bootstrap.min.js"></script>

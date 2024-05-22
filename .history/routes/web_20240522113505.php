@@ -52,12 +52,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/artikel/{id}', [BackendArtikelController::class, 'hapusDataArtikel']);
 
     // dokter
-    Route::get('/dokter', [DokterController::class, 'indexDokter']);
-    Route::post('/dokter', [DokterController::class, 'saveDokter']);
-    Route::get('/dokter/{id}/edit', [DokterController::class, 'getDataforEdit']);
-    Route::put('/dokter/{id}/status', [DokterController::class, 'editStatus']);
-    Route::put('/dokter/{id}', [DokterController::class, 'updateDataArtikel']);
-    Route::delete('/dokter/{id}', [DokterController::class, 'hapusDataArtikel']);
+    Route::get('/artikel', [BackendArtikelController::class, 'indexArtikel']);
+    Route::post('/artikel', [BackendArtikelController::class, 'saveDataArtikel']);
+    Route::get('/artikel/{id}/edit', [BackendArtikelController::class, 'getDataforEdit']);
+    Route::put('/artikel/{id}/status', [BackendArtikelController::class, 'editStatus']);
+    Route::put('/artikel/{id}', [BackendArtikelController::class, 'updateDataArtikel']);
+    Route::delete('/artikel/{id}', [BackendArtikelController::class, 'hapusDataArtikel']);
 });
 
 
