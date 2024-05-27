@@ -1,3 +1,17 @@
+<!--
+=========================================================
+* Corporate UI - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/corporate-ui
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,9 +70,6 @@
         @include('Backend.layout.navbar')
         @yield('content')
     </main>
-    <script src="/../assets/backend/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/../assets/backend/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/../assets/backend/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'))
@@ -91,13 +102,13 @@
         }
     </script>
     <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    {{-- <script async defer src="https://buttons.github.io/buttons.js"></script> --}}
     <!-- Control Center for Corporate UI Dashboard: parallax effects, scripts for the example pages etc -->
     {{-- <script src="/../assets/backend/assets/js/corporate-ui-dashboard.min.js?v=1.0.0"></script> --}}
 
     {{-- datatables --}}
-    <script src="/../assets/backend/assets/js/datatables.min.js"></script>
-    <script src="/../assets/backend/assets/js/datatables.js"></script>
+    {{-- <script src="/../assets/backend/assets/js/datatables.min.js"></script> --}}
+    {{-- <script src="/../assets/backend/assets/js/datatables.js"></script> --}}
     {{-- <script src="/../assets/backend/assets/js/dataTables.bootstrap.min.js"></script> --}}
     {{-- <script src="/../assets/backend/assets/js/dataTables.buttons.min.js"></script> --}}
     {{-- <script src="/../assets/backend/assets/js/buttons.bootstrap.min.js"></script> --}}
@@ -119,15 +130,6 @@
     <!-- Bootstrap JS (Opsional) -->
     {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
     <!-- Initialize DataTables -->
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();

@@ -1,3 +1,17 @@
+<!--
+=========================================================
+* Corporate UI - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/corporate-ui
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,9 +70,6 @@
         @include('Backend.layout.navbar')
         @yield('content')
     </main>
-    <script src="/../assets/backend/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/../assets/backend/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/../assets/backend/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'))
@@ -110,31 +121,22 @@
     {{-- <script src="/../assets/backend/assets/js/multiinsert.js"></script> --}}
     {{-- <script src="/../assets/backend/assets/js/jquerydua.js"></script> --}}
     {{-- <script src="https://cdn.tiny.cloud/1/vvjvlt7hei8al7pa5khj9072zbnz0a12ohzazcwprn14k0cl/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> --}}
-    {{-- <script src="https://cdn.tiny.cloud/1/3ermfi9smgwonw9urelswo0xbj2yte3esuh0nh2tjz7850xe/tinymce/6/tinymce.min.js"
-        referrerpolicy="origin"></script> --}}
+    <script src="https://cdn.tiny.cloud/1/3ermfi9smgwonw9urelswo0xbj2yte3esuh0nh2tjz7850xe/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
     <!-- jQuery -->
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- DataTables JS -->
-    {{-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> --}}
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <!-- Bootstrap JS (Opsional) -->
-    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Initialize DataTables -->
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
         });
     </script>
 
-    {{-- <script>
+    <script>
         $(document).ready(function() {
   var toastElList = [].slice.call(document.querySelectorAll('.toast'));
   var toastList = toastElList.map(function(toastEl) {
@@ -154,7 +156,7 @@
   });
 });
 
-    </script> --}}
+    </script>
 </body>
 
 </html>

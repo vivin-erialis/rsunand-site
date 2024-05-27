@@ -56,9 +56,10 @@
         @include('Backend.layout.navbar')
         @yield('content')
     </main>
-    <script src="/../assets/backend/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="/../assets/backend/js/plugins/smooth-scrollbar.min.js"></script>
+
     <script src="/../assets/backend/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+    <script src="/../assets/backend/js/plugins/perfect-scrollbar.min.js"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'))

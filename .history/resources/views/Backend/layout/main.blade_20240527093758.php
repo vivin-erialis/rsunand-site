@@ -56,9 +56,6 @@
         @include('Backend.layout.navbar')
         @yield('content')
     </main>
-    <script src="/../assets/backend/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="/../assets/backend/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="/../assets/backend/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'))
@@ -120,19 +117,12 @@
     {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
     <!-- Initialize DataTables -->
     <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
-    <script>
         $(document).ready(function() {
             $('#myTable').DataTable();
         });
     </script>
+        <script src="/../assets/backend/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+
 
     {{-- <script>
         $(document).ready(function() {
