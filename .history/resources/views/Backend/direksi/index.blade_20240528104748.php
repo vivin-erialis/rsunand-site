@@ -42,9 +42,9 @@
                 </div>
             </div>
         </div>
-        @include('Backend.direksi.create')
-        @include('Backend.direksi.edit')
-        {{-- @include('Backend.direksi.hapus') --}}
+        {{-- @include('Backend.dokter.create') --}}
+        {{-- @include('Backend.dokter.edit') --}}
+        {{-- @include('Backend.dokter.hapus') --}}
         <script>
             $(document).ready(function() {
                 // Setup CSRF token
@@ -69,27 +69,16 @@
                             let html = '';
                             response.direksi.forEach(function(direksi) {
                                 html += '<tr>';
-                                html += '<td>'
-                                    if (direksi.status == 0) {
-                                    html +=
-                                        '<a href="#" class="btn btn-sm btn-success change-status" data-id="' +
-                                        direksi.id + '" data-status="1">Aktif</a>';
-                                } else {
-                                    html +=
-                                        '<a href="#" class="btn btn-sm btn-danger change-status" data-id="' +
-                                        direksi.id + '" data-status="0">Non Aktif</a>';
-                                }
 
-                                html += '</td>'
                                 html += '<td><p class="px-3 mb-0">' +
                                     '<img src="' + direksi.foto_url + // Menggunakan foto_url
                                     '" alt="Foto Dokter" style="width:100px; height:auto;"><br>' +
-                                    direksi.nama + '<br>' + direksi.nip + '<br>' + direksi
-                                    .tempat_lahir + `/` + direksi.tanggal_lahir +
+                                    direksi.nama + '<br>' + direksi.nip + '<br>' + direksi.tempat_lahir +`/` +direksi.tanggal_lahir +
                                     '<br></p></td>';
-                                html += '<td><p class="px-3 mb-0">' + direksi.jabatan +
+                                html += '<td><p class="px-3 mb-0">' + direksi.pendidikan +
                                     '</p></td>';
-
+                                html += '<td><p class="px-3 mb-0">' + direksi.title +
+                                    '</p></td>';
                                 html += '<td>';
                                 html +=
                                     '<button class="btn btn-sm btn-warning edit-btn" data-id="' +
@@ -114,14 +103,14 @@
 
                 }
 
-                // tambah data direksi
+                // tambah data dokter
                 $('#addForm').on('submit', function(e) {
                     e.preventDefault();
 
                     var formData = new FormData(this);
 
                     $.ajax({
-                        url: '/admin/direksi',
+                        url: '/admin/dokter',
                         method: 'POST',
                         data: formData,
                         processData: false,
@@ -132,6 +121,17 @@
 
                             // Tutup modal setelah berhasil menambahkan data
                             $('#addModal').modal('hide');
+                            // Kosongkan nilai input di dalam modal
+                            // Event handler untuk membersihkan modal setelah ditutup
+                            $('#addModal').on('hidden.bs.modal', function() {
+                                $(this).find('form')[0].reset(); // Reset semua input form
+                                for (var instance in CKEDITOR.instances) {
+                                    CKEDITOR.instances[instance].setData(
+                                        ''); // Reset CKEditor instance
+                                }
+                            });;
+
+                            // Hapus elemen backdrop modal secara manual
                             $('.modal-backdrop').remove();
 
                             // Memuat ulang data artikel setelah data berhasil disimpan
@@ -153,53 +153,26 @@
                         }
                     });
                 });
-                // end tambah data direksi
+                // end tambah data dokter
 
-                // ganti status jabatan
-                $(document).on('click', '.change-status', function(event) {
-                    event.preventDefault();
-
-                    var dataId = $(this).data('id');
-                    var newStatus = $(this).data('status');
-                    console.log(dataId);
-
-                    $.ajax({
-                        url: '/admin/direksi/' + dataId + '/status',
-                        type: 'PUT',
-                        data: {
-                            status: newStatus
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            // Update tampilan tombol sesuai dengan status baru
-                            if (newStatus == 1) {
-                                $(this).removeClass('btn-danger').addClass('btn-success').text(
-                                    'Non Aktif').data('status', 0);
-                            } else {
-                                $(this).removeClass('btn-success').addClass('btn-danger').text(
-                                    'Aktif').data('status', 1);
-                            }
-                            toastr.success(response.message);
-
-                            loadData();
-                            // Atau Anda bisa melakukan penyesuaian tampilan lain sesuai kebutuhan
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
+                //inisialisasi ckeditor
+                ClassicEditor
+                    .create(document.querySelector('#pendidikan'))
+                    .then(editor => {
+                        // CKEditor #editor-4 siap, tetapkan editor ke variabel global
+                        window.editor3 = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
                     });
-                });
-                // end ganti status jabatan
-
+                // end inisialisasi ckeditor
 
                 // klik button edit data
                 $(document).on('click', '.edit-btn', function() {
                     var dataId = $(this).data('id');
                     console.log("Edit button clicked, dataId:", dataId); // Debugging
                     $.ajax({
-                        url: '/admin/direksi/' + dataId + '/edit',
+                        url: '/admin/dokter/' + dataId + '/edit',
                         type: 'GET',
                         success: function(response) {
                             // Isi formulir modal dengan data artikel yang diterima dari server
@@ -208,7 +181,15 @@
                             $('#nip').val(response.nip);
                             $('#tempatLahir').val(response.tempat_lahir);
                             $('#tanggalLahir').val(response.tanggal_lahir);
-                            $('#jabatan').val(response.jabatan);
+                            $('#pendidikan').val(response.pendidikan);
+
+                            // // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
+
+                            if (window.editor3) {
+                                window.editor3.setData(response.pendidikan);
+                            }
+
+                            $('#spesialisId').val(response.spesialis_id);
 
                             // Setelah semua data dimuat, tampilkan modal
                             $('#editModal').modal('show');
@@ -224,13 +205,16 @@
                 $('#editForm').on('submit', function(event) {
                     event.preventDefault();
 
+                    var pendidikan = editor3.getData();
 
                     // Siapkan data form
                     var formData = new FormData(this);
+                    formData.set('pendidikan', pendidikan);
+
                     var dataId = $('#dataId').val();
 
                     $.ajax({
-                        url: '/admin/direksi/' + dataId,
+                        url: '/admin/dokter/' + dataId,
                         method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
                         data: formData,
                         contentType: false,
@@ -260,32 +244,32 @@
                 // end simpan perubahan data
 
                 // delete data
-                // $(document).on('click', '.delete-btn', function() {
-                //     var dataId = $(this).data('id');
-                //     console.log("Delete button clicked, dataId:", dataId); // Debugging
-                //     $('#deleteModal').modal('show');
+                $(document).on('click', '.delete-btn', function() {
+                    var dataId = $(this).data('id');
+                    console.log("Delete button clicked, dataId:", dataId); // Debugging
+                    $('#deleteModal').modal('show');
 
-                //     // Saat konfirmasi hapus diklik, kirim permintaan penghapusan
-                //     $('#deleteBtn').off('click').on('click', function() {
-                //         $.ajax({
-                //             url: '/admin/direksi/' + dataId,
-                //             type: 'DELETE',
-                //             success: function(response) {
-                //                 console.log(response);
-                //                 // Tampilkan pesan toast
-                //                 $('#deleteModal').modal('hide');
-                //                 $('.modal-backdrop').remove();
-                //                 toastr.success(response.message);
+                    // Saat konfirmasi hapus diklik, kirim permintaan penghapusan
+                    $('#deleteBtn').off('click').on('click', function() {
+                        $.ajax({
+                            url: '/admin/dokter/' + dataId,
+                            type: 'DELETE',
+                            success: function(response) {
+                                console.log(response);
+                                // Tampilkan pesan toast
+                                $('#deleteModal').modal('hide');
+                                $('.modal-backdrop').remove();
+                                toastr.success(response.message);
 
-                //                 loadData();
-                //             },
-                //             error: function(xhr, status, error) {
-                //                 console.error(xhr.responseText);
-                //                 alert('Terjadi kesalahan, silakan coba lagi.');
-                //             }
-                //         });
-                //     });
-                // });
+                                loadData();
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                                alert('Terjadi kesalahan, silakan coba lagi.');
+                            }
+                        });
+                    });
+                });
                 // end delete data
                 loadData();
             });

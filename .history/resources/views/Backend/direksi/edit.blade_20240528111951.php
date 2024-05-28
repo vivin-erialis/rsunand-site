@@ -35,7 +35,7 @@
                 </div>
                 <label>Jabatan</label>
                 <div class="mb-3">
-                  <input type="text" class="form-control" id="jabatan" placeholder="masukan jabatan direksi" aria-label="Name"
+                  <input type="text" id="jabatan" placeholder="masukan jabatan direksi" aria-label="Name"
                     aria-describedby="name-addon" name="jabatan" ></input>
                 </div>
                 <label>Foto</label>

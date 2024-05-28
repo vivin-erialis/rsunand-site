@@ -71,4 +71,3 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 // ajax
 Route::get('/get-data-artikel', [BackendArtikelController::class, 'getArtikel'])->name('getArtikel');
 Route::get('/get-data-dokter', [DokterController::class, 'getDokter'])->name('getDokter');
-Route::get('/get-data-direksi', [DireksiController::class, 'getDireksi'])->name('getDireksi');

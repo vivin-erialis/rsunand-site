@@ -224,9 +224,12 @@
                 $('#editForm').on('submit', function(event) {
                     event.preventDefault();
 
+                    var pendidikan = editor3.getData();
 
                     // Siapkan data form
                     var formData = new FormData(this);
+                    formData.set('pendidikan', pendidikan);
+
                     var dataId = $('#dataId').val();
 
                     $.ajax({

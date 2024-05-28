@@ -43,7 +43,7 @@
             </div>
         </div>
         @include('Backend.direksi.create')
-        @include('Backend.direksi.edit')
+        {{-- @include('Backend.direksi.edit') --}}
         {{-- @include('Backend.direksi.hapus') --}}
         <script>
             $(document).ready(function() {
@@ -174,11 +174,11 @@
                         },
                         success: function(response) {
                             // Update tampilan tombol sesuai dengan status baru
-                            if (newStatus == 1) {
-                                $(this).removeClass('btn-danger').addClass('btn-success').text(
+                            (newStatus == 1) {
+                                $(this).removeClass('btn-success').addClass('btn-danger').text(
                                     'Non Aktif').data('status', 0);
                             } else {
-                                $(this).removeClass('btn-success').addClass('btn-danger').text(
+                                $(this).removeClass('btn-danger').addClass('btn-success').text(
                                     'Aktif').data('status', 1);
                             }
                             toastr.success(response.message);
@@ -195,68 +195,79 @@
 
 
                 // klik button edit data
-                $(document).on('click', '.edit-btn', function() {
-                    var dataId = $(this).data('id');
-                    console.log("Edit button clicked, dataId:", dataId); // Debugging
-                    $.ajax({
-                        url: '/admin/direksi/' + dataId + '/edit',
-                        type: 'GET',
-                        success: function(response) {
-                            // Isi formulir modal dengan data artikel yang diterima dari server
-                            $('#dataId').val(response.id);
-                            $('#nama').val(response.nama);
-                            $('#nip').val(response.nip);
-                            $('#tempatLahir').val(response.tempat_lahir);
-                            $('#tanggalLahir').val(response.tanggal_lahir);
-                            $('#jabatan').val(response.jabatan);
+                // $(document).on('click', '.edit-btn', function() {
+                //     var dataId = $(this).data('id');
+                //     console.log("Edit button clicked, dataId:", dataId); // Debugging
+                //     $.ajax({
+                //         url: '/admin/direksi/' + dataId + '/edit',
+                //         type: 'GET',
+                //         success: function(response) {
+                //             // Isi formulir modal dengan data artikel yang diterima dari server
+                //             $('#dataId').val(response.id);
+                //             $('#nama').val(response.nama);
+                //             $('#nip').val(response.nip);
+                //             $('#tempatLahir').val(response.tempat_lahir);
+                //             $('#tanggalLahir').val(response.tanggal_lahir);
+                //             $('#pendidikan').val(response.pendidikan);
 
-                            // Setelah semua data dimuat, tampilkan modal
-                            $('#editModal').modal('show');
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
-                });
+                //             // // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
+
+                //             if (window.editor3) {
+                //                 window.editor3.setData(response.pendidikan);
+                //             }
+
+                //             $('#spesialisId').val(response.spesialis_id);
+
+                //             // Setelah semua data dimuat, tampilkan modal
+                //             $('#editModal').modal('show');
+                //         },
+                //         error: function(xhr, status, error) {
+                //             console.error(xhr.responseText);
+                //         }
+                //     });
+                // });
                 // end klik button edit data
 
                 // simpan perubahan data
-                $('#editForm').on('submit', function(event) {
-                    event.preventDefault();
+                // $('#editForm').on('submit', function(event) {
+                //     event.preventDefault();
 
+                //     var pendidikan = editor3.getData();
 
-                    // Siapkan data form
-                    var formData = new FormData(this);
-                    var dataId = $('#dataId').val();
+                //     // Siapkan data form
+                //     var formData = new FormData(this);
+                //     formData.set('pendidikan', pendidikan);
 
-                    $.ajax({
-                        url: '/admin/direksi/' + dataId,
-                        method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            // alert('Artikel berhasil diperbarui!');
-                            $('#editModal').modal('hide');
-                            $('.modal-backdrop').remove();
-                            toastr.success(response.message);
-                            loadData();
-                        },
-                        error: function(xhr) {
-                            var errors = xhr.responseJSON.errors;
-                            var errorMessage = '';
-                            for (var key in errors) {
-                                if (errors.hasOwnProperty(key)) {
-                                    errorMessage += errors[key][0] + '\n';
-                                }
-                            }
-                            alert('Terjadi kesalahan:\n' + errorMessage);
-                        }
-                    });
-                });
+                //     var dataId = $('#dataId').val();
+
+                //     $.ajax({
+                //         url: '/admin/direksi/' + dataId,
+                //         method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
+                //         data: formData,
+                //         contentType: false,
+                //         processData: false,
+                //         headers: {
+                //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //         },
+                //         success: function(response) {
+                //             // alert('Artikel berhasil diperbarui!');
+                //             $('#editModal').modal('hide');
+                //             $('.modal-backdrop').remove();
+                //             toastr.success(response.message);
+                //             loadData();
+                //         },
+                //         error: function(xhr) {
+                //             var errors = xhr.responseJSON.errors;
+                //             var errorMessage = '';
+                //             for (var key in errors) {
+                //                 if (errors.hasOwnProperty(key)) {
+                //                     errorMessage += errors[key][0] + '\n';
+                //                 }
+                //             }
+                //             alert('Terjadi kesalahan:\n' + errorMessage);
+                //         }
+                //     });
+                // });
                 // end simpan perubahan data
 
                 // delete data

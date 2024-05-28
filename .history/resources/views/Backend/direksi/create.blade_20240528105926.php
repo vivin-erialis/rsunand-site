@@ -35,7 +35,7 @@ aria-hidden="true">
                         </div>
                         <label>Jabatan</label>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan tempat jabatan"
+                            <input type="date" class="form-control" placeholder="masukan tempat lahir"
                                 aria-label="Name" aria-describedby="name-addon" name="jabatan" required>
                         </div>
                         <label>Foto</label>

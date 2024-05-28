@@ -57,7 +57,7 @@ class DireksiController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'foto' => $foto, // Simpan nama file foto ke dalam database
             'jabatan' => $request->jabatan,
-            'status' => '0',
+            'status' => '1',
         ]);
 
         return response()->json(['message' => 'Data Direksi Berhasil Ditambah']);
@@ -69,7 +69,7 @@ class DireksiController extends Controller
         return response()->json($direksi);
     }
 
-    public function updateDireksi(Request $request, $id)
+    public function updateDireksi()
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string',
@@ -77,6 +77,7 @@ class DireksiController extends Controller
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
             'jabatan' => 'required|string',
+            'status' => 'required|string',
         ]);
 
         $direksi = Direksi::find($id);
@@ -109,16 +110,7 @@ class DireksiController extends Controller
         $direksi->tempat_lahir = $request->tempat_lahir;
         $direksi->tanggal_lahir = $request->tanggal_lahir;
         $direksi->jabatan = $request->jabatan;
-        $direksi->status = '0';
-        $direksi->save();
-    }
-
-    public function editStatus(Request $request, $id)
-    {
-        $direksi = Direksi::findOrFail($id);
         $direksi->status = $request->status;
         $direksi->save();
-
-        return response()->json(['message' => 'Status direksi berhasil diperbarui']);
     }
 }

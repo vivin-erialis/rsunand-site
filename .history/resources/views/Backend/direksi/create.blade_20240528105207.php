@@ -15,12 +15,12 @@ aria-hidden="true">
                     <div class="col-md-12">
                         <label>Nama</label>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan nama direksi"
+                            <input type="text" class="form-control" placeholder="masukan nama dokter"
                                 aria-label="Name" aria-describedby="name-addon" name="nama" required>
                         </div>
                         <label>NIP</label>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan NIP direksi"
+                            <input type="text" class="form-control" placeholder="masukan NIP dokter"
                                 aria-label="Name" aria-describedby="name-addon" name="nip" required>
                         </div>
                         <label>Tempat Lahir</label>
@@ -33,22 +33,31 @@ aria-hidden="true">
                             <input type="date" class="form-control" placeholder="masukan tempat lahir"
                                 aria-label="Name" aria-describedby="name-addon" name="tanggal_lahir" required>
                         </div>
-                        <label>Jabatan</label>
+                        <label>Pendidikan</label>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan tempat jabatan"
-                                aria-label="Name" aria-describedby="name-addon" name="jabatan" required>
+                            <textarea type="text" id="editor-2" placeholder="masukan pendidikan dokter" aria-label="Name"
+                                aria-describedby="name-addon" name="pendidikan"></textarea>
                         </div>
                         <label>Foto</label>
                         <div class="mb-3">
                             <input type="file" class="form-control" aria-describedby="email-addon"
                                 name="foto">
                         </div>
+                        <div class="form-group">
+                            <label class="control-label">Spesialis</label>
+                            <select name="spesialis_id" id="mySelect" class="form-control">
+                                @foreach ($spesialis as $item)
+                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="">
                             <button type="submit"
                                 class="btn btn-success btn-sm w-13 mt-4 mb-3 float-end"> <i class="fa fa-save me-1 text-xs"></i>Simpan</button>
                         </div>
                         <div class="">
-                            <a href="/admin/direksi"
+                            <a href="/admin/dokter"
                                     class="btn btn-dark btn-sm w-13 mt-4 mb-3 float-end mx-2"> <i class="fa fa-times me-1 text-xs"></i>Batal
                             </a>
                         </div>

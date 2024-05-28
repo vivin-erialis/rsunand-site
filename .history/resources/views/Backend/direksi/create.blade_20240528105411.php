@@ -35,8 +35,8 @@ aria-hidden="true">
                         </div>
                         <label>Jabatan</label>
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan tempat jabatan"
-                                aria-label="Name" aria-describedby="name-addon" name="jabatan" required>
+                            <textarea type="text" id="editor-2" placeholder="masukan pendidikan direksi" aria-label="Name"
+                                aria-describedby="name-addon" name="pendidikan"></textarea>
                         </div>
                         <label>Foto</label>
                         <div class="mb-3">

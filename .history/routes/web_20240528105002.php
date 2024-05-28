@@ -52,12 +52,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/artikel/{id}', [BackendArtikelController::class, 'hapusDataArtikel']);
 
     // direksi
-    Route::get('/direksi', [DireksiController::class, 'indexDireksi']);
-    Route::post('/direksi', [DireksiController::class, 'saveDireksi']);
-    Route::get('/direksi/{id}/edit', [DireksiController::class, 'getDataforEdit']);
-    Route::put('/direksi/{id}/status', [DireksiController::class, 'editStatus']);
-    Route::put('/direksi/{id}', [DireksiController::class, 'updateDireksi']);
-    Route::delete('/direksi/{id}', [DireksiController::class, 'hapusDireksi']);
+    Route::get('/direksi', [BackendArtikelController::class, 'indexArtikel']);
+    Route::post('/direksi', [BackendArtikelController::class, 'saveDataArtikel']);
+    Route::get('/direksi/{id}/edit', [BackendArtikelController::class, 'getDataforEdit']);
+    Route::put('/direksi/{id}/status', [BackendArtikelController::class, 'editStatus']);
+    Route::put('/direksi/{id}', [BackendArtikelController::class, 'updateDataArtikel']);
+    Route::delete('/direksi/{id}', [BackendArtikelController::class, 'hapusDataArtikel']);
 
     // dokter
     Route::get('/dokter', [DokterController::class, 'indexDokter']);
@@ -71,4 +71,3 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 // ajax
 Route::get('/get-data-artikel', [BackendArtikelController::class, 'getArtikel'])->name('getArtikel');
 Route::get('/get-data-dokter', [DokterController::class, 'getDokter'])->name('getDokter');
-Route::get('/get-data-direksi', [DireksiController::class, 'getDireksi'])->name('getDireksi');

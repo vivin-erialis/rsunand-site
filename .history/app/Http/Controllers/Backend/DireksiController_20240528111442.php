@@ -57,7 +57,7 @@ class DireksiController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'foto' => $foto, // Simpan nama file foto ke dalam database
             'jabatan' => $request->jabatan,
-            'status' => '0',
+            'status' => '1',
         ]);
 
         return response()->json(['message' => 'Data Direksi Berhasil Ditambah']);
@@ -109,7 +109,7 @@ class DireksiController extends Controller
         $direksi->tempat_lahir = $request->tempat_lahir;
         $direksi->tanggal_lahir = $request->tanggal_lahir;
         $direksi->jabatan = $request->jabatan;
-        $direksi->status = '0';
+        $direksi->status = '1';
         $direksi->save();
     }
 

@@ -35,13 +35,21 @@
                 </div>
                 <label>Jabatan</label>
                 <div class="mb-3">
-                  <input type="text" class="form-control" id="jabatan" placeholder="masukan jabatan direksi" aria-label="Name"
+                  <input type="text" id="jabatan" placeholder="masukan jabatan direksi" aria-label="Name"
                     aria-describedby="name-addon" name="jabatan" ></input>
                 </div>
                 <label>Foto</label>
                 <div class="mb-3">
                   <input type="file" class="form-control" aria-describedby="email-addon"
                     name="foto">
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Spesialis</label>
+                  <select name="spesialis_id" id="spesialisId" class="form-control">
+                    @foreach ($spesialis as $item)
+                    <option value="{{ $item->id }}">{{ $item->title }}</option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
             </div>

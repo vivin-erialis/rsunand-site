@@ -208,7 +208,15 @@
                             $('#nip').val(response.nip);
                             $('#tempatLahir').val(response.tempat_lahir);
                             $('#tanggalLahir').val(response.tanggal_lahir);
-                            $('#jabatan').val(response.jabatan);
+                            $('#pendidikan').val(response.pendidikan);
+
+                            // // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
+
+                            if (window.editor3) {
+                                window.editor3.setData(response.pendidikan);
+                            }
+
+                            $('#spesialisId').val(response.spesialis_id);
 
                             // Setelah semua data dimuat, tampilkan modal
                             $('#editModal').modal('show');
@@ -224,9 +232,12 @@
                 $('#editForm').on('submit', function(event) {
                     event.preventDefault();
 
+                    var pendidikan = editor3.getData();
 
                     // Siapkan data form
                     var formData = new FormData(this);
+                    formData.set('pendidikan', pendidikan);
+
                     var dataId = $('#dataId').val();
 
                     $.ajax({
