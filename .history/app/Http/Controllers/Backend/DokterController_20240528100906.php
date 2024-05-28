@@ -27,18 +27,11 @@ class DokterController extends Controller
             ->join('spesialis', 'dokters.spesialis_id', '=', 'spesialis.id')
             ->select('dokters.*', 'spesialis.title as title')
             ->get();
-
-        // Menambahkan URL foto ke setiap dokter
-        foreach ($dokter as $d) {
-            $d->foto_url = asset('images/dokter/' . $d->foto);
-        }
-
         return response()->json([
             'active' => 'admin/dokter',
             'dokter' => $dokter
         ]);
     }
-
 
     public function saveDokter(Request $request)
     {
@@ -145,11 +138,14 @@ class DokterController extends Controller
     {
         $dokter = Dokter::find($id);
         if (!$dokter) {
-            return response()->json(['message' => 'Data Dokter tidak ditemukan.'], 404);
+            return response()->json(['message' => 'Dokter tidak ditemukan.'], 404);
         }
 
         $dokter->delete();
 
-        return response()->json(['message' => 'Data Dokter berhasil dihapus.']);
+        // Simpan pesan dalam sesi
+        // session()->flash('message', 'Dokter berhasil dihapus.');
+
+        return response()->json(['message' => 'Dokter berhasil dihapus.']);
     }
 }

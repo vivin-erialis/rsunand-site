@@ -70,10 +70,7 @@
                             response.dokter.forEach(function(dokter) {
                                 html += '<tr>';
 
-                                html += '<td><p class="px-3 mb-0">' +
-                                    '<img src="' + dokter.foto_url + // Menggunakan foto_url
-                                    '" alt="Foto Dokter" style="width:100px; height:auto;"><br>' +
-                                    dokter.nama + '<br>' + dokter.nip + '<br>' + dokter.tempat_lahir +`/` +dokter.tanggal_lahir +
+                                html += '<td><p class="px-3 mb-0">'  + dokter.nama + '<br>' +dokter.nip +
                                     '<br></p></td>';
                                 html += '<td><p class="px-3 mb-0">' + dokter.pendidikan +
                                     '</p></td>';
@@ -100,7 +97,6 @@
                             console.error('Error:', textStatus, errorThrown); // Debugging
                         }
                     });
-
                 }
 
                 // tambah data dokter

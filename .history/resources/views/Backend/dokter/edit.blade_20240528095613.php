@@ -11,7 +11,7 @@
             @csrf
             <div class="row">
               <div class="col-md-12">
-                <input type="hidden" id="dataId" name="" value="">
+                <input type="hidden" id="dataId" name="artikel_id" value="">
 
                 <label>Nama</label>
                 <div class="mb-3">

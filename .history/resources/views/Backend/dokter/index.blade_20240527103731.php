@@ -44,7 +44,7 @@
         </div>
         @include('Backend.dokter.create')
         @include('Backend.dokter.edit')
-        @include('Backend.dokter.hapus')
+        {{-- @include('Backend.dokter.hapus') --}}
         <script>
             $(document).ready(function() {
                 // Setup CSRF token
@@ -70,10 +70,7 @@
                             response.dokter.forEach(function(dokter) {
                                 html += '<tr>';
 
-                                html += '<td><p class="px-3 mb-0">' +
-                                    '<img src="' + dokter.foto_url + // Menggunakan foto_url
-                                    '" alt="Foto Dokter" style="width:100px; height:auto;"><br>' +
-                                    dokter.nama + '<br>' + dokter.nip + '<br>' + dokter.tempat_lahir +`/` +dokter.tanggal_lahir +
+                                html += '<td><p class="px-3 mb-0">' + dokter.nama + +dokter.nip +
                                     '<br></p></td>';
                                 html += '<td><p class="px-3 mb-0">' + dokter.pendidikan +
                                     '</p></td>';
@@ -100,7 +97,6 @@
                             console.error('Error:', textStatus, errorThrown); // Debugging
                         }
                     });
-
                 }
 
                 // tambah data dokter
@@ -157,7 +153,7 @@
 
                 //inisialisasi ckeditor
                 ClassicEditor
-                    .create(document.querySelector('#pendidikan'))
+                    .create(document.querySelector('#isiArtikel'))
                     .then(editor => {
                         // CKEditor #editor-4 siap, tetapkan editor ke variabel global
                         window.editor3 = editor;
@@ -172,7 +168,7 @@
                     var dataId = $(this).data('id');
                     console.log("Edit button clicked, dataId:", dataId); // Debugging
                     $.ajax({
-                        url: '/admin/dokter/' + dataId + '/edit',
+                        url: '/admin/artikel/' + dataId + '/edit',
                         type: 'GET',
                         success: function(response) {
                             // Isi formulir modal dengan data artikel yang diterima dari server
@@ -183,10 +179,9 @@
                             $('#tanggalLahir').val(response.tanggal_lahir);
                             $('#pendidikan').val(response.pendidikan);
 
-                            // // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
-
-                            if (window.editor3) {
-                                window.editor3.setData(response.pendidikan);
+                            // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
+                            if (window.editor2) {
+                                window.editor2.setData(response.pendidikan);
                             }
 
                             $('#spesialisId').val(response.spesialis_id);
@@ -205,16 +200,16 @@
                 $('#editForm').on('submit', function(event) {
                     event.preventDefault();
 
-                    var pendidikan = editor3.getData();
+                    var isi = editor3.getData();
 
                     // Siapkan data form
                     var formData = new FormData(this);
-                    formData.set('pendidikan', pendidikan);
+                    formData.set('isi', isi);
 
-                    var dataId = $('#dataId').val();
+                    var artikelId = $('#artikelId').val();
 
                     $.ajax({
-                        url: '/admin/dokter/' + dataId,
+                        url: '/admin/artikel/' + artikelId,
                         method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
                         data: formData,
                         contentType: false,
@@ -227,7 +222,8 @@
                             $('#editModal').modal('hide');
                             $('.modal-backdrop').remove();
                             toastr.success(response.message);
-                            loadData();
+
+                            loadArticles();
                         },
                         error: function(xhr) {
                             var errors = xhr.responseJSON.errors;
@@ -245,23 +241,24 @@
 
                 // delete data
                 $(document).on('click', '.delete-btn', function() {
-                    var dataId = $(this).data('id');
-                    console.log("Delete button clicked, dataId:", dataId); // Debugging
+                    var artikelId = $(this).data('id');
+                    console.log("Delete button clicked, artikelId:", artikelId); // Debugging
                     $('#deleteModal').modal('show');
 
                     // Saat konfirmasi hapus diklik, kirim permintaan penghapusan
                     $('#deleteBtn').off('click').on('click', function() {
                         $.ajax({
-                            url: '/admin/dokter/' + dataId,
+                            url: '/admin/artikel/' + artikelId,
                             type: 'DELETE',
                             success: function(response) {
                                 console.log(response);
                                 // Tampilkan pesan toast
                                 $('#deleteModal').modal('hide');
+                                // Memuat ulang data artikel setelah artikel berhasil dihapus
                                 $('.modal-backdrop').remove();
                                 toastr.success(response.message);
 
-                                loadData();
+                                loadArticles();
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr.responseText);
@@ -271,6 +268,7 @@
                     });
                 });
                 // end delete data
+
                 loadData();
             });
         </script>

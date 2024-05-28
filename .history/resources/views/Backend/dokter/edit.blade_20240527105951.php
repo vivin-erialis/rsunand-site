@@ -11,8 +11,6 @@
             @csrf
             <div class="row">
               <div class="col-md-12">
-                <input type="hidden" id="dataId" name="" value="">
-
                 <label>Nama</label>
                 <div class="mb-3">
                   <input type="text" class="form-control" placeholder="masukan nama dokter"
@@ -35,7 +33,7 @@
                 </div>
                 <label>Pendidikan</label>
                 <div class="mb-3">
-                  <textarea type="text" id="pendidikan" placeholder="masukan pendidikan dokter" aria-label="Name"
+                  <textarea type="text" id="editor2" placeholder="masukan pendidikan dokter" aria-label="Name"
                     aria-describedby="name-addon" name="pendidikan" ></textarea>
                 </div>
                 <label>Foto</label>

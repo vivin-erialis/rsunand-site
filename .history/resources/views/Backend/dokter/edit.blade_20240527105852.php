@@ -11,8 +11,6 @@
             @csrf
             <div class="row">
               <div class="col-md-12">
-                <input type="hidden" id="dataId" name="" value="">
-
                 <label>Nama</label>
                 <div class="mb-3">
                   <input type="text" class="form-control" placeholder="masukan nama dokter"
@@ -35,8 +33,8 @@
                 </div>
                 <label>Pendidikan</label>
                 <div class="mb-3">
-                  <textarea type="text" id="pendidikan" placeholder="masukan pendidikan dokter" aria-label="Name"
-                    aria-describedby="name-addon" name="pendidikan" ></textarea>
+                  <textarea type="text" id="editor2" placeholder="masukan pendidikan dokter" aria-label="Name"
+                    aria-describedby="name-addon" name="pendidikan" id="pendidikan"></textarea>
                 </div>
                 <label>Foto</label>
                 <div class="mb-3">
@@ -54,7 +52,7 @@
               </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-bs-dismiss="modal"> <i class="fa fa-times me-1"></i>Batal</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> <i class="fa fa-times me-1"></i>Batal</button>
               <button type="submit" class="btn btn-success"> <i class="fa fa-save me-1"></i>Simpan</button>
             </div>
           </form>

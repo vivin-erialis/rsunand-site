@@ -11,8 +11,6 @@
             @csrf
             <div class="row">
               <div class="col-md-12">
-                <input type="hidden" id="dataId" name="" value="">
-
                 <label>Nama</label>
                 <div class="mb-3">
                   <input type="text" class="form-control" placeholder="masukan nama dokter"

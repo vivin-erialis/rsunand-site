@@ -27,18 +27,11 @@ class DokterController extends Controller
             ->join('spesialis', 'dokters.spesialis_id', '=', 'spesialis.id')
             ->select('dokters.*', 'spesialis.title as title')
             ->get();
-
-        // Menambahkan URL foto ke setiap dokter
-        foreach ($dokter as $d) {
-            $d->foto_url = asset('images/dokter/' . $d->foto);
-        }
-
         return response()->json([
             'active' => 'admin/dokter',
             'dokter' => $dokter
         ]);
     }
-
 
     public function saveDokter(Request $request)
     {

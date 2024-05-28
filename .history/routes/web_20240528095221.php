@@ -55,8 +55,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/dokter', [DokterController::class, 'indexDokter']);
     Route::post('/dokter', [DokterController::class, 'saveDokter']);
     Route::get('/dokter/{id}/edit', [DokterController::class, 'getDataforEdit']);
-    Route::put('/dokter/{id}', [DokterController::class, 'updateDokter']);
-    Route::delete('/dokter/{id}', [DokterController::class, 'hapusDokter']);
+    Route::put('/dokter/{id}', [DokterController::class, 'updateDataArtikel']);
+    Route::delete('/dokter/{id}', [DokterController::class, 'hapusDataArtikel']);
 });
 
 

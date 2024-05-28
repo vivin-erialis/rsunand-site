@@ -44,7 +44,7 @@
         </div>
         @include('Backend.dokter.create')
         @include('Backend.dokter.edit')
-        @include('Backend.dokter.hapus')
+        {{-- @include('Backend.dokter.hapus') --}}
         <script>
             $(document).ready(function() {
                 // Setup CSRF token
@@ -70,10 +70,7 @@
                             response.dokter.forEach(function(dokter) {
                                 html += '<tr>';
 
-                                html += '<td><p class="px-3 mb-0">' +
-                                    '<img src="' + dokter.foto_url + // Menggunakan foto_url
-                                    '" alt="Foto Dokter" style="width:100px; height:auto;"><br>' +
-                                    dokter.nama + '<br>' + dokter.nip + '<br>' + dokter.tempat_lahir +`/` +dokter.tanggal_lahir +
+                                html += '<td><p class="px-3 mb-0">' + dokter.nama + +dokter.nip +
                                     '<br></p></td>';
                                 html += '<td><p class="px-3 mb-0">' + dokter.pendidikan +
                                     '</p></td>';
@@ -100,7 +97,6 @@
                             console.error('Error:', textStatus, errorThrown); // Debugging
                         }
                     });
-
                 }
 
                 // tambah data dokter
@@ -205,16 +201,16 @@
                 $('#editForm').on('submit', function(event) {
                     event.preventDefault();
 
-                    var pendidikan = editor3.getData();
+                    var isi = editor3.getData();
 
                     // Siapkan data form
                     var formData = new FormData(this);
-                    formData.set('pendidikan', pendidikan);
+                    formData.set('isi', isi);
 
                     var dataId = $('#dataId').val();
 
                     $.ajax({
-                        url: '/admin/dokter/' + dataId,
+                        url: '/admin/artikel/' + dataId,
                         method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
                         data: formData,
                         contentType: false,
@@ -227,7 +223,8 @@
                             $('#editModal').modal('hide');
                             $('.modal-backdrop').remove();
                             toastr.success(response.message);
-                            loadData();
+
+                            loadArticles();
                         },
                         error: function(xhr) {
                             var errors = xhr.responseJSON.errors;
@@ -245,23 +242,24 @@
 
                 // delete data
                 $(document).on('click', '.delete-btn', function() {
-                    var dataId = $(this).data('id');
-                    console.log("Delete button clicked, dataId:", dataId); // Debugging
+                    var artikelId = $(this).data('id');
+                    console.log("Delete button clicked, artikelId:", artikelId); // Debugging
                     $('#deleteModal').modal('show');
 
                     // Saat konfirmasi hapus diklik, kirim permintaan penghapusan
                     $('#deleteBtn').off('click').on('click', function() {
                         $.ajax({
-                            url: '/admin/dokter/' + dataId,
+                            url: '/admin/artikel/' + artikelId,
                             type: 'DELETE',
                             success: function(response) {
                                 console.log(response);
                                 // Tampilkan pesan toast
                                 $('#deleteModal').modal('hide');
+                                // Memuat ulang data artikel setelah artikel berhasil dihapus
                                 $('.modal-backdrop').remove();
                                 toastr.success(response.message);
 
-                                loadData();
+                                loadArticles();
                             },
                             error: function(xhr, status, error) {
                                 console.error(xhr.responseText);
@@ -271,6 +269,7 @@
                     });
                 });
                 // end delete data
+
                 loadData();
             });
         </script>
