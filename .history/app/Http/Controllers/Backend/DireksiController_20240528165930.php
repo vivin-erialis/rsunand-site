@@ -5,38 +5,34 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Direksi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class DireksiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    //
+    public function getDireksi()
     {
-        //
+        $direksi = Direksi::all();
+
+        // Menambahkan URL foto ke setiap direksi
+        foreach ($direksi as $d) {
+            $d->foto_url = asset('images/direksi/' . $d->foto);
+        }
+
+        return response()->json([
+            'direksi' => $direksi
+        ]);
+    }
+
+    public function indexDireksi()
+    {
         return view('Backend.direksi.index', [
+            'active' => 'admin/direksi',
             'direksi' => Direksi::all(),
-            'active' => 'admin/direksi'
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-        return view('Backend.direksi.create', [
-            'active' => 'admin/direksi'
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function saveDireksi(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string',
@@ -49,7 +45,7 @@ class DireksiController extends Controller
 
 
         if ($request->hasFile('foto')) {
-            $foto = time().$request->file('foto')->getClientOriginalName();
+            $foto = time() . $request->file('foto')->getClientOriginalName();
             $request->file('foto')->move(public_path('images/direksi'), $foto);
             $validate['foto'] = $foto;
         }
@@ -61,45 +57,26 @@ class DireksiController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'foto' => $foto, // Simpan nama file foto ke dalam database
             'jabatan' => $request->jabatan,
-            'status' => '1',
-
+            'status' => '0',
         ]);
 
-        return redirect('admin/direksi')->with('pesan', 'Data Direksi Berhasil Ditambah');
+        return response()->json(['message' => 'Data Direksi Berhasil Ditambah']);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function getDataForEdit($id)
     {
-        //
+        $direksi = Direksi::find($id);
+        return response()->json($direksi);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-        return view('Backend.direksi.edit', [
-            'direksi' => Direksi::find($id),
-            'active' => 'admin/direksi',
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
+    public function updateDireksi(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required|string',
-            'nip' => 'required|string|unique:employees,nip,'.$id,
+            'nip' => 'required|string|unique:employees,nip,' . $id,
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
             'jabatan' => 'required|string',
-            'status' => 'required|string',
         ]);
 
         $direksi = Direksi::find($id);
@@ -132,21 +109,28 @@ class DireksiController extends Controller
         $direksi->tempat_lahir = $request->tempat_lahir;
         $direksi->tanggal_lahir = $request->tanggal_lahir;
         $direksi->jabatan = $request->jabatan;
+        $direksi->status = '0';
+        $direksi->save();
+    }
+
+    public function editStatus(Request $request, $id)
+    {
+        $direksi = Direksi::findOrFail($id);
         $direksi->status = $request->status;
         $direksi->save();
 
-        return redirect('admin/direksi')->with('pesan', 'Data Direksi Berhasil Diupdate');
+        return response()->json(['message' => 'Status direksi berhasil diperbarui']);
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function hapusDireksi($id)
     {
-        $direksi = Direksi::where('id', $id)->first();
-        File::delete('images/direksi/' . $direksi->gambar);
-        Direksi::destroy($id);
-        return redirect('admin/direksi')->with('pesan', 'Data Direksi Berhasil Dihapus');
+        $direksi = Direksi::find($id);
+        if (!$direksi) {
+            return response()->json(['message' => 'Data tidak ditemukan.'], 404);
+        }
+
+        $direksi->delete();
+
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }
