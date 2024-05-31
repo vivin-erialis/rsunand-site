@@ -47,10 +47,6 @@ Route::get('/karir', [HomeController::class, 'karir']);
 
 // Informasi
 
-Route::fallback(function () {
-    return response()->view('Frontend.page-not-found', [], 404);
-});
-
 //
 Route::prefix('admin')->middleware('auth')->group(function () {
     // artikel

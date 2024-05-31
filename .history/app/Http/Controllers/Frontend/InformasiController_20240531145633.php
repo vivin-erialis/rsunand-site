@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Artikel;
 use App\Models\Direksi;
 use App\Models\Dokter;
-use App\Models\KategoriArtikel;
 use App\Models\spesialis;
 use Illuminate\Http\Request;
 
@@ -52,9 +51,9 @@ class InformasiController extends Controller
 
     public function detailBagianInstalasi($id)
     {
-        return view('Frontend.informasi.detail-bagian-instalasi', [
+        return view('Frontend.artikel.detail-berita', [
             'headerStart' => Artikel::where('url', $id)->first()->title,
-            'bagianInstalasi' => Artikel::where('url', $id)->first(),
+            'berita' => Artikel::where('url', $id)->first(),
             'kategori' => KategoriArtikel::all(),
         ]);
     }

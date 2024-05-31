@@ -107,45 +107,33 @@
             </div>
             <div class="row g-4" style="padding:2vw 4vw">
                 @forelse ($bagianInstalasi as $item)
-                    <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item d-flex position-relative text-center h-100">
-                            @if ($item->gambar)
-                                @php
-                                    $gambarArray = json_decode($item->gambar);
-                                    if ($gambarArray) {
-                                        $gambarPertama = reset($gambarArray);
-                                    }
-                                @endphp
+                <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item d-flex position-relative text-center h-100">
+                        @if ($item->gambar)
+                        @php
+                            $gambarArray = json_decode($item->gambar);
+                            if ($gambarArray) {
+                                $gambarPertama = reset($gambarArray);
+                            }
+                        @endphp
 
-                                @if (!empty($gambarPertama))
-                                    <img loading="lazy" class="bg-img"
-                                        src="{{ asset('/../images/artikel/' . $gambarPertama) }}">
-                                @endif
-                            @endif
-                            <div class="service-text p-3 card-dokter" style="width: 100%">
-                                @if ($item->gambar)
-                                    @php
-                                        $gambarArray = json_decode($item->gambar);
-                                        if ($gambarArray) {
-                                            $gambarPertama = reset($gambarArray);
-                                        }
-                                    @endphp
-
-                                    @if (!empty($gambarPertama))
-                                        <img loading="lazy" class="card-img"
-                                            src="{{ asset('/../images/artikel/' . $gambarPertama) }}">
-                                    @endif
-                                @endif
-                                <h6 class="mb-2 mt-3">{{ $item->title }}</h6>
-                                <p class="mb-2">{!! $item->desc !!}</p>
-                                <a style="font-size: 11px !important" class="btn" href="/bagian-instalasi/{{$item->url}}"><i class="fa fa-plus text-primary me-4"></i>
-                                SELENGKAPNYA</a>
-                            </div>
+                        @if (!empty($gambarPertama))
+                            <img loading="lazy" class="card-img"
+                                src="{{ asset('/../images/artikel/' . $gambarPertama) }}">
+                        @endif
+                    @endif
+                        <div class="service-text p-3 card-dokter" style="width: 100%">
+                            <img class="mb-3 mt-2" style="width: 100%" src="../images/artikel/{{$item->gambar}}" alt="Icon">
+                            <h6 class="mb-2">{{ $item->title }}</h6>
+                            <p class="mb-2">{!! $item->desc !!}</p>
+                            {{-- <a style="font-size: 11px !important" class="btn" href="/bagian-instalasi/{{$item->url}}"><i class="fa fa-plus text-primary me-4"></i>
+                                SELENGKAPNYA</a> --}}
                         </div>
                     </div>
-                @empty
-                    <h4 class="text-center">Data Belum Tersedia</h4>
-                @endforelse
+                </div>
+            @empty
+                <h4 class="text-center">Data Belum Tersedia</h4>
+            @endforelse
             </div>
             <div style="text-align: center;">
                 @if (!$bagianInstalasi->isEmpty())

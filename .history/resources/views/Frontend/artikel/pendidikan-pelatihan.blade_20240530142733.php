@@ -37,12 +37,12 @@
                                         class="far fa-calendar me-2"></i>{{ Carbon\carbon::parse($item->created_at)->isoFormat('D MMMM, Y') }}</span>
 
                             </div>
-                            <a href="/pendidikan-pelatihan/{{ $item->url }}">
+                            <a href="/berita/{{ $item->url }}">
                                 <h2 class="card-title">{{ $item->title }}</h2>
                             </a>
                             {{-- <p style="color: #1C7C3D; "><i class="fa fa-calendar me-2"></i>{{ $item->created_at->format('d F Y') }}</p> --}}
                             <p class="card-text">{!! $item->desc !!}</p>
-                            <a href="/pendidikan-pelatihan/{{ $item->url }}" class="card-button">Read More</a>
+                            <a href="/berita/{{ $item->url }}" class="card-button">Read More</a>
                         </div>
                     </div>
                 @endforeach

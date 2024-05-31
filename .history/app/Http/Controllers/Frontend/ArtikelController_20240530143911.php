@@ -59,7 +59,7 @@ class ArtikelController extends Controller
     public function pendidikanPelatihan()
     {
         $pendidikanPelatihan = Artikel::whereHas('kategori', function ($query) {
-            $query->where('title', 'Pendidikan & Pelatihan');
+            $query->where('title', 'Ilmiah');
         })->get();
         return view('Frontend.artikel.pendidikan-pelatihan', [
             'headerStart' => 'Pendidikan & Pelatihan',

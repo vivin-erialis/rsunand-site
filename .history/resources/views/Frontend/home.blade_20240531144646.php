@@ -132,14 +132,14 @@
                                     @endphp
 
                                     @if (!empty($gambarPertama))
-                                        <img loading="lazy" class="card-img"
+                                        <img loading="lazy" class="bg-img"
                                             src="{{ asset('/../images/artikel/' . $gambarPertama) }}">
                                     @endif
                                 @endif
-                                <h6 class="mb-2 mt-3">{{ $item->title }}</h6>
+                                <h6 class="mb-2">{{ $item->title }}</h6>
                                 <p class="mb-2">{!! $item->desc !!}</p>
-                                <a style="font-size: 11px !important" class="btn" href="/bagian-instalasi/{{$item->url}}"><i class="fa fa-plus text-primary me-4"></i>
-                                SELENGKAPNYA</a>
+                                {{-- <a style="font-size: 11px !important" class="btn" href="/bagian-instalasi/{{$item->url}}"><i class="fa fa-plus text-primary me-4"></i>
+                                SELENGKAPNYA</a> --}}
                             </div>
                         </div>
                     </div>

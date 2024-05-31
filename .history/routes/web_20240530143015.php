@@ -28,7 +28,6 @@ Route::get('tentang-kami', [InformasiController::class, 'tentangKami']);
 Route::get('jadwal-dokter', [InformasiController::class, 'jadwalDokter']);
 Route::get('informasi-dokter', [InformasiController::class, 'informasiDokter']);
 Route::get('bagian-instalasi', [InformasiController::class, 'bagianInstalasi']);
-Route::get('bagian-instalasi/{id}', [InformasiController::class, 'detailBagianInstalasi']);
 
 // Artikel
 Route::get('berita', [ArtikelController::class, 'berita']);
@@ -46,10 +45,6 @@ Route::get('informasi', [HomeController::class, 'informasi']);
 Route::get('/karir', [HomeController::class, 'karir']);
 
 // Informasi
-
-Route::fallback(function () {
-    return response()->view('Frontend.page-not-found', [], 404);
-});
 
 //
 Route::prefix('admin')->middleware('auth')->group(function () {

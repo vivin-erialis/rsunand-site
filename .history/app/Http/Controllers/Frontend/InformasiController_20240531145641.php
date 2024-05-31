@@ -52,9 +52,9 @@ class InformasiController extends Controller
 
     public function detailBagianInstalasi($id)
     {
-        return view('Frontend.informasi.detail-bagian-instalasi', [
+        return view('Frontend.artikel.detail-berita', [
             'headerStart' => Artikel::where('url', $id)->first()->title,
-            'bagianInstalasi' => Artikel::where('url', $id)->first(),
+            'berita' => Artikel::where('url', $id)->first(),
             'kategori' => KategoriArtikel::all(),
         ]);
     }

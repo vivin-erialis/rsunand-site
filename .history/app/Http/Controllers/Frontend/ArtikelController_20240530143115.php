@@ -59,40 +59,22 @@ class ArtikelController extends Controller
     public function pendidikanPelatihan()
     {
         $pendidikanPelatihan = Artikel::whereHas('kategori', function ($query) {
-            $query->where('title', 'Pendidikan & Pelatihan');
+            $query->where('title', 'Ilmiah');
         })->get();
         return view('Frontend.artikel.pendidikan-pelatihan', [
             'headerStart' => 'Pendidikan & Pelatihan',
             'artikel' => $pendidikanPelatihan
         ]);
     }
-    public function detailPendidikanPelatihan($id)
-    {
-        return view('Frontend.artikel.detail-pendidikan-pelatihan', [
-            'headerStart' => Artikel::where('url', $id)->first()->title,
-            'pendidikanPelatihan' => Artikel::where('url', $id)->first(),
-            'kategori' => KategoriArtikel::all(),
-        ]);
-    }
 
     public function penyakitPengobatan()
     {
         $penyakitPengobatan = Artikel::whereHas('kategori', function ($query) {
-            $query->where('title', 'Penyakit & Pengobatan');
+            $query->where('title', 'Ilmiah');
         })->get();
         return view('Frontend.artikel.penyakit-pengobatan', [
             'headerStart' => 'Penyakit & Pengobatan',
             'artikel' => $penyakitPengobatan
-        ]);
-    }
-
-
-    public function detailPenyakitPengobatan($id)
-    {
-        return view('Frontend.artikel.detail-penyakit-pengobatan', [
-            'headerStart' => Artikel::where('url', $id)->first()->title,
-            'penyakitPengobatan' => Artikel::where('url', $id)->first(),
-            'kategori' => KategoriArtikel::all(),
         ]);
     }
 }

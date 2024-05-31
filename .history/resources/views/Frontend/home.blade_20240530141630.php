@@ -2,28 +2,29 @@
 @section('title', 'Website Resmi')
 @section('content')
     <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="owl-carousel header-carousel position-relative">
-            @foreach ($slider as $slider)
-                <div class="owl-carousel-item position-relative"
-                    data-dot="<img src='{{ asset('../images/slider/' . $slider->img) }}'>">
-                    <img class="img-fluid" src="{{ asset('../images/slider/' . $slider->img) }}" alt="">
-                    <div class="owl-carousel-inner home-img">
-                        <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-12 col-lg-12 text-center">
-                                    <h4 class="display-1 text-white animated slideInDown" style="font-size: 8vw !important">
-                                        {{ $slider->title }}
-                                    </h4>
-                                    <p class="fs-7 fw-medium text-white mb-4 pb-3" style="font-size: 2vw !important">
-                                        {{ $slider->desc }}
-                                    </p>
-                                    {{-- <a href="{{ $slider->link }}" class="py-3 px-5 btn-home fs-7 mt-3">SELENGKAPNYA</a> --}}
+            <div class="owl-carousel header-carousel position-relative">
+                @foreach ($slider as $slider)
+                    <div class="owl-carousel-item position-relative"
+                        data-dot="<img src='{{ asset('../images/slider/' . $slider->img) }}'>">
+                        <img class="img-fluid" src="{{ asset('../images/slider/' . $slider->img) }}" alt="">
+                        <div class="owl-carousel-inner home-img">
+                            <div class="container">
+                                <div class="row justify-content-start">
+                                    <div class="col-12 col-lg-12 text-center">
+                                        <h4 class="display-1 text-white animated slideInDown"
+                                            style="font-size: 8vw !important">
+                                            {{ $slider->title }}
+                                        </h4>
+                                        <p class="fs-7 fw-medium text-white mb-4 pb-3" style="font-size: 2vw !important">
+                                            {{ $slider->desc }}
+                                        </p>
+                                        {{-- <a href="{{ $slider->link }}" class="py-3 px-5 btn-home fs-7 mt-3">SELENGKAPNYA</a> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
 
         </div>
     </div>
@@ -109,37 +110,14 @@
                 @forelse ($bagianInstalasi as $item)
                     <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item d-flex position-relative text-center h-100">
-                            @if ($item->gambar)
-                                @php
-                                    $gambarArray = json_decode($item->gambar);
-                                    if ($gambarArray) {
-                                        $gambarPertama = reset($gambarArray);
-                                    }
-                                @endphp
-
-                                @if (!empty($gambarPertama))
-                                    <img loading="lazy" class="bg-img"
-                                        src="{{ asset('/../images/artikel/' . $gambarPertama) }}">
-                                @endif
-                            @endif
+                            <img class="bg-img" src="../images/artikel/{{ $item->gambar }}" alt="">
                             <div class="service-text p-3 card-dokter" style="width: 100%">
-                                @if ($item->gambar)
-                                    @php
-                                        $gambarArray = json_decode($item->gambar);
-                                        if ($gambarArray) {
-                                            $gambarPertama = reset($gambarArray);
-                                        }
-                                    @endphp
-
-                                    @if (!empty($gambarPertama))
-                                        <img loading="lazy" class="card-img"
-                                            src="{{ asset('/../images/artikel/' . $gambarPertama) }}">
-                                    @endif
-                                @endif
-                                <h6 class="mb-2 mt-3">{{ $item->title }}</h6>
+                                <img class="mb-3 mt-2" style="width: 100%" src="../images/artikel/{{ $item->gambar }}"
+                                    alt="Icon">
+                                <h6 class="mb-2">{{ $item->title }}</h6>
                                 <p class="mb-2">{!! $item->desc !!}</p>
-                                <a style="font-size: 11px !important" class="btn" href="/bagian-instalasi/{{$item->url}}"><i class="fa fa-plus text-primary me-4"></i>
-                                SELENGKAPNYA</a>
+                                {{-- <a style="font-size: 11px !important" class="btn" href="/bagian-instalasi/{{$item->url}}"><i class="fa fa-plus text-primary me-4"></i>
+                                    SELENGKAPNYA</a> --}}
                             </div>
                         </div>
                     </div>
@@ -169,19 +147,8 @@
             <div class="container-berita">
                 @foreach ($artikel as $item)
                     <div class="card">
-                        @if ($item->gambar)
-                            @php
-                                $gambarArray = json_decode($item->gambar);
-                                if ($gambarArray) {
-                                    $gambarPertama = reset($gambarArray);
-                                }
-                            @endphp
+                        <img loading="lazy" class="card-img" src="{{ asset('/../images/artikel/' . $item->gambar) }}">
 
-                            @if (!empty($gambarPertama))
-                                <img loading="lazy" class="card-img"
-                                    src="{{ asset('/../images/artikel/' . $gambarPertama) }}">
-                            @endif
-                        @endif
                         <div class="card-content">
                             <div class="me-2 mb-3" style="color: #1C7C3D">
                                 <span style="font-size: 12px"class="post-author">
