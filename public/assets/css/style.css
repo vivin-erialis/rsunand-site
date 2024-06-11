@@ -157,7 +157,7 @@ h6,
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1000px) {
     .navbar .nav-item .dropdown-menu {
         display: block;
         visibility: hidden;
@@ -608,6 +608,15 @@ transition: all ease-in-out 0.8s;
 
 .footer .copyright a:hover {
     color: var(--primary);
+}
+
+.about-item {
+    color: black;
+    display: block;
+    text-align: inherit;
+    white-space: nowrap;
+    font-size: 15px;
+
 }
 
 /* CSS Card Berita dan Artikel */

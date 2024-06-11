@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-    <a href="/" class="navbar-brand ms-4 ms-lg-0">
-        <h2 class="text-primary m-0"><img class="me-3" style="width: 50px" src="/../assets/img/rsunandlogo.png"
-                alt="Icon">RS Universitas Andalas</h2>
+    <a href="/" class="navbar-brand ms-4 ms-lg-0 d-flex mt-1">
+        <img class="me-3" style="width: 50px; height: 60px;" src="/../assets/img/rsunandlogo.png" alt="Icon">
+        <h3 class="text-primary mt-2 ">RS UNIVERISTAS <br> ANDALAS</h3>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -12,24 +12,30 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">About Us</a>
                 <div class="dropdown-menu border-0 m-0 ">
-                    <div class="row mx-2" style="width: 600px">
+                    <div class="row mx-2" style="width: 790px">
                         <div class="col-md-4">
-                            <strong style="color: #1C7C3D; font-size: 12px">TENTANG KAMI</strong><hr>
-                            <a href="/sejarah" class="dropdown-item {{ Request::is('/sejarah') ? 'active' : '' }}">Sejarah</a>
-                            <a href="/visi-misi" class="dropdown-item">Visi & Misi</a>
-                            <a href="/visi-misi" class="dropdown-item">Milestone</a>
-                        </div>
-                        <div class="col-md-4">
-                            <strong style="color: #1C7C3D; font-size: 12px">MANAJEMEN</strong><hr>
-                            <a href="/direksi" class="dropdown-item">Direksi</a>
-                            {{-- <a href="/direksi" class="dropdown-item"></a> --}}
+                            <strong style="color: #1C7C3D; font-size: 13px">TENTANG KAMI</strong>
+                            <hr>
+                            <p><a href="/sejarah" class="about-item">Sejarah</a></p>
+                            <p> <a href="/visi-misi" class="about-item">Visi & Misi</a> </p>
+                            <p><a href="/visi-misi" class="about-item">Milestone</a></p>
 
                         </div>
                         <div class="col-md-4">
-                            <strong style="color: #1C7C3D; font-size: 12px">KEPALA INSTALASI</strong><hr>
-                            <a href="/sejarah" class="dropdown-item">Sejarah</a>
-                            <a href="/visi-misi" class="dropdown-item">Visi & Misi</a>
-                            <a href="/visi-misi" class="dropdown-item">Milestone</a>
+                            <strong style="color: #1C7C3D; font-size: 13px">STRUKTUR KELEMBAGAAN</strong>
+                            <hr>
+                            <p><a href="/rektor" class="about-item">Rektor</a></p>
+                            <p><a href="/dewan-pengawas" class="about-item">Dewan Pengawas</a></p>
+                            <p><a href="/direksi" class="about-item">Direksi</a></p>
+                            <p><a href="/struktur-organisasi" class="about-item">Struktur Organisasi</a></p>
+                        </div>
+                        <div class="col-md-4">
+                            <strong style="color: #1C7C3D; font-size: 13px">BIDANG</strong>
+                            <hr>
+                            <p><a href="/pelayanan-medik" class="about-item">Pelayanan Medik dan Keperawatan</a></p>
+                            <p><a href="/umum-sumber-daya" class="about-item">Umum dan Sumber Daya</a></p>
+                            <p><a href="/keuangan-perencanaan" class="about-item">Keuangan dan Perencanaan</a></p>
+
                         </div>
                     </div>
                 </div>
@@ -79,6 +85,8 @@
 
                 </div>
             </div>
+            <a href="/upcoming-event"
+                class="nav-item nav-link  {{ Request::is('upcoming-event') ? 'active' : '' }}">Upcoming Event</a>
             <a href="/pendidikan-penelitian"
                 class="nav-item nav-link  {{ Request::is('pendidikan-penelitian') ? 'active' : '' }}">Pendidikan dan
                 Penelitian</a>
