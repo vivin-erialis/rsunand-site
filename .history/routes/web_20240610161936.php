@@ -12,7 +12,7 @@ use App\Http\Controllers\Frontend\InformasiController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Frontend\FasilitasController;
 use App\Http\Controllers\Frontend\LayananController as FrontendLayananController;
-use App\Http\Controllers\Backend\TentangKamiController;
+use App\Http\Controllers\TentangKamiController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -108,13 +108,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/dokter/{id}', [DokterController::class, 'updateDokter']);
     Route::delete('/dokter/{id}', [DokterController::class, 'hapusDokter']);
 
-    //profile
-    Route::get('/profile', [TentangKamiController::class, 'indexProfile']);
-    Route::post('/profile', [TentangKamiController::class, 'saveProfile']);
-    Route::get('/profile/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
-    Route::put('/profile/{id}', [TentangKamiController::class, 'updateProfile']);
-    Route::delete('/profile/{id}', [TentangKamiController::class, 'hapusProfile']);
-
     // layanan
     Route::get('/layanan', [LayananController::class, 'indexLayanan']);
     Route::post('/layanan', [LayananController::class, 'saveLayanan']);
@@ -131,4 +124,4 @@ Route::get('/get-data-direksi', [DireksiController::class, 'getDireksi'])->name(
 Route::get('/get-data-slider', [SliderController::class, 'getSlider'])->name('getSlider');
 Route::get('/get-data-layanan', [LayananController::class, 'getLayanan'])->name('getLayanan');
 Route::get('/get-data-fasilitas', [BackendFasilitasController::class, 'getFasilitas'])->name('getFasilitas');
-Route::get('/get-data-profile', [TentangKamiController::class, 'getProfile'])->name('getProfile');
+Route::get('/get-data-profile', [TentangKamiController::class, 'getFasilitas'])->name('getFasilitas');

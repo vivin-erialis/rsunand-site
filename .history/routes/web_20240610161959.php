@@ -108,13 +108,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/dokter/{id}', [DokterController::class, 'updateDokter']);
     Route::delete('/dokter/{id}', [DokterController::class, 'hapusDokter']);
 
-    //profile
-    Route::get('/profile', [TentangKamiController::class, 'indexProfile']);
-    Route::post('/profile', [TentangKamiController::class, 'saveProfile']);
-    Route::get('/profile/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
-    Route::put('/profile/{id}', [TentangKamiController::class, 'updateProfile']);
-    Route::delete('/profile/{id}', [TentangKamiController::class, 'hapusProfile']);
-
     // layanan
     Route::get('/layanan', [LayananController::class, 'indexLayanan']);
     Route::post('/layanan', [LayananController::class, 'saveLayanan']);

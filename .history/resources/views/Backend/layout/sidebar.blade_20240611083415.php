@@ -72,7 +72,7 @@
                 <a class="nav-link  {{ $active == 'admin/layanan' ? 'active' : '' }} " href="/admin/layanan">
                     <div
                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
-                        <i class="fa fa-user-nurse"></i>
+                        <i class="fa fa-book"></i>
                     </div>
                     <span class="nav-link-text ms-1">Layanan</span>
                 </a>

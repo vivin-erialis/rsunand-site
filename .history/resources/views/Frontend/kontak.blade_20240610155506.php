@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col- md-7">
                     <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.3033820359447!2d100.45395997358297!3d-0.9205414353328706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b7998d0add5d%3A0x30d2b69478a7bb30!2sRumah%20Sakit%20Universitas%20Andalas!5e0!3m2!1sid!2sid!4v1715135853543!5m2!1sid!2sid"
                     width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
