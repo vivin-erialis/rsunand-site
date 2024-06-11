@@ -37,6 +37,10 @@ class HomeController extends Controller
 
         $sliderImg = Slider::where('status' , '=', '0')->get();
 
+        $about = Artikel::whereHas('kategori', function ($query) {
+            $query->where('title', 'Deksripsi RS');
+        })->get();
+
         return view('Frontend.home', [
             'headerStart' => 'Berita',
             'artikel' => $artikel,
@@ -45,7 +49,8 @@ class HomeController extends Controller
             'recentPosts' => $recentPosts,
             'bagianInstalasi' => $bagianInstalasi,
             'pendidikanPenelitian' => $pendidikanPenelitian,
-            'fasilitas' => $fasilitas
+            'fasilitas' => $fasilitas,
+            'about' => $about
         ]);
     }
     // public function getHomePage()

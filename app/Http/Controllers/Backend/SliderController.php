@@ -80,33 +80,63 @@ class SliderController extends Controller
         $slider = Slider::find($id);
         return response()->json($slider);
     }
-
     public function updateSlider(Request $request, $id)
     {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'desc' => 'required',
+            'img' => 'image|mimes:jpeg,png,jpg,gif,svg', // Buat opsional
+        ]);
+
+        // Jika validasi gagal, kembalikan pesan kesalahan sebagai respons JSON
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $slider = Slider::find($id);
+
+        if (!$slider) {
+            return response()->json(['error' => 'Data Slider tidak ditemukan'], 404);
+        }
+
+        DB::beginTransaction();
+
         try {
-
-            $gambarlama = Slider::where('id', $id)->first();
-
+            // Periksa apakah file gambar baru diunggah
             if ($request->hasFile('img')) {
-                foreach ($request->file('img') as $gambar) {
-                    $namaGambar = time() . '-' . $gambar->getClientOriginalName();
-                    $gambar->move(public_path('images/slider'), $namaGambar);
-                    // Simpan nama gambar ke database atau lakukan operasi lainnya
+                // Hapus gambar lama jika ada
+                if ($slider->img && File::exists(public_path('images/slider/' . $slider->img))) {
+                    File::delete(public_path('images/slider/' . $slider->img));
                 }
+
+                // Simpan gambar baru
+                $img = time() . '_' . $request->file('img')->getClientOriginalName();
+                $request->file('img')->move(public_path('images/slider'), $img);
+                $slider->img = $img;
             }
 
-            // Update data  setelah mengunggah gambar
-            Slider::find($id)->update([
-                'title' => $request->title,
-                'desc' => $request->desc,
-                'status' => '0',
-            ]);
+            // Update data slider
+            $slider->title = $request->title;
+            $slider->desc = $request->desc;
+
+            $slider->save();
+
+            DB::commit();
 
             return response()->json(['message' => 'Data Slider Berhasil Diubah']);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Gagal memperbarui data: ' . $e->getMessage()]);
+            DB::rollBack();
+
+            // Hapus file yang sudah terupload jika terjadi error
+            if (isset($img) && File::exists(public_path('images/slider/' . $img))) {
+                File::delete(public_path('images/slider/' . $img));
+            }
+
+            return response()->json(['message' => 'Gagal memperbarui data: ' . $e->getMessage()], 500);
         }
     }
+
 
     public function editStatus(Request $request, $id)
     {

@@ -27,7 +27,7 @@
                             </div>
 
                             <label>Gambar</label>
-                            <input type="file" class="form-control mb-3" id="gambarArtikel" name="img[]" multiple>
+                            <input type="file" class="form-control mb-3" id="gambarArtikel" name="img">
 
                             <div class="">
                                 <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">

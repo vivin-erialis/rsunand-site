@@ -7,7 +7,7 @@
                 <div class="owl-carousel-item position-relative"
                     data-dot="<img src='{{ asset('../images/slider/' . $slider->img) }}'>">
                     <img class="img-fluid" src="{{ asset('images/slider/' . $slider->img) }}" alt=""
-                        style="height: 400px; object-fit: cover;">
+                        style="height: 500px; object-fit: cover;">
                     <div class="owl-carousel-inner home-img">
                         <div class="container">
                             <div class="row justify-content-start">
@@ -29,36 +29,26 @@
         </div>
     </div>
 
-      {{-- About --}}
-      <div class="container-xxl py-5">
+    {{-- About --}}
+    <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="about-img">
                         <img class="img-fluid" src="/../assets/img/about-2.jpeg" alt="">
-                        <img class="img-fluid" src="/../assets/img/about-1.jpeg" alt="">
+                        <img class="img-fluid" src="/../assets/img/about-3.jpeg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <h4 class="section-title">about us</h4>
                     <h1 class="display-5 mb-4">Rumah Sakit Univeristas Andalas</h1>
-                    <p>Rumah Sakit Unand merupakan Rumah sakit Perguruan tinggi Negeri (RSPTN) yang berada dibawah
-                        pengelolaan Universitas Andalas.</p>
-                    <p class="mb-4">Perencanaan rumah sakit ini telah dimulai sejak tahun 2006 yang berkaitan dengan
-                        adanya kebijakan untuk pendirian rumah sakit perguruan tinggi dan terbatasnya fasilitas pendidikan
-                        di rumah sakit pendidikan utama di RS. M. Djamil, Padang.</p>
-                    <div class="d-flex align-items-center mb-5">
-                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center border border-5 border-primary"
-                            style="width: 120px; height: 120px;">
-                            <h1 class="display-1 mb-n2" data-toggle="counter-up">7</h1>
+                    @foreach ($about as $about)
+                        <div style="font-size: 14px">
+                            <p style="">{{ $about->desc }}</p>
+                            <p class="mb-4">{!! $about->isi !!}</p>
                         </div>
-                        <div class="ps-4">
-                            <h3>Sudah</h3>
-                            <h3>Beroperasi</h3>
-                            <h3 class="mb-0">Selama 7 tahun</h3>
-                        </div>
-                    </div>
-                    <a class="btn btn-primary py-2 px-4" href="/tentang-kami">SELENGKAPNYA</a>
+                    @endforeach
+                    <a class="btn btn-primary py-2 px-4 mt-2" href="/sejarah">SELENGKAPNYA</a>
                 </div>
             </div>
         </div>
