@@ -20,7 +20,7 @@
                             </div>
                             <div class="col-md-8 bg-light p-3">
                                 <h5 class="mt-1">{{$data->nama}}</h5>
-                               <strong> <span class="text-primary" style="font-size: 13px">Dokter {{$data->spesialis->title}}</span></strong>
+                               {{-- <strong> <span class="text-primary" style="font-size: 13px">Dokter {{$data->spesialis->title}}</span></strong> --}}
                                <p>Pendidikan : {!! $data->pendidikan !!}</p>
                             </div>
                         </div>
