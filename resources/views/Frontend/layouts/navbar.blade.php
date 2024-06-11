@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-    <a href="/" class="navbar-brand ms-4 ms-lg-0">
-        <h2 class="text-primary m-0"><img class="me-3" style="width: 50px" src="/../assets/img/rsunandlogo.png"
-                alt="Icon">RS Universitas Andalas</h2>
+    <a href="/" class="navbar-brand ms-4 ms-lg-0 d-flex mt-1">
+        <img class="me-3" style="width: 50px; height: 60px;" src="/../assets/img/rsunandlogo.png"
+                alt="Icon"><h3 class="text-primary mt-2 ">RS UNIVERISTAS <br> ANDALAS</h3>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -20,9 +20,11 @@
                             <a href="/visi-misi" class="dropdown-item">Milestone</a>
                         </div>
                         <div class="col-md-4">
-                            <strong style="color: #1C7C3D; font-size: 12px">MANAJEMEN</strong><hr>
-                            <a href="/direksi" class="dropdown-item">Direksi</a>
-                            {{-- <a href="/direksi" class="dropdown-item"></a> --}}
+                            <strong style="color: #1C7C3D; font-size: 12px">STRUKTUR KELEMBAGAAN</strong><hr>
+                            <a href="/rektor" class="dropdown-item">Rektor</a>
+                            <a href="/dewan-pengawas" class="dropdown-item">Dewan Pengawas</a>
+                            <a href="/direksi" class="dropdown-item">Direksi </a>
+                            <a href="/struktur-organisasi" class="dropdown-item">Struktur Organisasi</a>
 
                         </div>
                         <div class="col-md-4">
@@ -79,7 +81,9 @@
 
                 </div>
             </div>
-            <a href="/pendidikan-penelitian"
+            <a href="/upcoming-event"
+                class="nav-item nav-link  {{ Request::is('upcoming-event') ? 'active' : '' }}">Upcoming Event</a>
+                <a href="/pendidikan-penelitian"
                 class="nav-item nav-link  {{ Request::is('pendidikan-penelitian') ? 'active' : '' }}">Pendidikan dan
                 Penelitian</a>
 

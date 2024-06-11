@@ -71,6 +71,9 @@ Route::get('/karir', [HomeController::class, 'karir']);
 Route::get('/video', [VideoController::class, 'video']);
 Route::get('/video/{id}', [VideoController::class, 'detailVideo']);
 
+Route::get('/upcoming-event', [HomeController::class, 'upcomingEvent']);
+
+
 
 // not found
 Route::fallback(function () {

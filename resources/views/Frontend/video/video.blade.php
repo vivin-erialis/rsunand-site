@@ -14,19 +14,22 @@
             @if ($video->isEmpty())
                 <p>Belum ada video yang tersedia.</p>
             @else
-                @foreach ($video as $video)
-                    <div class="d-flex">
-
-                            <iframe src="{{ $video->link }}" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <p><a href="/video/{{ $video->url }}">{{ $video->judul }}</a></p>
-                @endforeach
+                <div class="row">
+                    @foreach ($video as $video)
+                        <div class="col-md-4">
+                            <iframe src="{{ $video->link }}" style="width: 100%; height: 230px;" frameborder="0"
+                                allowfullscreen></iframe>
+                            <hr>
+                            <a href="/video/{{ $video->url }}">
+                                <h2 class="card-title text-center">{{ $video->judul }}</h2>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             @endif
 
 
         </div>
     </div>
     <!-- Contact End -->
-
-
 @endsection
