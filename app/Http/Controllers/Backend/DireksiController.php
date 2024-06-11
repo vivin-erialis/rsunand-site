@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Direksi;
+use App\Models\Jabatan;
+use App\Models\Dokter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -31,19 +33,18 @@ class DireksiController extends Controller
     {
         return view('Backend.direksi.index', [
             'active' => 'admin/direksi',
-            'direksi' => Direksi::all(),
+            'dokter' => Dokter::all(),
+            'jabatan' => Jabatan::all(),
         ]);
     }
     public function saveDireksi(Request $request)
     {
         // Validasi request
         $validator = Validator::make($request->all(), [
-            'nama' => 'required|string',
-            'nip' => 'required|string',
-            'tempat_lahir' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif', // Validasi untuk file gambar
-            'jabatan' => 'required|string',
+            'pegawai'               => 'required|string',
+            'jabatan'               => 'required|string',
+            'periode_jabatan_awal'  => 'required',
+            'periode_jabatan_akhir' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -53,23 +54,13 @@ class DireksiController extends Controller
         DB::beginTransaction();
 
         try {
-            if ($request->hasFile('foto')) {
-                $foto = time() . '_' . $request->file('foto')->getClientOriginalName();
-                $request->file('foto')->move(public_path('images/direksi'), $foto);
-                $validate['foto'] = $foto;
-            } else {
-                return response()->json(['message' => 'Foto tidak ditemukan.'], 400);
-            }
 
-            // Buat entri direksi baru
             $direksi = Direksi::create([
-                'nama' => $request->nama,
-                'nip' => $request->nip,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'foto' => $foto,
-                'jabatan' => $request->jabatan,
-                'status' => '0',
+                'id_jabatan'            => $request->jabatan,
+                'id_dokter'             => $request->pegawai,
+                'periode_jabatan_awal'  => $request->periode_jabatan_awal,
+                'periode_jabatan_akhir' => $request->periode_jabatan_akhir,
+                'status'                => 0
             ]);
 
             DB::commit();
@@ -77,11 +68,6 @@ class DireksiController extends Controller
             return response()->json(['message' => 'Data Direksi Berhasil Ditambah']);
         } catch (\Exception $e) {
             DB::rollBack();
-
-            // Hapus file yang sudah terupload jika terjadi error
-            if (isset($foto) && file_exists(public_path('images/direksi/' . $foto))) {
-                unlink(public_path('images/direksi/' . $foto));
-            }
 
             return response()->json(['message' => 'Terjadi kesalahan saat menyimpan data', 'error' => $e->getMessage()], 500);
         }

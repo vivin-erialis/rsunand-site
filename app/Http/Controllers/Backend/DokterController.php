@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
+use App\Traits\MasterTrait;
 
 class DokterController extends Controller
 {
-    //
+    use MasterTrait;
+
     public function indexDokter()
     {
         return view('Backend.dokter.index', [
@@ -25,8 +27,7 @@ class DokterController extends Controller
     public function getDokter()
     {
         $dokter = DB::table('dokters')
-            ->join('spesialis', 'dokters.spesialis_id', '=', 'spesialis.id')
-            ->select('dokters.*', 'spesialis.title as title')
+            ->select('dokters.*')
             ->get();
 
         // Menambahkan URL foto ke setiap dokter
@@ -50,7 +51,6 @@ class DokterController extends Controller
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'pendidikan' => 'required',
-            'spesialis_id' => 'required'
         ]);
 
         // Jika validasi gagal, kembalikan pesan kesalahan sebagai respons JSON
@@ -68,14 +68,18 @@ class DokterController extends Controller
             }
 
             // Buat data dokter
+            $id_dokter = $this->idCreate('dokters', 'id');
             $dokter = Dokter::create([
-                'nama' => $request->nama,
-                'nip' => $request->nip,
-                'foto' => $foto,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'pendidikan' => $request->pendidikan,
-                'spesialis_id' => $request->spesialis_id
+                'id'                => $id_dokter,
+                'gelar_depan'       => $request->gelar_depan,
+                'nama'              => $request->nama,
+                'gelar_belakang'    => $request->gelar_belakang,
+                'nip'               => $request->nip,
+                'tempat_lahir'      => $request->tempat_lahir,
+                'tanggal_lahir'     => $request->tanggal_lahir,
+                'foto'              => $foto,
+                'pendidikan'        => $request->pendidikan,
+                'isdokter'          => $request->isdokter
             ]);
 
             DB::commit();

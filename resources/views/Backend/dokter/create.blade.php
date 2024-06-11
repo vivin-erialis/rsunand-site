@@ -11,45 +11,53 @@ aria-hidden="true">
         <div class="modal-body">
             <form id="addForm" enctype="multipart/form-data">
                 @csrf
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Gelar Depan</label>
+                        <input type="text" class="form-control" placeholder="dr." aria-label="Name" aria-describedby="name-addon" name="gelar_depan" required>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label>Nama</label>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan nama dokter"
-                                aria-label="Name" aria-describedby="name-addon" name="nama" required>
-                        </div>
+                        <input type="text" class="form-control" placeholder="Nama" aria-label="Name" aria-describedby="name-addon" name="nama" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Gelar Belakang</label>
+                        <input type="text" class="form-control" placeholder="" aria-label="Name" aria-describedby="name-addon" name="gelar_belakang" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
                         <label>NIP</label>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan NIP dokter"
-                                aria-label="Name" aria-describedby="name-addon" name="nip" required>
-                        </div>
+                        <input type="text" class="form-control" placeholder="masukan NIP dokter" aria-label="Name" aria-describedby="name-addon" name="nip" required>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label>Tempat Lahir</label>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan tempat lahir"
-                                aria-label="Name" aria-describedby="name-addon" name="tempat_lahir" required>
-                        </div>
+                        <input type="text" class="form-control" placeholder="masukan tempat lahir" aria-label="Name" aria-describedby="name-addon" name="tempat_lahir" required>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label>Tanggal Lahir</label>
-                        <div class="mb-3">
-                            <input type="date" class="form-control" placeholder="masukan tempat lahir"
-                                aria-label="Name" aria-describedby="name-addon" name="tanggal_lahir" required>
-                        </div>
+                        <input type="date" class="form-control" placeholder="masukan tempat lahir"aria-label="Name" aria-describedby="name-addon" name="tanggal_lahir" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Jenis Pegawai</label>
+                        <select id="isdokter" name="isdokter" class="form-control">
+                            <option selected value="0">Dokter</option>
+                            <option value="1">Non Dokter</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label>Foto</label>
+                        <input type="file" class="form-control" aria-describedby="email-addon"
+                                name="foto">
+                    </div>
+                </div>
+                    <div class="col-md-12">
                         <label>Pendidikan</label>
                         <div class="mb-3">
                             <textarea type="text" id="editor-2" placeholder="masukan pendidikan dokter" aria-label="Name"
                                 aria-describedby="name-addon" name="pendidikan"></textarea>
-                        </div>
-                        <label>Foto</label>
-                        <div class="mb-3">
-                            <input type="file" class="form-control" aria-describedby="email-addon"
-                                name="foto">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Spesialis</label>
-                            <select name="spesialis_id" id="mySelect" class="form-control">
-                                @foreach ($spesialis as $item)
-                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                @endforeach
-                            </select>
                         </div>
 
                         <div class="">

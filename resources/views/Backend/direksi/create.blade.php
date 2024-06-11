@@ -12,37 +12,37 @@ aria-hidden="true">
             <form id="addForm" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Nama Pegawai</label>
+                            <select id="pegawai" name="pegawai" class="form-control">
+                                <option selected >Pilih Pegawai</option>
+                                @foreach($dokter as $dr)
+                                    <option value="{{ $dr->id }}">{{ $dr->gelar_depan }} {{ $dr->nama }} {{ $dr->gelar_belakang }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Jabatan</label>
+                            <select id="jabatan" name="jabatan" class="form-control">
+                                <option selected >Pilih Jabatan</option>
+                                @foreach($jabatan as $jbt)
+                                    <option value="{{ $jbt->id_jabatan }}">{{ $jbt->desc_jabatan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Awal Jabatan</label>
+                            <input type="date" class="form-control" name="periode_jabatan_awal" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Akhir Jabatan</label>
+                            <input type="date" class="form-control" name="periode_jabatan_akhir" required>
+                        </div>
+                    </div>
                     <div class="col-md-12">
-                        <label>Nama</label>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan nama direksi"
-                                aria-label="Name" aria-describedby="name-addon" name="nama" required>
-                        </div>
-                        <label>NIP</label>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan NIP direksi"
-                                aria-label="Name" aria-describedby="name-addon" name="nip" required>
-                        </div>
-                        <label>Tempat Lahir</label>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan tempat lahir"
-                                aria-label="Name" aria-describedby="name-addon" name="tempat_lahir" required>
-                        </div>
-                        <label>Tanggal Lahir</label>
-                        <div class="mb-3">
-                            <input type="date" class="form-control" placeholder="masukan tempat lahir"
-                                aria-label="Name" aria-describedby="name-addon" name="tanggal_lahir" required>
-                        </div>
-                        <label>Jabatan</label>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="masukan tempat jabatan"
-                                aria-label="Name" aria-describedby="name-addon" name="jabatan" required>
-                        </div>
-                        <label>Foto</label>
-                        <div class="mb-3">
-                            <input type="file" class="form-control" aria-describedby="email-addon"
-                                name="foto">
-                        </div>
                         <div class="">
                             <button type="submit"
                                 class="btn btn-success btn-sm w-13 mt-4 mb-3 float-end"> <i class="fa fa-save me-1 text-xs"></i>Simpan</button>
