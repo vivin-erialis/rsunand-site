@@ -1,9 +1,9 @@
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addArticleModalLabel"
+<div class="modal fade" id="addModalSpesialis" tabindex="-1" role="dialog" aria-labelledby="addArticleModalLabel"
 aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: whitesmoke;">
-                <h5 class="modal-title" id="addArticleModalLabel">Tambah Data Direksi</h5>
+                <h5 class="modal-title" id="addArticleModalLabel">Tambah Data Dokter Spesialis</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,33 +13,27 @@ aria-hidden="true">
                     @csrf
                     <div class="row">
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Nama Pegawai</label>
-                                <select id="pegawai" name="pegawai" class="form-control">
-                                    <option selected >Pilih Pegawai</option>
+                            <div class="form-group col-md-5">
+                                <label>Nama Dokter</label>
+                                <select id="dokter" name="dokter" class="form-control">
+                                    <option selected >Pilih Dokter</option>
                                     @foreach($dokter as $dr)
                                         <option value="{{ $dr->id }}">{{ $dr->gelar_depan }} {{ $dr->nama }} {{ $dr->gelar_belakang }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label>Jabatan</label>
-                                <select id="jabatan" name="jabatan" class="form-control">
-                                    <option selected >Pilih Jabatan</option>
-                                    @foreach($jabatan as $jbt)
-                                        <option value="{{ $jbt->id_jabatan }}">{{ $jbt->desc_jabatan }}</option>
+                            <div class="form-group col-md-4">
+                                <label>Spesialisasi</label>
+                                <select id="spesialis" name="spesialis" class="form-control">
+                                    <option selected >Pilih Spesialis</option>
+                                    @foreach($spesialis as $sp)
+                                        <option value="{{ $sp->id }}">{{ $sp->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Awal Jabatan</label>
-                                <input type="date" class="form-control" name="periode_jabatan_awal" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Akhir Jabatan</label>
-                                <input type="date" class="form-control" name="periode_jabatan_akhir" required>
+                            <div class="form-group col-md-3">
+                                <label>ID Hfis</label>
+                                <input type="number" class="form-control" name="idhfis" required>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -59,5 +53,3 @@ aria-hidden="true">
         </div>
     </div>
 </div>
-
-

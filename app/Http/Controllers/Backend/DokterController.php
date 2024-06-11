@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dokter;
-use App\Models\spesialis;
+use App\Models\Spesialis;
+use App\Models\DokterSpesialis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,6 @@ class DokterController extends Controller
         return view('Backend.dokter.index', [
             'active' => 'admin/dokter',
             'dokter' => Dokter::all(),
-            'spesialis' => spesialis::all()
         ]);
     }
 
@@ -79,7 +79,9 @@ class DokterController extends Controller
                 'tanggal_lahir'     => $request->tanggal_lahir,
                 'foto'              => $foto,
                 'pendidikan'        => $request->pendidikan,
-                'isdokter'          => $request->isdokter
+                'isdokter'          => $request->isdokter,
+                'idhfis'                => $request->idhfis,
+                'statusenabled'         => 1
             ]);
 
             DB::commit();
@@ -198,6 +200,57 @@ class DokterController extends Controller
             DB::rollBack();
 
             return response()->json(['message' => 'Gagal menghapus data dokter: ' . $e->getMessage()], 500);
+        }
+    }
+
+
+    public function indexDokterSpesialis()
+    {
+        return view('Backend.dokter.spesialis.index', [
+            'active' => 'admin/dokter/spesialis',
+            'dokter' => Dokter::all(),
+            'spesialis' => Spesialis::all()
+        ]);
+    }
+
+    public function saveDokterSpesialis(Request $request)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'dokter' => 'required',
+            'spesialis' => 'required'
+        ]);
+
+        // Jika validasi gagal, kembalikan pesan kesalahan sebagai respons JSON
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        DB::beginTransaction();
+
+        try {
+
+            // Buat data dokter
+            $id_dokter_spesialis = $this->idCreate('m_dokter_spesialis', 'id_dokter_spesialis');
+            $dokter = DokterSpesialis::create([
+                'id_dokter_spesialis'   => $id_dokter_spesialis,
+                'id_dokter'             => $request->dokter,
+                'id_spesialis'          => $request->spesialis,
+                'idhfis'                => $request->idhfis,
+                'statusenabled'         => 1
+            ]);
+
+            DB::commit();
+
+            // Kembalikan respons JSON
+            return response()->json([
+                'message' => 'Data Dokter Spesialis Berhasil Ditambah',
+                'dokter' => $dokter
+            ], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['message' => 'Gagal menambah data: ' . $e->getMessage()], 500);
         }
     }
 }

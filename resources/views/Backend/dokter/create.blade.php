@@ -47,7 +47,11 @@ aria-hidden="true">
                             <option value="1">Non Dokter</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-3">
+                                <label>ID Hfis</label>
+                                <input type="number" class="form-control" name="idhfis" required>
+                            </div>
+                    <div class="form-group col-md-5">
                         <label>Foto</label>
                         <input type="file" class="form-control" aria-describedby="email-addon"
                                 name="foto">

@@ -43,14 +43,6 @@
                   <input type="file" class="form-control" aria-describedby="email-addon"
                     name="foto">
                 </div>
-                <div class="form-group">
-                  <label class="control-label">Spesialis</label>
-                  <select name="spesialis_id" id="spesialisId" class="form-control">
-                    @foreach ($spesialis as $item)
-                    <option value="{{ $item->id }}">{{ $item->title }}</option>
-                    @endforeach
-                  </select>
-                </div>
               </div>
             </div>
             <div class="modal-footer">

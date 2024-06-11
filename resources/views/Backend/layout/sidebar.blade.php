@@ -74,16 +74,16 @@
                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                         <i class="fa fa-user"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Dokter</span>
+                    <span class="nav-link-text ms-1">Pegawai</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ $active == 'admin/jabatan' ? 'active' : '' }} " href="/admin/jabatan">
+                <a class="nav-link  {{ $active == 'admin/dokter/spesialis' ? 'active' : '' }} " href="/admin/dokter/spesialis">
                     <div
                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                         <i class="fa fa-user"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Jabatan</span>
+                    <span class="nav-link-text ms-1">Dokter Spesialis</span>
                 </a>
             </li>
             <li class="nav-item">

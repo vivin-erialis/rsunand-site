@@ -127,6 +127,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/dokter/{id}', [DokterController::class, 'updateDokter']);
     Route::delete('/dokter/{id}', [DokterController::class, 'hapusDokter']);
 
+    Route::get('/dokter/spesialis', [DokterController::class, 'indexDokterSpesialis']);
+    Route::post('/dokter/spesialis/add', [DokterController::class, 'saveDokterSpesialis'])->name('spesialis.add');
+
     //profile
     Route::get('/profile', [TentangKamiController::class, 'indexProfile']);
     Route::post('/profile', [TentangKamiController::class, 'saveProfile']);
