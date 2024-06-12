@@ -32,7 +32,7 @@
                         <div class="col-md-4">
                             <strong style="color: #1C7C3D; font-size: 13px">BIDANG</strong>
                             <hr>
-                            <p><a href="/pelayanan-medik" class="about-item">Pelayanan Medik dan Keperawatan</a></p>
+                            <p><a href="/pelayanan-medik-keperawatan" class="about-item">Pelayanan Medik dan Keperawatan</a></p>
                             <p><a href="/umum-sumber-daya" class="about-item">Umum dan Sumber Daya</a></p>
                             <p><a href="/keuangan-perencanaan" class="about-item">Keuangan dan Perencanaan</a></p>
 
