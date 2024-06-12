@@ -29,17 +29,17 @@
                                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                                         <i class="fa fa-hospital"></i>
                                     </div>
-                                    <span class="nav-link-text ms-1">Profile RS Unand</span>
+                                    <span class="nav-link-text ms-1">About</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link  {{ $active == 'admin/direksi' ? 'active' : '' }} "
-                                    href="/admin/direksi">
+                                <a class="nav-link  {{ $active == 'admin/manajemen' ? 'active' : '' }} "
+                                    href="/admin/manajemen">
                                     <div
                                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                                         <i class="fa fa-users"></i>
                                     </div>
-                                    <span class="nav-link-text ms-1">Direksi</span>
+                                    <span class="nav-link-text ms-1">Manajemen</span>
                                 </a>
                             </li>
                             <li class="nav-item">

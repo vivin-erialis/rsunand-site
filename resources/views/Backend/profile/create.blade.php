@@ -13,20 +13,32 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
+                                <label>Milestone</label>
+                                <div class="mb-3">
+                                    <textarea type="text" id="editor" placeholder="" aria-label="Name"
+                                        aria-describedby="name-addon" name="milestone"></textarea>
+                                </div>
                                 <label>Sejarah</label>
                                 <div class="mb-3">
-                                    <textarea type="text" id="editor-2" placeholder="masukan isi artikel" aria-label="Name"
+                                    <textarea type="text" id="editor-2" placeholder="" aria-label="Name"
                                         aria-describedby="name-addon" name="sejarah"></textarea>
                                 </div>
-                                <label>Email</label>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="editor-2" placeholder="masukan email" aria-label="Name"
-                                        aria-describedby="name-addon" name="email"></input>
-                                </div>
-                                <label>Telepon</label>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="editor-2" placeholder="masukan telepon" aria-label="Name"
-                                        aria-describedby="name-addon" name="telp"></input>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                        <div class="mb-3">
+                                            <input id="email" class="form-control" name="email"
+                                                placeholder="masukan email"></input>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Telepon</label>
+                                        <div class="mb-3">
+                                            <input id="telp" class="form-control" name="telp" placeholder="masukan telepon"></input>
+                                        </div>
+                                    </div>
                                 </div>
                                 <label>Alamat</label>
                                 <div class="mb-3">

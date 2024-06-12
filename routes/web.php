@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\ArtikelController as BackendArtikelController;
-use App\Http\Controllers\Backend\DireksiController;
+use App\Http\Controllers\Backend\ManajemenController;
 use \App\Http\Controllers\Backend\DokterController ;
 use App\Http\Controllers\Backend\FasilitasController as BackendFasilitasController;
 use App\Http\Controllers\Backend\LayananController;
@@ -91,12 +91,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/artikel/{id}', [BackendArtikelController::class, 'hapusDataArtikel']);
 
     // direksi
-    Route::get('/direksi', [DireksiController::class, 'indexDireksi']);
-    Route::post('/direksi', [DireksiController::class, 'saveDireksi']);
-    Route::get('/direksi/{id}/edit', [DireksiController::class, 'getDataforEdit']);
-    Route::put('/direksi/{id}/status', [DireksiController::class, 'editStatus']);
-    Route::put('/direksi/{id}', [DireksiController::class, 'updateDireksi']);
-    Route::delete('/direksi/{id}', [DireksiController::class, 'hapusDireksi']);
+    Route::get('/manajemen', [ManajemenController::class, 'indexDireksi']);
+    Route::post('/manajemen', [ManajemenController::class, 'saveDireksi']);
+    Route::get('/manajemen/{id}/edit', [ManajemenController::class, 'getDataforEdit']);
+    Route::put('/manajemen/{id}/status', [ManajemenController::class, 'editStatus']);
+    Route::put('/manajemen/{id}', [ManajemenController::class, 'updateDireksi']);
+    Route::delete('/manajemen/{id}', [ManajemenController::class, 'hapusDireksi']);
 
     // video
     Route::get('/video', [BackendVideoController::class, 'indexVideo']);

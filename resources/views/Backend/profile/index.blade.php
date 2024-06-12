@@ -161,6 +161,15 @@
                     .catch(error => {
                         console.error(error);
                     });
+                ClassicEditor
+                    .create(document.querySelector('#milestone'))
+                    .then(editor => {
+                        // CKEditor #editor-4 siap, tetapkan editor ke variabel global
+                        window.editor4 = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
                 // Event delegation for delete button
                 $(document).on('click', '.edit-btn', function() {
                     var dataId = $(this).data('id');
@@ -171,14 +180,17 @@
                         success: function(response) {
                             // Isi formulir modal dengan data artikel yang diterima dari server
                             $('#dataId').val(response.id);
-                            $('#email').val(response.email);
-                            $('#telp').val(response.telp);
+                            $('#emailAdress').val(response.email);
+                            $('#telepon').val(response.telp);
                             $('#alamat').val(response.alamat);
 
 
 
                             if (window.editor3) {
                                 window.editor3.setData(response.sejarah);
+                            }
+                            if (window.editor4) {
+                                window.editor4.setData(response.milestone);
                             }
 
 

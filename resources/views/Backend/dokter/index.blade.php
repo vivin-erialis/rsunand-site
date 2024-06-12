@@ -1,5 +1,5 @@
 @extends('Backend.layout.main')
-@section('title', 'Halaman Data Dokter')
+@section('title', 'Halaman Data Pegawai')
 @section('content')
     <div class="container-fluid py-3 px-3">
         <div class="row">
@@ -8,8 +8,8 @@
                     <div class="card-header border-bottom pb-0 mb-3">
                         <div class="d-sm-flex align-items-center">
                             <div>
-                                <h6 class="font-weight-semibold text-lg mb-0">Data Dokter</h6>
-                                <p class="text-sm">Data Dokter RS Unand</p>
+                                <h6 class="font-weight-semibold text-lg mb-0">Data Pegawai</h6>
+                                <p class="text-sm">Data Pegawai RS Unand</p>
                             </div>
                             <div class="ms-auto d-flex">
                                 <button class="btn btn-sm btn-dark btn-icon d-flex align-items-center" data-toggle="modal"

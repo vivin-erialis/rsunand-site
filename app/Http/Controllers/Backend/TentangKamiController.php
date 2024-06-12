@@ -39,7 +39,8 @@ class TentangKamiController extends Controller
             'sejarah' => 'required',
             'email' => 'required|email',
             'telp' => 'required',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'milestone' => 'required'
         ]);
 
         // Jika validasi gagal, kembalikan respon JSON dengan pesan error
@@ -59,6 +60,7 @@ class TentangKamiController extends Controller
             $data->email = $request->input('email');
             $data->telp = $request->input('telp');
             $data->alamat = $request->input('alamat');
+            $data->milestone = $request->input('milestone');
             $data->save();
 
             // Komit transaksi jika berhasil
@@ -99,6 +101,7 @@ class TentangKamiController extends Controller
             'email' => 'required|email',
             'telp' => 'required',
             'alamat' => 'required',
+            'milestone' => 'required'
         ]);
 
         // Jika validasi gagal, kembalikan respon JSON dengan pesan error
@@ -128,6 +131,7 @@ class TentangKamiController extends Controller
             $data->email = $request->input('email');
             $data->telp = $request->input('telp');
             $data->alamat = $request->input('alamat');
+            $data->milestone = $request->input('milestone');
             $data->save();
 
             // Komit transaksi jika berhasil

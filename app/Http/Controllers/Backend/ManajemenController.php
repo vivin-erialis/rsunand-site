@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 
 
-class DireksiController extends Controller
+class ManajemenController extends Controller
 {
     //
     public function getDireksi()
@@ -31,8 +31,8 @@ class DireksiController extends Controller
 
     public function indexDireksi()
     {
-        return view('Backend.direksi.index', [
-            'active' => 'admin/direksi',
+        return view('Backend.manajemen.index', [
+            'active' => 'admin/manajemen',
             'dokter' => Dokter::all(),
             'jabatan' => Jabatan::all(),
         ]);
@@ -65,7 +65,7 @@ class DireksiController extends Controller
 
             DB::commit();
 
-            return response()->json(['message' => 'Data Direksi Berhasil Ditambah']);
+            return response()->json(['message' => 'Data Berhasil Ditambah']);
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -97,7 +97,7 @@ class DireksiController extends Controller
     $direksi = Direksi::find($id);
 
     if (!$direksi) {
-        return response()->json(['message' => 'Data Direksi tidak ditemukan'], 404);
+        return response()->json(['message' => 'Dksi tidak ditemukan'], 404);
     }
 
     DB::beginTransaction();
@@ -170,7 +170,7 @@ class DireksiController extends Controller
             unlink($filePath);
         }
 
-        // Hapus data direksi dari database
+        // Hapus eksi dari database
         $direksi->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus.']);

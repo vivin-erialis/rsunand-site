@@ -1,5 +1,5 @@
 @extends('Backend.layout.main')
-@section('title', 'Halaman Data Direksi')
+@section('title', 'Halaman Data Manajemen')
 @section('content')
     <div class="container-fluid py-3 px-3">
         <div class="row">
@@ -8,8 +8,8 @@
                     <div class="card-header border-bottom pb-0 mb-3">
                         <div class="d-sm-flex align-items-center">
                             <div>
-                                <h6 class="font-weight-semibold text-lg mb-0">Data Direksi</h6>
-                                <p class="text-sm">Data Direksi RS Unand</p>
+                                <h6 class="font-weight-semibold text-lg mb-0">Data Manajemen</h6>
+                                <p class="text-sm">Data Manajemen RS Unand</p>
                             </div>
                             <div class="ms-auto d-flex">
                                 <button class="btn btn-sm btn-dark btn-icon d-flex align-items-center" data-toggle="modal"
@@ -42,9 +42,9 @@
                 </div>
             </div>
         </div>
-        @include('Backend.direksi.create')
-        @include('Backend.direksi.edit')
-        @include('Backend.direksi.hapus')
+        @include('Backend.manajemen.create')
+        @include('Backend.manajemen.edit')
+        @include('Backend.manajemen.hapus')
         <script>
             $(document).ready(function() {
                 // Setup CSRF token
