@@ -81,6 +81,9 @@ class ArtikelController extends Controller
             return response()->json(['message' => 'Data Artikel Berhasil Ditambah', 'artikel' => $artikel], 201);
         } catch (\Exception $e) {
             DB::rollBack();
+            if ($gambar && file_exists(public_path('images/artikel/' . $gambar))) {
+                unlink(public_path('images/artikel/' . $gambar));
+            }
             \Log::error($e); // Log the error
             return response()->json(['message' => 'Terjadi kesalahan saat menyimpan data.'], 500);
         }

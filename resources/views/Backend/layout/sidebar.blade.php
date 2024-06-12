@@ -53,6 +53,16 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link  {{ $active == 'admin/kerjasama' ? 'active' : '' }} "
+                                    href="/admin/kerjasama">
+                                    <div
+                                        class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-handshake"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Kerja Sama</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link  {{ $active == 'admin/dokter/spesialis' ? 'active' : '' }} "
                                     href="/admin/dokter/spesialis">
                                     <div

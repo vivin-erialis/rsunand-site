@@ -95,4 +95,6 @@ class ArtikelController extends Controller
             'kategori' => KategoriArtikel::all(),
         ]);
     }
+
+
 }

@@ -54,6 +54,31 @@
         </div>
     </div>
 
+    {{-- Kerja Sama --}}
+    <div class="container-xxl py-5">
+        <div class="container">
+
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <h4 class="section-title">kerja sama</h4>
+                <h1 class="display-5 mb-4">Rumah Sakit Universitas Andalas</h1>
+            </div>
+
+            <div class="slider-container">
+                <div class="slider" id="slider">
+                    @foreach ($kerjaSama as $item)
+                        <div class="slide mx-2">
+                            <img src="{{ asset('images/kerjasama/' . $item->gambar) }}" class="mx-1"
+                                alt="{{ $item->nama_kerjasama }}">
+                        </div>
+                    @endforeach
+                </div>
+                <button class="prev" onclick="prevSlide()">&#10094;</button>
+                <button class="next" onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Service Start -->
     <div class="container-xxl py-5">
         <div class="container">
@@ -85,7 +110,8 @@
                             <div class="service-text p-5">
                                 <i class="fa fa-hospital flex-shrink-0 mb-4" style="color: white; font-size: 40px"></i>
                                 <h2 class="mb-3" style="color: white">{{ $item->nama_layanan }}</h2>
-                                <p class="mb-4" style="font-size: 14px">{{ Str::limit($item->desc, 80, '...') }}.</p>
+                                <p class="mb-4" style="font-size: 14px">{{ Str::limit($item->desc, 80, '...') }}.
+                                </p>
                                 <a class="btn" href="/layanan-unggulan/{{ $item->url }}"><i
                                         class="fa fa-plus text-primary me-3"></i>Read
                                     More</a>
@@ -181,11 +207,13 @@
                                     </div>
                                     <div class="news-block-title mb-2">
                                         <a href="/berita/{{ $new->url }}">
-                                            <h4 style="font-size: 18px" class="card-title">{{ $new->title }}</h4>
+                                            <h4 style="font-size: 18px" class="card-title">{{ $new->title }}
+                                            </h4>
                                         </a>
                                     </div>
                                     <div>
-                                        <p class="card-text">{{ Str::limit(strip_tags($new->desc), 80, '...') }}</p>
+                                        <p class="card-text">{{ Str::limit(strip_tags($new->desc), 80, '...') }}
+                                        </p>
                                     </div>
 
                                 </div>
@@ -231,7 +259,8 @@
                                         </h6>
                                     </div>
                                     <div>
-                                        <p class="card-text">{{ Str::limit(strip_tags($data->desc), 100, '...') }}</p>
+                                        <p class="card-text">{{ Str::limit(strip_tags($data->desc), 100, '...') }}
+                                        </p>
                                     </div>
 
                                 </div>
@@ -262,7 +291,8 @@
                                 </i>
                                 <div class="ms-4">
                                     <h4>AKREDITASI TAHUN 2018</h4>
-                                    <p class="mb-0" style="font-size: 15px">Akreditasi Rumah Sakit Unand pertama kali
+                                    <p class="mb-0" style="font-size: 15px">Akreditasi Rumah Sakit Unand pertama
+                                        kali
                                         oleh Komite Akreditasi
                                         Rumah Sakit (KARS) pada tanggal 26 Desember tahun 2018 dengan Akreditasi
                                         <strong>PARIPURNA</strong>
@@ -277,7 +307,8 @@
                                 </i>
                                 <div class="ms-4">
                                     <h4>AKREDITASI TAHUN 2022</h4>
-                                    <p class="mb-0" style="font-size: 15px">Rumah Sakit Unand kembali meraih akreditasi
+                                    <p class="mb-0" style="font-size: 15px">Rumah Sakit Unand kembali meraih
+                                        akreditasi
                                         <strong>PARIPURNA</strong> pada tanggal 3-4 November tahun 2022 oleh Lembaga
                                         Akreditasi Mutu dan Keselamatan Pasien Rumah Sakit (LAMKPRS)
                                     </p>
@@ -355,5 +386,7 @@
 
         </div>
     </div>
+
+
 
 @endsection

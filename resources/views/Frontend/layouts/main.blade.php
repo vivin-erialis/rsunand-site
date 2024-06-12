@@ -32,6 +32,65 @@
 
     <!-- Template Stylesheet -->
     <link href="/../assets/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <style>
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            flex: 0 0 20%;
+            /* Default 4 gambar dalam satu slide */
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 1200px) {
+            .slide {
+                flex: 0 0 33.33%;
+                /* 3 gambar dalam satu slide */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                flex: 0 0 50%;
+                /* 2 gambar dalam satu slide */
+            }
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 100;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -81,8 +140,65 @@
     <script src="/../assets/lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="/../assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
     <!-- Template Javascript -->
     <script src="/../assets/js/main.js"></script>
+    <script>
+        let slideIndex = 0;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const slideWidth = slides[0].clientWidth;
+            const slider = document.querySelector('.slider');
+
+            if (n >= slides.length) {
+                slideIndex = 0;
+            } else if (n < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            slider.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            showSlide(slideIndex);
+        }
+
+        // Autoplay
+        let autoplayInterval = setInterval(nextSlide, 5000);
+
+        // Pause autoplay on button hover
+        const buttons = document.querySelectorAll('.prev, .next');
+        buttons.forEach(button => {
+            button.addEventListener('mouseover', () => {
+                clearInterval(autoplayInterval);
+            });
+            button.addEventListener('mouseleave', () => {
+                autoplayInterval = setInterval(nextSlide, 5000);
+            });
+        });
+
+        // Adjust slides based on screen size
+        function adjustSlides() {
+            const slides = document.querySelectorAll('.slide');
+            const slideWidth = slides[0].clientWidth;
+            const slider = document.querySelector('.slider');
+
+            slider.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        }
+
+        // Initial display and event listener for resize
+        showSlide(slideIndex);
+        window.addEventListener('resize', adjustSlides);
+    </script>
+
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 @extends('Backend.layout.main')
-@section('title', 'Halaman Data Manajemen')
+@section('title', 'Halaman Data Kerja Sama')
 @section('content')
     <div class="container-fluid py-3 px-3">
         <div class="row">
@@ -8,8 +8,8 @@
                     <div class="card-header border-bottom pb-0 mb-3">
                         <div class="d-sm-flex align-items-center">
                             <div>
-                                <h6 class="font-weight-semibold text-lg mb-0">Data Manajemen</h6>
-                                <p class="text-sm">Data Manajemen RS Unand</p>
+                                <h6 class="font-weight-semibold text-lg mb-0">Data Kerja Sama</h6>
+                                <p class="text-sm">Data Kerja Sama RS Unand</p>
                             </div>
                             <div class="ms-auto d-flex">
                                 <button class="btn btn-sm btn-dark btn-icon d-flex align-items-center" data-toggle="modal"
@@ -23,13 +23,12 @@
                         </div>
                     </div>
                     <div class="container p-3">
-                        <table id="myTable" class="table-bordered table-striped">
+                        <table id="myTable" class="display">
                             <thead>
                                 <tr>
-                                    <th class="text-dark text-xs font-weight-semibold">Data</th>
-                                    <th class="text-dark text-xs font-weight-semibold">Jabatan</th>
-                                    </th>
-                                    <th class="text-dark text-xs font-weight-semibold">Status</th>
+                                    <th class="text-dark text-xs font-weight-semibold" style="text-align: left">Nama Kerja
+                                        Sama</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Foto</th>
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
                                 </tr>
                             </thead>
@@ -42,9 +41,9 @@
                 </div>
             </div>
         </div>
-        @include('Backend.manajemen.create')
-        @include('Backend.manajemen.edit')
-        @include('Backend.manajemen.hapus')
+        @include('Backend.kerjasama.create')
+        @include('Backend.kerjasama.edit')
+        @include('Backend.kerjasama.hapus')
         <script>
             $(document).ready(function() {
                 // Setup CSRF token
@@ -57,47 +56,34 @@
                 // Inisialisasi DataTables
                 var table = $('#myTable').DataTable();
 
-                // Fungsi untuk memuat
+                // Fungsi untuk memuat fasilitas
                 function loadData() {
+                    console.log('Load Articles function called'); // Debugging
 
                     $.ajax({
-                        url: "{{ route('getDireksi') }}",
+                        url: "{{ route('getKerjasama') }}",
                         type: 'GET',
                         dataType: 'json',
                         success: function(response) {
-                            console.log('Success:', response.direksi); // Debugging
+                            console.log('Success:', response); // Debugging
                             let html = '';
-                            response.direksi.forEach(function(direksi) {
+                            response.kerjasama.forEach(function(kerjasama) {
                                 html += '<tr>';
-                                html += '<td>'
-                                    if (direksi.status == 0) {
-                                    html +=
-                                        '<a href="#" class="btn btn-sm btn-success change-status" data-id="' +
-                                        direksi.id + '" data-status="1">Aktif</a>';
-                                } else {
-                                    html +=
-                                        '<a href="#" class="btn btn-sm btn-danger change-status" data-id="' +
-                                        direksi.id + '" data-status="0">Non Aktif</a>';
-                                }
-
-                                html += '</td>'
-                                html += '<td><p class="px-3 mb-0">' +
-                                    '<img src="' + direksi.foto_url + // Menggunakan foto_url
-                                    '" alt="Foto Dokter" style="width:100px; height:auto;"><br>' +
-                                    direksi.nama + '<br>' + direksi.nip + '<br>' + direksi
-                                    .tempat_lahir + `/` + direksi.tanggal_lahir +
-                                    '<br></p></td>';
-                                html += '<td><p class="px-3 mb-0">' + direksi.jabatan +
+                                html +=
+                                    '<td width="20%" style="text-align:left"><p class="px-3 mb-0">' +
+                                    '<img src="' + kerjasama.foto_url + // Menggunakan foto_url
+                                    '" alt="Foto kerjasama" style="width:100px; height:auto;"><br>' +
                                     '</p></td>';
-
+                                html += '<td><p class="px-3 mb-0">' + kerjasama.nama_kerjasama +
+                                    '</p></td>';
                                 html += '<td>';
                                 html +=
                                     '<button class="btn btn-sm btn-warning edit-btn" data-id="' +
-                                    direksi.id +
+                                    kerjasama.id_kerjasama +
                                     '" data-toggle="modal" data-target="#editModal"> <i class="fa fa-edit text-xs me-2"></i> Edit</button>';
                                 html +=
                                     '<button class="btn btn-sm btn-danger mx-2 delete-btn" data-id="' +
-                                    direksi.id +
+                                    kerjasama.id_kerjasama +
                                     '" data-toggle="modal" data-target="#deleteModal"> <i class="fa fa-trash text-xs me-2"></i> Hapus</button>';
                                 html += '</td>';
                                 html += '</tr>';
@@ -111,17 +97,17 @@
                             console.error('Error:', textStatus, errorThrown); // Debugging
                         }
                     });
-
                 }
 
-                // tambah data direksi
-                $('#addForm').on('submit', function(e) {
+
+                // Event handler untuk form submit
+                $('#artikelForm').on('submit', function(e) {
                     e.preventDefault();
 
                     var formData = new FormData(this);
 
                     $.ajax({
-                        url: '/admin/manajemen',
+                        url: '/admin/kerjasama',
                         method: 'POST',
                         data: formData,
                         processData: false,
@@ -132,6 +118,17 @@
 
                             // Tutup modal setelah berhasil menambahkan data
                             $('#addModal').modal('hide');
+                            // Kosongkan nilai input di dalam modal
+                            // Event handler untuk membersihkan modal setelah ditutup
+                            $('#addModal').on('hidden.bs.modal', function() {
+                                $(this).find('form')[0].reset(); // Reset semua input form
+                                for (var instance in CKEDITOR.instances) {
+                                    CKEDITOR.instances[instance].setData(
+                                        ''); // Reset CKEditor instance
+                                }
+                            });;
+
+                            // Hapus elemen backdrop modal secara manual
                             $('.modal-backdrop').remove();
 
                             // Memuat ulang data artikel setelah data berhasil disimpan
@@ -147,68 +144,24 @@
                                 }
                                 alert(errorMessage);
                             } else {
-                                toastr.error('Terjadi kesalahan, silakan coba lagi.');
+                                alert('Terjadi kesalahan, silakan coba lagi.');
                                 console.log('Full response:', response);
                             }
                         }
                     });
                 });
-                // end tambah data direksi
 
-                // ganti status jabatan
-                $(document).on('click', '.change-status', function(event) {
-                    event.preventDefault();
-
-                    var dataId = $(this).data('id');
-                    var newStatus = $(this).data('status');
-                    console.log(dataId);
-
-                    $.ajax({
-                        url: '/admin/manajemen/' + dataId + '/status',
-                        type: 'PUT',
-                        data: {
-                            status: newStatus
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            // Update tampilan tombol sesuai dengan status baru
-                            if (newStatus == 1) {
-                                $(this).removeClass('btn-danger').addClass('btn-success').text(
-                                    'Non Aktif').data('status', 0);
-                            } else {
-                                $(this).removeClass('btn-success').addClass('btn-danger').text(
-                                    'Aktif').data('status', 1);
-                            }
-                            toastr.success(response.message);
-
-                            loadData();
-                            // Atau Anda bisa melakukan penyesuaian tampilan lain sesuai kebutuhan
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
-                });
-                // end ganti status jabatan
-
-
-                // klik button edit data
+                // Event delegation for delete button
                 $(document).on('click', '.edit-btn', function() {
-                    var dataId = $(this).data('id');
-                    console.log("Edit button clicked, dataId:", dataId); // Debugging
+                    var id_kerjasama = $(this).data('id');
+                    console.log("Edit button clicked, id_kerjasama:", id_kerjasama); // Debugging
                     $.ajax({
-                        url: '/admin/manajemen/' + dataId + '/edit',
+                        url: '/admin/kerjasama/' + id_kerjasama + '/edit',
                         type: 'GET',
                         success: function(response) {
                             // Isi formulir modal dengan data artikel yang diterima dari server
-                            $('#dataId').val(response.id);
-                            $('#nama').val(response.nama);
-                            $('#nip').val(response.nip);
-                            $('#tempatLahir').val(response.tempat_lahir);
-                            $('#tanggalLahir').val(response.tanggal_lahir);
-                            $('#jabatan').val(response.jabatan);
+                            $('#id_kerjasama').val(response.id_kerjasama);
+                            $('#namaKerjasama').val(response.nama_kerjasama);
 
                             // Setelah semua data dimuat, tampilkan modal
                             $('#editModal').modal('show');
@@ -218,19 +171,18 @@
                         }
                     });
                 });
-                // end klik button edit data
 
-                // simpan perubahan data
-                $('#editForm').on('submit', function(event) {
+
+                $('#editArtikelForm').on('submit', function(event) {
                     event.preventDefault();
-
 
                     // Siapkan data form
                     var formData = new FormData(this);
-                    var dataId = $('#dataId').val();
+
+                    var dataId = $('#id_kerjasama').val();
 
                     $.ajax({
-                        url: '/admin/manajemen/' + dataId,
+                        url: '/admin/kerjasama/' + dataId,
                         method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
                         data: formData,
                         contentType: false,
@@ -243,6 +195,7 @@
                             $('#editModal').modal('hide');
                             $('.modal-backdrop').remove();
                             toastr.success(response.message);
+
                             loadData();
                         },
                         error: function(xhr) {
@@ -257,9 +210,8 @@
                         }
                     });
                 });
-                // end simpan perubahan data
 
-                // delete data
+                // Event delegation for delete button
                 $(document).on('click', '.delete-btn', function() {
                     var dataId = $(this).data('id');
                     console.log("Delete button clicked, dataId:", dataId); // Debugging
@@ -268,12 +220,13 @@
                     // Saat konfirmasi hapus diklik, kirim permintaan penghapusan
                     $('#deleteBtn').off('click').on('click', function() {
                         $.ajax({
-                            url: '/admin/manajemen/' + dataId,
+                            url: '/admin/kerjasama/' + dataId,
                             type: 'DELETE',
                             success: function(response) {
                                 console.log(response);
                                 // Tampilkan pesan toast
                                 $('#deleteModal').modal('hide');
+                                // Memuat ulang data artikel setelah artikel berhasil dihapus
                                 $('.modal-backdrop').remove();
                                 toastr.success(response.message);
 
@@ -286,7 +239,7 @@
                         });
                     });
                 });
-                // end delete data
+
                 loadData();
             });
         </script>

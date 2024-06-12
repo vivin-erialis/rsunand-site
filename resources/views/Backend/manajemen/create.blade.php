@@ -13,6 +13,15 @@ aria-hidden="true">
                     @csrf
                     <div class="row">
                         <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>Bidang</label>
+                                <select id="id_bidang" name="id_bidang" class="form-control">
+                                    <option selected >Pilih Bidang</option>
+                                    @foreach($bidang as $bid)
+                                        <option value="{{ $bid->id_bidang }}">{{ $bid->nama_bidang }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group col-md-6">
                                 <label>Nama Pegawai</label>
                                 <select id="pegawai" name="pegawai" class="form-control">
@@ -42,6 +51,7 @@ aria-hidden="true">
                                 <input type="date" class="form-control" name="periode_jabatan_akhir" required>
                             </div>
                         </div>
+
                         <div class="col-md-12">
                             <div class="">
                                 <button type="submit"

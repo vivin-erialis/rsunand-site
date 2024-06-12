@@ -17,7 +17,7 @@ class DokterSpesialis extends Model
         'id_dokter_spesialis',
         'id_dokter',
         'id_spesialis',
-        'idhafis',
+        'idhfis',
         'statusenabled'
     ];
 }

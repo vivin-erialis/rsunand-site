@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\ArtikelController as BackendArtikelController;
 use App\Http\Controllers\Backend\ManajemenController;
 use \App\Http\Controllers\Backend\DokterController ;
 use App\Http\Controllers\Backend\FasilitasController as BackendFasilitasController;
+use App\Http\Controllers\Backend\KerjasamaController;
 use App\Http\Controllers\Backend\LayananController;
 use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Frontend\ArtikelController;
@@ -66,12 +67,16 @@ Route::get('penyakit-pengobatan', [ArtikelController::class, 'penyakitPengobatan
 Route::get('kontak', [HomeController::class, 'kontak']);
 Route::get('informasi', [HomeController::class, 'informasi']);
 Route::get('/karir', [HomeController::class, 'karir']);
+Route::get('/kerja-sama', [HomeController::class, 'kerjaSama']);
 
 //video
 Route::get('/video', [VideoController::class, 'video']);
 Route::get('/video/{id}', [VideoController::class, 'detailVideo']);
 
 Route::get('/upcoming-event', [HomeController::class, 'upcomingEvent']);
+Route::get('/pelayanan-medik-keperawatan', [InformasiController::class, 'medikKeperawatan']);
+Route::get('/umum-sumber-daya', [InformasiController::class, 'umumSumberDaya']);
+Route::get('/keuangan-perencanaan', [InformasiController::class, 'keuanganPerencanaan']);
 
 
 
@@ -104,6 +109,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/video/{id}/edit', [BackendVideoController::class, 'getDataforEdit']);
     Route::put('/video/{id}', [BackendVideoController::class, 'updateVideo']);
     Route::delete('/video/{id}', [BackendVideoController::class, 'hapusVideo']);
+
+    //kerjasama
+    Route::get('/kerjasama', [KerjasamaController::class, 'indexKerjasama']);
+    Route::post('/kerjasama', [KerjasamaController::class, 'saveKerjasama']);
+    Route::get('/kerjasama/{id_kerjasama}/edit', [KerjasamaController::class, 'getDataforEdit']);
+    Route::put('/kerjasama/{id}', [KerjasamaController::class, 'updateKerjasama']);
+    Route::delete('/kerjasama/{id}', [KerjasamaController::class, 'hapusKerjasama']);
 
     // fasilitas
     Route::get('/fasilitas', [BackendFasilitasController::class, 'indexFasilitas']);
@@ -144,15 +156,17 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/layanan/{id}', [LayananController::class, 'updateLayanan']);
     Route::delete('/layanan/{id}', [LayananController::class, 'hapusLayanan']);
 
+
 });
 
 
 // get data for index
 Route::get('/get-data-artikel', [BackendArtikelController::class, 'getArtikel'])->name('getArtikel');
 Route::get('/get-data-dokter', [DokterController::class, 'getDokter'])->name('getDokter');
-Route::get('/get-data-direksi', [DireksiController::class, 'getDireksi'])->name('getDireksi');
+Route::get('/get-data-direksi', [ManajemenController::class, 'getDireksi'])->name('getDireksi');
 Route::get('/get-data-slider', [SliderController::class, 'getSlider'])->name('getSlider');
 Route::get('/get-data-layanan', [LayananController::class, 'getLayanan'])->name('getLayanan');
 Route::get('/get-data-fasilitas', [BackendFasilitasController::class, 'getFasilitas'])->name('getFasilitas');
 Route::get('/get-data-profile', [TentangKamiController::class, 'getProfile'])->name('getProfile');
 Route::get('/get-data-video', [BackendVideoController::class, 'getVideo'])->name('getVideo');
+Route::get('/get-data-kerjasama', [KerjasamaController::class, 'getKerjasama'])->name('getKerjasama');

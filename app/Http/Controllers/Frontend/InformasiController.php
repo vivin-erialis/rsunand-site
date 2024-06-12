@@ -10,17 +10,20 @@ use App\Models\KategoriArtikel;
 use App\Models\spesialis;
 use App\Models\TentangKami;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InformasiController extends Controller
 {
     //
 
-    public function jadwalDokter() {
+    public function jadwalDokter()
+    {
         return view('Frontend.informasi.jadwal-dokter', [
             'headerStart' => 'Jadwal Dokter'
         ]);
     }
-    public function informasiDokter(Request $request) {
+    public function informasiDokter(Request $request)
+    {
         $spesialis = $request->input('spesialis'); // Ambil nilai spesialis dari request
 
         // Jika spesialis tidak ditentukan, tampilkan semua dokter
@@ -37,15 +40,16 @@ class InformasiController extends Controller
         ]);
     }
 
-    public function bagianInstalasi() {
+    public function bagianInstalasi()
+    {
         // $bagianInstalsi = Artikel::where('title', 'Bagian & Instalasi')->get();
         $bagianInstalsi = Artikel::whereHas('kategori', function ($query) {
             $query->where('title', 'Bagian & Instalasi');
         })->get();
 
         return view('Frontend.informasi.bagian-instalasi', [
-                'bagianInstalasi' => $bagianInstalsi,
-                'headerStart' => 'Bagian & Instalasi'
+            'bagianInstalasi' => $bagianInstalsi,
+            'headerStart' => 'Bagian & Instalasi'
 
         ]);
     }
@@ -61,7 +65,8 @@ class InformasiController extends Controller
     }
 
 
-    public function sejarah() {
+    public function sejarah()
+    {
         $sejarah = TentangKami::all();
         return view('Frontend.tentang-kami.sejarah', [
             'headerStart' => 'Sejarah',
@@ -69,7 +74,8 @@ class InformasiController extends Controller
 
         ]);
     }
-    public function direksi() {
+    public function direksi()
+    {
         $direksi = Direksi::all();
         return view('Frontend.tentang-kami.direksi', [
             'headerStart' => 'Direksi',
@@ -77,10 +83,61 @@ class InformasiController extends Controller
 
         ]);
     }
-    public function visiMisi() {
+    public function visiMisi()
+    {
         return view('Frontend.tentang-kami.visi-misi', [
             'headerStart' => 'Visi & Misi',
         ]);
     }
+    public function medikKeperawatan()
+    {
+        $data = DB::table('dokters as dokter')
+            ->join('m_jabatan_det', 'dokter.id', '=', 'm_jabatan_det.id_dokter')
+            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
+            ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
+            ->where('m_bidang.id_bidang', '=', '1')
+            ->select('dokter.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
+            ->get();
 
+        // return $data;
+
+        return view('Frontend.tentang-kami.medik-keperawatan', [
+            'data' => $data,
+            'headerStart' => 'Bidang Pelayanan Medik dan Keperawatan',
+        ]);
+    }
+    public function umumSumberDaya()
+    {
+        $data = DB::table('dokters as dokter')
+            ->join('m_jabatan_det', 'dokter.id', '=', 'm_jabatan_det.id_dokter')
+            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
+            ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
+            ->where('m_bidang.id_bidang', '=', '2')
+            ->select('dokter.*')
+            ->get();
+
+        // return $data;
+
+        return view('Frontend.tentang-kami.umum-sumber-daya', [
+            'data' => $data,
+            'headerStart' => 'Bidang Umum dan Sumber Daya',
+        ]);
+    }
+    public function keuanganPerencanaan()
+    {
+        $data = DB::table('dokters as dokter')
+            ->join('m_jabatan_det', 'dokter.id', '=', 'm_jabatan_det.id_dokter')
+            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
+            ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
+            ->where('m_bidang.id_bidang', '=', '3')
+            ->select('dokter.*')
+            ->get();
+
+        // return $data;
+
+        return view('Frontend.tentang-kami.keuangan-perencanaan', [
+            'data' => $data,
+            'headerStart' => 'Bidang Keuangan dan Perencanaan',
+        ]);
+    }
 }

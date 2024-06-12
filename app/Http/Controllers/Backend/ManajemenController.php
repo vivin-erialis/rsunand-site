@@ -35,12 +35,14 @@ class ManajemenController extends Controller
             'active' => 'admin/manajemen',
             'dokter' => Dokter::all(),
             'jabatan' => Jabatan::all(),
+            'bidang' => DB::table('m_bidang')->get(),
         ]);
     }
     public function saveDireksi(Request $request)
     {
         // Validasi request
         $validator = Validator::make($request->all(), [
+            'id_bidang'               => 'required',
             'pegawai'               => 'required|string',
             'jabatan'               => 'required|string',
             'periode_jabatan_awal'  => 'required',
@@ -56,8 +58,9 @@ class ManajemenController extends Controller
         try {
 
             $direksi = Direksi::create([
-                'id_jabatan'            => $request->jabatan,
                 'id_dokter'             => $request->pegawai,
+                'id_bidang'             => $request->id_bidang,
+                'id_jabatan'            => $request->jabatan,
                 'periode_jabatan_awal'  => $request->periode_jabatan_awal,
                 'periode_jabatan_akhir' => $request->periode_jabatan_akhir,
                 'status'                => 0

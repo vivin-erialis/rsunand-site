@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artikel;
 use App\Models\Fasilitas;
+use App\Models\KerjaSama;
 use App\Models\Layanan;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -41,6 +42,8 @@ class HomeController extends Controller
             $query->where('title', 'Deksripsi RS');
         })->get();
 
+        $kerjaSama = KerjaSama::all();
+
         return view('Frontend.home', [
             'headerStart' => 'Berita',
             'artikel' => $artikel,
@@ -50,7 +53,8 @@ class HomeController extends Controller
             'bagianInstalasi' => $bagianInstalasi,
             'pendidikanPenelitian' => $pendidikanPenelitian,
             'fasilitas' => $fasilitas,
-            'about' => $about
+            'about' => $about,
+            'kerjaSama' => $kerjaSama
         ]);
     }
     // public function getHomePage()
@@ -103,4 +107,5 @@ class HomeController extends Controller
             'headerStart' => 'Karir'
         ]);
     }
+
 }

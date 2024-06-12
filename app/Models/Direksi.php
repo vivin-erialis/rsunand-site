@@ -16,6 +16,7 @@ class Direksi extends Model
     protected $fillable = [
         'id_jabatan_det',
         'id_jabatan',
+        'id_bidang',
         'id_dokter',
         'periode_jabatan_awal',
         'periode_jabatan_akhir',
