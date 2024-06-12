@@ -28,7 +28,7 @@
                 @endphp
 
             </div>
-            <div class="slider mt-2 px-5">
+            <div class=" mt-2 px-5">
                 @if(!empty($gambar))
                     <h3>Foto Dokumentasi</h3>
                     <div class="slider-wrapper">
