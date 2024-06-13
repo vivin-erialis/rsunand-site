@@ -44,11 +44,11 @@ aria-hidden="true">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Awal Jabatan</label>
-                                <input type="date" class="form-control" name="periode_jabatan_awal" required>
+                                <input type="date" class="form-control" name="periode_jabatan_awal">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Akhir Jabatan</label>
-                                <input type="date" class="form-control" name="periode_jabatan_akhir" required>
+                                <input type="date" class="form-control" name="periode_jabatan_akhir">
                             </div>
                         </div>
 
