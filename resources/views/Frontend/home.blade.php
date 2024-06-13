@@ -15,9 +15,9 @@
                                     <!-- <p class="display-1 fs-7 text-white animated slideInDown" style="font-size: vw !important">
                                         {{ $slider->title }}
                                     </p> -->
-                                    <h4 class="display-1 fs-7 text-white text-white mb-4 pb-3" style="padding-top: 20px;font-size: vw !important">
+                                    <!-- <h4 class="display-1 fs-7 text-white text-white mb-4 pb-3" style="padding-top: 20px;font-size: vw !important">
                                         {{ $slider->desc }}
-                                    </h4>
+                                    </h4> -->
                                     {{-- <a href="{{ $slider->link }}" class="py-3 px-5 btn-home fs-7 mt-3">SELENGKAPNYA</a> --}}
                                 </div>
                             </div>
