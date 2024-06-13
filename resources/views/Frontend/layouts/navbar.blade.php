@@ -18,7 +18,7 @@
                             <hr>
                             <p><a href="/sejarah" class="about-item">Sejarah</a></p>
                             <p> <a href="/visi-misi" class="about-item">Visi & Misi</a> </p>
-                            <p><a href="/visi-misi" class="about-item">Milestone</a></p>
+                            <p><a href="/visi-misi" class="about-item">Perkembangan Rs Unand</a></p>
 
                         </div>
                         <div class="col-md-4">
@@ -65,7 +65,7 @@
                     <a href="/video" class="dropdown-item">Video</a>
                     <a href="/ilmiah" class="dropdown-item">Ilmiah</a>
                     <a href="/bagian-instalasi" class="dropdown-item">Bagian dan Instalasi</a>
-                    <a href="/penyakit-pengobatan" class="dropdown-item">Penyakit dan Pengobatan</a>
+                    <a href="/penyakit-pengobatan" class="dropdown-item">Edukasi Kesehatan</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
