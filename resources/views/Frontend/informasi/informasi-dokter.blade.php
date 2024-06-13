@@ -24,7 +24,11 @@
                                         <h5 class="mt-1">{{ $data->gelar_depan }} {{ $data->nama }}
                                             {{ $data->gelar_belakang }}</h5>
                                         {{-- <strong> <span class="text-primary" style="font-size: 13px">Dokter {{$data->spesialis->title}}</span></strong> --}}
-                                        <p>{!! $data->title !!}</p>
+                                        <?php if ($data->title != 'Umum') { ?>
+                                            <p>Dokter Spesialis {!! $data->title !!}</p>
+                                        <?php } else { ?>
+                                            <p>Dokter {!! $data->title !!}</p>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
