@@ -72,10 +72,12 @@
                             response.dokter.forEach(function(dokter) {
                                 html += '<tr>';
 
-                                html += '<td><p class="px-3 mb-0">' +
+                                    html += '<td><p class="px-3 mb-0">' +
                                     '<img src="' + dokter.foto_url +
-                                    '" alt="Foto Pegawai" style="width:80px; height:auto;" ' +
-                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' 
+                                    '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
+                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' +
+                                    direksi.nama + '<br>' + direksi.nip + '<br>' + direksi
+                                    .tempat_lahir + '/' + direksi.tanggal_lahir +
                                     '<br></p></td>';
                                 html += '<td><p class="px-3 mb-0">' + dokter.gelar_depan + ' ' + dokter.nama + ' ' + dokter.gelar_belakang +
                                     '</p></td>';
