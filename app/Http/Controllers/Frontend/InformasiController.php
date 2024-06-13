@@ -7,7 +7,7 @@ use App\Models\Artikel;
 use App\Models\Direksi;
 use App\Models\Dokter;
 use App\Models\KategoriArtikel;
-use App\Models\spesialis;
+use App\Models\Spesialis;
 use App\Models\TentangKami;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +47,7 @@ class InformasiController extends Controller
         }
         return view('Frontend.informasi.informasi-dokter', [
             'dokter' => $dokter,
-            'spesialis' => spesialis::all(),
+            'spesialis' => Spesialis::all(),
             'headerStart' => 'Informasi Dokter',
         ]);
     }
