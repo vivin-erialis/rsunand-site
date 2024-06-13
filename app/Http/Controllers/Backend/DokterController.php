@@ -118,11 +118,11 @@ class DokterController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'nip' => 'required',
+            // 'nip' => 'required',
             // 'foto' => 'image|mimes:jpeg,png,jpg,gif,svg', // 'required' removed to make it optional
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'pendidikan' => 'required',
+            // 'tempat_lahir' => 'required',
+            // 'tanggal_lahir' => 'required',
+            // 'pendidikan' => 'required',
             // 'spesialis_id' => 'required'
         ]);
 
