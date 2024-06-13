@@ -77,7 +77,7 @@
                                     '" alt="Foto Pegawai" style="width:80px; height:auto;" ' +
                                     'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' 
                                     '<br></p></td>';
-                                html += '<td><p class="px-3 mb-0">' + dokter.gelar_depan + dokter.nama + dokter.gelar_belakang +
+                                html += '<td><p class="px-3 mb-0">' + dokter.gelar_depan + ' ' + dokter.nama + ' ' + dokter.gelar_belakang +
                                     '</p></td>';
                                 html += '<td><p class="px-3 mb-0">' + dokter.nip +
                                     '</p></td>';
