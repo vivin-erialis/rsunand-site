@@ -26,7 +26,10 @@
                         <table id="myTable" class="table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="text-dark text-xs font-weight-semibold">Data</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Foto</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Nama</th>
+                                    <th class="text-dark text-xs font-weight-semibold">NIP</th>
+                                    <th class="text-dark text-xs font-weight-semibold" style="width: 50px;">Tempat Tgl Lahir</th>
                                     <th class="text-dark text-xs font-weight-semibold">Pendidikan</th>
                                     </th>
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
@@ -71,11 +74,15 @@
 
                                 html += '<td><p class="px-3 mb-0">' +
                                     '<img src="' + dokter.foto_url +
-                                    '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
-                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' +
-                                    dokter.nama + '<br>' + dokter.nip + '<br>' + dokter
-                                    .tempat_lahir + '/' + dokter.tanggal_lahir +
+                                    '" alt="Foto Pegawai" style="width:50px; height:auto;" ' +
+                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' 
                                     '<br></p></td>';
+                                html += '<td><p class="px-3 mb-0">' + dokter.gelar_depan + dokter.nama + dokter.gelar_belakang +
+                                    '</p></td>';
+                                html += '<td><p class="px-3 mb-0">' + dokter.nip +
+                                    '</p></td>';
+                                html += '<td><p class="px-3 mb-0">' + dokter.tempat_lahir + '/' + dokter.tanggal_lahir +
+                                    '</p></td>';
                                 html += '<td><p class="px-3 mb-0">' + dokter.pendidikan +
                                     '</p></td>';
 
