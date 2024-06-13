@@ -24,7 +24,7 @@
                                         <h5 class="mt-1">{{ $data->gelar_depan }} {{ $data->nama }}
                                             {{ $data->gelar_belakang }}</h5>
                                         {{-- <strong> <span class="text-primary" style="font-size: 13px">Dokter {{$data->spesialis->title}}</span></strong> --}}
-                                        <p>Pendidikan : {!! $data->pendidikan !!}</p>
+                                        <p>{!! $data->title !!}</p>
                                     </div>
                                 </div>
                             </div>
