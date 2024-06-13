@@ -46,11 +46,11 @@ class DokterController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'nip' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'pendidikan' => 'required',
+            // 'nip' => 'required',
+            // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'tempat_lahir' => 'required',
+            // 'tanggal_lahir' => 'required',
+            // 'pendidikan' => 'required',
         ]);
 
         // Jika validasi gagal, kembalikan pesan kesalahan sebagai respons JSON
@@ -61,13 +61,16 @@ class DokterController extends Controller
         DB::beginTransaction();
 
         try {
-            // Proses file foto
+            // Initialize the photo variable
+            $foto = null;
+
+            // Check and process the uploaded photo file
             if ($request->hasFile('foto')) {
                 $foto = time() . '_' . $request->file('foto')->getClientOriginalName();
                 $request->file('foto')->move(public_path('images/dokter'), $foto);
             }
 
-            // Buat data dokter
+            // Create the doctor data
             $id_dokter = $this->idCreate('dokters', 'id');
             $dokter = Dokter::create([
                 'id'                => $id_dokter,
@@ -77,16 +80,17 @@ class DokterController extends Controller
                 'nip'               => $request->nip,
                 'tempat_lahir'      => $request->tempat_lahir,
                 'tanggal_lahir'     => $request->tanggal_lahir,
-                'foto'              => $foto,
+                'foto'              => $foto, // Will be null if no file is uploaded
                 'pendidikan'        => $request->pendidikan,
                 'isdokter'          => $request->isdokter,
-                'idhfis'                => $request->idhfis,
-                'statusenabled'         => 1
+                'idhfis'            => $request->idhfis,
+                'statusenabled'     => 1
             ]);
 
+            // Commit the transaction
             DB::commit();
 
-            // Kembalikan respons JSON
+            // Return JSON response
             return response()->json([
                 'message' => 'Data Dokter Berhasil Ditambah',
                 'dokter' => $dokter
