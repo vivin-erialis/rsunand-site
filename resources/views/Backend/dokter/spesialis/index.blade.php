@@ -162,20 +162,24 @@
                     var dataId = $(this).data('id');
                     console.log("Edit button clicked, dataId:", dataId); // Debugging
                     $.ajax({
-                        url: '/admin/dokter/spesialis' + dataId + '/edit',
+                        url: '/admin/dokter/spesialis/' + dataId + '/edit',
                         type: 'GET',
                         success: function(response) {
-                            console.log("Response id_bidang:", response.id_dokter);
+                            console.log("Response:", response); // Debugging
 
-                            // Isi formulir modal dengan data artikel yang diterima dari server
-                            $('#dataId').val(response.id_dokter_spesialis);
-                            $('#dokter').val(response.id_dokter);
-                            $('#idhfis').val(response.idhfis);
-                            $('#spesialis').val(response.id_spesialis);
+                            // Check if the response is not null or undefined
+                            if (response) {
+                                // Populate the form fields
+                                $('#dataId').val(response.id_dokter_spesialis);
+                                $('#idhfis').val(response.idhfis);
+                                $('[name="dokter"]').val(response.id_dokter).trigger('change');
+                                $('[name="spesialis"]').val(response.id_spesialis).trigger('change');
 
-
-                            // Setelah semua data dimuat, tampilkan modal
-                            $('#editModal').modal('show');
+                                // Show the modal after data is populated
+                                $('#editModal').modal('show');
+                            } else {
+                                console.error("No data found in response.");
+                            }
                         },
                         error: function(xhr, status, error) {
                             console.error(xhr.responseText);

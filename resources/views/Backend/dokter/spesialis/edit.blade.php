@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editModal">Edit Data Dokter</h5>
+          <h5 class="modal-title" id="editModal">Edit Data Dokter Spesialis</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form id="editForm" role="form" method="post" enctype="multipart/form-data">
-            @method('PUT')
+            @method('POST')
             @csrf
             <div class="row">
                 <div class="form-row">
@@ -16,9 +16,9 @@
                     <div class="form-group col-md-5">
                         <label>Nama Dokter</label>
                         <select id="dokter" name="dokter" class="form-control">
-                            <option selected >Pilih Dokter</option>
+                            <option value="">Pilih Dokter</option>
                             @foreach($pegawai as $dr)
-                                <option value="{{ $dr->id }}" selected>{{ $dr->gelar_depan }} {{ $dr->nama }} {{ $dr->gelar_belakang }}</option>
+                                <option value="{{ $dr->id }}">{{ $dr->gelar_depan }} {{ $dr->nama }} {{ $dr->gelar_belakang }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -27,7 +27,7 @@
                         <select id="spesialis" name="spesialis" class="form-control">
                             <option selected >Pilih Spesialis</option>
                             @foreach($spesialis as $sp)
-                                <option value="{{ $sp->id }}" selected>{{ $sp->title }}</option>
+                                <option value="{{ $sp->id }}">{{ $sp->title }}</option>
                             @endforeach
                         </select>
                     </div>
