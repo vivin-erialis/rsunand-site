@@ -27,9 +27,9 @@
                             <thead>
                                 <tr>
                                     <th class="text-dark text-xs font-weight-semibold">Foto</th>
-                                    <th class="text-dark text-xs font-weight-semibold">Nama</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Nama Pegawai</th>
                                     <th class="text-dark text-xs font-weight-semibold">NIP</th>
-                                    <th class="text-dark text-xs font-weight-semibold" style="width: 50px;">Tempat Tgl Lahir</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Tgl Lahir</th>
                                     <th class="text-dark text-xs font-weight-semibold">Pendidikan</th>
                                     </th>
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
