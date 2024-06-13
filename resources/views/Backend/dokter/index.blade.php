@@ -29,7 +29,6 @@
                                     <th class="text-dark text-xs font-weight-semibold">Data</th>
                                     <th class="text-dark text-xs font-weight-semibold">Pendidikan</th>
                                     </th>
-                                    <th class="text-dark text-xs font-weight-semibold">Spesialis</th>
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
                                 </tr>
                             </thead>
@@ -71,14 +70,15 @@
                                 html += '<tr>';
 
                                 html += '<td><p class="px-3 mb-0">' +
-                                    '<img src="' + dokter.foto_url + // Menggunakan foto_url
-                                    '" alt="Foto Dokter" style="width:100px; height:auto;"><br>' +
-                                    dokter.nama + '<br>' + dokter.nip + '<br>' + dokter.tempat_lahir +`/` +dokter.tanggal_lahir +
+                                    '<img src="' + dokter.foto_url +
+                                    '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
+                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' +
+                                    dokter.nama + '<br>' + dokter.nip + '<br>' + dokter
+                                    .tempat_lahir + '/' + dokter.tanggal_lahir +
                                     '<br></p></td>';
                                 html += '<td><p class="px-3 mb-0">' + dokter.pendidikan +
                                     '</p></td>';
-                                html += '<td><p class="px-3 mb-0">' + dokter.title +
-                                    '</p></td>';
+
                                 html += '<td>';
                                 html +=
                                     '<button class="btn btn-sm btn-warning edit-btn" data-id="' +
@@ -181,7 +181,12 @@
                             $('#nip').val(response.nip);
                             $('#tempatLahir').val(response.tempat_lahir);
                             $('#tanggalLahir').val(response.tanggal_lahir);
+                            $('#idhfis').val(response.idhfis);
+                            $('#gelarDepan').val(response.gelar_depan);
+                            $('#gelarBelakang').val(response.gelar_belakang);
                             $('#pendidikan').val(response.pendidikan);
+                            $('#isdokter').val(response.isdokter); // Mengatur nilai select
+
 
                             // // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
 

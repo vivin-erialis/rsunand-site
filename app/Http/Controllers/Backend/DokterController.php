@@ -46,11 +46,19 @@ class DokterController extends Controller
         // Validasi input
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
+<<<<<<< Updated upstream
             // 'nip' => 'required',
             // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             // 'tempat_lahir' => 'required',
             // 'tanggal_lahir' => 'required',
             // 'pendidikan' => 'required',
+=======
+            'nip' => 'required',
+            // 'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'pendidikan' => 'required',
+>>>>>>> Stashed changes
         ]);
 
         // Jika validasi gagal, kembalikan pesan kesalahan sebagai respons JSON
@@ -80,7 +88,11 @@ class DokterController extends Controller
                 'nip'               => $request->nip,
                 'tempat_lahir'      => $request->tempat_lahir,
                 'tanggal_lahir'     => $request->tanggal_lahir,
+<<<<<<< Updated upstream
                 'foto'              => $foto, // Will be null if no file is uploaded
+=======
+                'foto'              => $request->foto,
+>>>>>>> Stashed changes
                 'pendidikan'        => $request->pendidikan,
                 'isdokter'          => $request->isdokter,
                 'idhfis'            => $request->idhfis,
@@ -119,11 +131,11 @@ class DokterController extends Controller
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
             'nip' => 'required',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg', // 'required' removed to make it optional
+            // 'foto' => 'image|mimes:jpeg,png,jpg,gif,svg', // 'required' removed to make it optional
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'pendidikan' => 'required',
-            'spesialis_id' => 'required'
+            // 'spesialis_id' => 'required'
         ]);
 
         // Jika validasi gagal, kembalikan pesan kesalahan sebagai respons JSON
@@ -159,7 +171,6 @@ class DokterController extends Controller
             $dokter->tempat_lahir = $request->tempat_lahir;
             $dokter->tanggal_lahir = $request->tanggal_lahir;
             $dokter->pendidikan = $request->pendidikan;
-            $dokter->spesialis_id = $request->spesialis_id;
 
             $dokter->save();
 
