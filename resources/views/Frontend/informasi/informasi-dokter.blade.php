@@ -15,7 +15,7 @@
                         @forelse ($dokter as $data)
                             <div class=" col-md-4 p-3 wow fadeInUp " data-wow-delay="0.3s">
                                 <div class="row team-item position-relative card-dokter">
-                                    <div class="col-md-4 position-relative">
+                                    <div class="col-md-4 position-relative text-center">
                                         <img class="img-fluid"
                                             src="{{ empty($data->foto) ? asset('assets/img/rsunandlogo.png') : asset('images/dokter/' . $data->foto) }}"
                                            >
