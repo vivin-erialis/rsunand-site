@@ -72,19 +72,27 @@
                             response.dokter.forEach(function(dokter) {
                                 html += '<tr>';
 
-                                    html += '<td><p class="px-3 mb-0">' +
+                                html += '<td><p class="px-3 mb-0">' +
                                     '<img src="' + dokter.foto_url +
                                     '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
                                     'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>'
-                                    '<br></p></td>';
-                                html += '<td><p class="px-3 mb-0">' + dokter.gelar_depan + ' ' + dokter.nama + ' ' + dokter.gelar_belakang +
+                                '<br></p></td>';
+                                html += '<td><p class="px-3 mb-0">' +
+                                    (dokter.gelar_depan ? dokter.gelar_depan : '-') + ' ' +
+                                    (dokter.nama ? dokter.nama : '-') + ' ' +
+                                    (dokter.gelar_belakang ? dokter.gelar_belakang : '-') +
                                     '</p></td>';
-                                html += '<td><p class="px-3 mb-0">' + dokter.nip +
+                                html += '<td><p class="px-3 mb-0">' +
+                                    (dokter.nip ? dokter.nip : '-') +
                                     '</p></td>';
-                                html += '<td><p class="px-3 mb-0">' + dokter.tempat_lahir + '/' + dokter.tanggal_lahir +
+                                html += '<td><p class="px-3 mb-0">' +
+                                    (dokter.tempat_lahir ? dokter.tempat_lahir : '-') + '/' +
+                                    (dokter.tanggal_lahir ? dokter.tanggal_lahir : '-') +
                                     '</p></td>';
-                                html += '<td><p class="px-3 mb-0">' + dokter.pendidikan +
+                                html += '<td><p class="px-3 mb-0">' +
+                                    (dokter.pendidikan ? dokter.pendidikan : '-') +
                                     '</p></td>';
+
 
                                 html += '<td>';
                                 html +=

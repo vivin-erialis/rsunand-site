@@ -26,9 +26,12 @@
                         <table id="myTable" class="table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="text-dark text-xs font-weight-semibold">Data</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Foto</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Nama</th>
+                                    <th class="text-dark text-xs font-weight-semibold">NIP</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Tanggal Lahir </th>
                                     <th class="text-dark text-xs font-weight-semibold">Pendidikan</th>
-                                    </th>
+
                                     <th class="text-dark text-xs font-weight-semibold">Spesialis</th>
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
                                 </tr>
@@ -72,14 +75,26 @@
                                 html += '<td><p class="px-3 mb-0">' +
                                     '<img src="' + dokter.foto_url +
                                     '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
-                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' +
-                                    dokter.nama + '<br>' + dokter.nip + '<br>' + dokter
-                                    .tempat_lahir + '/' + dokter.tanggal_lahir +
+                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>'
                                     '<br></p></td>';
 
-                                html += '<td><p class="px-3 mb-0">' + dokter.pendidikan +
+                                    html += '<td><p class="px-3 mb-0">' +
+                                    (dokter.gelar_depan ? dokter.gelar_depan : '-') + ' ' +
+                                    (dokter.nama ? dokter.nama : '-') + ' ' +
+                                    (dokter.gelar_belakang ? dokter.gelar_belakang : '-') +
                                     '</p></td>';
-                                html += '<td><p class="px-3 mb-0">' + dokter.title +
+                                html += '<td><p class="px-3 mb-0">' +
+                                    (dokter.nip ? dokter.nip : '-') +
+                                    '</p></td>';
+                                html += '<td><p class="px-3 mb-0">' +
+                                    (dokter.tempat_lahir ? dokter.tempat_lahir : '-') + '/' +
+                                    (dokter.tanggal_lahir ? dokter.tanggal_lahir : '-') +
+                                    '</p></td>';
+                                html += '<td><p class="px-3 mb-0">' +
+                                    (dokter.pendidikan ? dokter.pendidikan : '-') +
+                                    '</p></td>';
+                                html += '<td><p class="px-3 mb-0">' +
+                                    (dokter.title ? dokter.title : '-') +
                                     '</p></td>';
                                 html += '<td>';
                                 html +=
