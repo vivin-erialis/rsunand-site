@@ -42,11 +42,11 @@ class ManajemenController extends Controller
     {
         // Validasi request
         $validator = Validator::make($request->all(), [
-            'id_bidang'               => 'required',
+            // 'id_bidang'               => 'required',
             'pegawai'               => 'required|string',
             'jabatan'               => 'required|string',
-            'periode_jabatan_awal'  => 'required',
-            'periode_jabatan_akhir' => 'required'
+            // 'periode_jabatan_awal'  => 'required',
+            // 'periode_jabatan_akhir' => 'required'
         ]);
 
         if ($validator->fails()) {
