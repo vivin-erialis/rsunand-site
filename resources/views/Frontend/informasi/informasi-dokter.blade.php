@@ -12,22 +12,25 @@
             <div class="container-xxl py-5">
                 <div class="container">
                     <div class="row g-0 team-items">
-                      @forelse ($dokter as $data)
-                      <div class=" col-md-4 wow fadeInUp card-dokter mx-2" data-wow-delay="0.3s">
-                        <div class="row team-item position-relative">
-                            <div class="col-md-4 position-relative">
-                                <img class="img-fluid" src="../images/dokter/{{ $data->foto }}" alt="{{ $data->foto }}">
+                        @forelse ($dokter as $data)
+                            <div class=" col-md-4 wow fadeInUp card-dokter mx-2" data-wow-delay="0.3s">
+                                <div class="row team-item position-relative">
+                                    <div class="col-md-4 position-relative">
+                                        <img class="img-fluid"
+                                            src="{{ empty($data->foto) ? asset('assets/img/rsunandlogo.png') : asset('images/dokter/' . $data->foto) }}"
+                                           >
+                                    </div>
+                                    <div class="col-md-8 bg-light p-3">
+                                        <h5 class="mt-1">{{ $data->gelar_depan }} {{ $data->nama }}
+                                            {{ $data->gelar_belakang }}</h5>
+                                        {{-- <strong> <span class="text-primary" style="font-size: 13px">Dokter {{$data->spesialis->title}}</span></strong> --}}
+                                        <p>Pendidikan : {!! $data->pendidikan !!}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-8 bg-light p-3">
-                                <h5 class="mt-1">{{$data->nama}}</h5>
-                               {{-- <strong> <span class="text-primary" style="font-size: 13px">Dokter {{$data->spesialis->title}}</span></strong> --}}
-                               <p>Pendidikan : {!! $data->pendidikan !!}</p>
-                            </div>
-                        </div>
-                    </div>
-                      @empty
-                          <h4 class="text-center"><strong>Data Belum Tersedia</strong></h4>
-                      @endforelse
+                        @empty
+                            <h4 class="text-center"><strong>Data Belum Tersedia</strong></h4>
+                        @endforelse
                     </div>
                 </div>
             </div>

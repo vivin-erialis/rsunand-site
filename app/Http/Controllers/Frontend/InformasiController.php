@@ -28,10 +28,22 @@ class InformasiController extends Controller
 
         // Jika spesialis tidak ditentukan, tampilkan semua dokter
         if ($spesialis === null) {
-            $dokter = Dokter::all();
+            $dokter = DB::table('m_dokter_spesialis')
+                ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
+                ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
+                ->where('m_dokter_spesialis.id_spesialis', '=', '28')
+                ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
+                ->get();
+            // return $dokter;
+
         } else {
             // Jika spesialis ditentukan, tampilkan dokter berdasarkan spesialis
-            $dokter = Dokter::where('spesialis_id', $spesialis)->get();
+            $dokter = DB::table('m_dokter_spesialis')
+                ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
+                ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
+                ->where('m_dokter_spesialis.id_spesialis', '=', $spesialis)
+                ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
+                ->get();
         }
         return view('Frontend.informasi.informasi-dokter', [
             'dokter' => $dokter,
