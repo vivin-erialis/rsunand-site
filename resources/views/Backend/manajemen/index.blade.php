@@ -28,8 +28,7 @@
                                 <tr>
                                     <th class="text-dark text-xs font-weight-semibold">Data</th>
                                     <th class="text-dark text-xs font-weight-semibold">Jabatan</th>
-                                    </th>
-                                    <th class="text-dark text-xs font-weight-semibold">Status</th>
+
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
                                 </tr>
                             </thead>
@@ -65,40 +64,30 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function(response) {
-                            console.log('Success:', response.direksi); // Debugging
+                            console.log('Success:', response.manajemen); // Debugging
                             let html = '';
-                            response.direksi.forEach(function(direksi) {
-                                html += '<tr>';
-                                html += '<td>'
-                                    if (direksi.status == 0) {
-                                    html +=
-                                        '<a href="#" class="btn btn-sm btn-success change-status" data-id="' +
-                                        direksi.id + '" data-status="1">Aktif</a>';
-                                } else {
-                                    html +=
-                                        '<a href="#" class="btn btn-sm btn-danger change-status" data-id="' +
-                                        direksi.id + '" data-status="0">Non Aktif</a>';
-                                }
+                            response.manajemen.forEach(function(manajemen) {
 
-                                html += '</td>'
-                                html += '<td><p class="px-3 mb-0">' +
-                                    '<img src="' + direksi.foto_url +
+                                html += '<tr>';
+
+                                    html += '<td><p class="px-3 mb-0">' +
+                                    '<img src="' + manajemen.foto_url +
                                     '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
                                     'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' +
-                                    direksi.nama + '<br>' + direksi.nip + '<br>' + direksi
-                                    .tempat_lahir + '/' + direksi.tanggal_lahir +
+                                    manajemen.nama + '<br>' + manajemen.nip + '<br>' + manajemen
+                                    .tempat_lahir + '/' + manajemen.tanggal_lahir +
                                     '<br></p></td>';
-                                html += '<td><p class="px-3 mb-0">' + direksi.jabatan +
+                                html += '<td><p class="px-3 mb-0">' + manajemen.desc_jabatan +
                                     '</p></td>';
 
                                 html += '<td>';
                                 html +=
                                     '<button class="btn btn-sm btn-warning edit-btn" data-id="' +
-                                    direksi.id +
+                                    manajemen.id_jabatan +
                                     '" data-toggle="modal" data-target="#editModal"> <i class="fa fa-edit text-xs me-2"></i> Edit</button>';
                                 html +=
                                     '<button class="btn btn-sm btn-danger mx-2 delete-btn" data-id="' +
-                                    direksi.id +
+                                    manajemen.id +
                                     '" data-toggle="modal" data-target="#deleteModal"> <i class="fa fa-trash text-xs me-2"></i> Hapus</button>';
                                 html += '</td>';
                                 html += '</tr>';
@@ -156,43 +145,43 @@
                 });
                 // end tambah data direksi
 
-                // ganti status jabatan
-                $(document).on('click', '.change-status', function(event) {
-                    event.preventDefault();
+                // // ganti status jabatan
+                // $(document).on('click', '.change-status', function(event) {
+                //     event.preventDefault();
 
-                    var dataId = $(this).data('id');
-                    var newStatus = $(this).data('status');
-                    console.log(dataId);
+                //     var dataId = $(this).data('id');
+                //     var newStatus = $(this).data('status');
+                //     console.log(dataId);
 
-                    $.ajax({
-                        url: '/admin/manajemen/' + dataId + '/status',
-                        type: 'PUT',
-                        data: {
-                            status: newStatus
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            // Update tampilan tombol sesuai dengan status baru
-                            if (newStatus == 1) {
-                                $(this).removeClass('btn-danger').addClass('btn-success').text(
-                                    'Non Aktif').data('status', 0);
-                            } else {
-                                $(this).removeClass('btn-success').addClass('btn-danger').text(
-                                    'Aktif').data('status', 1);
-                            }
-                            toastr.success(response.message);
+                //     $.ajax({
+                //         url: '/admin/manajemen/' + dataId + '/status',
+                //         type: 'PUT',
+                //         data: {
+                //             status: newStatus
+                //         },
+                //         headers: {
+                //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //         },
+                //         success: function(response) {
+                //             // Update tampilan tombol sesuai dengan status baru
+                //             if (newStatus == 1) {
+                //                 $(this).removeClass('btn-danger').addClass('btn-success').text(
+                //                     'Non Aktif').data('status', 0);
+                //             } else {
+                //                 $(this).removeClass('btn-success').addClass('btn-danger').text(
+                //                     'Aktif').data('status', 1);
+                //             }
+                //             toastr.success(response.message);
 
-                            loadData();
-                            // Atau Anda bisa melakukan penyesuaian tampilan lain sesuai kebutuhan
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
-                });
-                // end ganti status jabatan
+                //             loadData();
+                //             // Atau Anda bisa melakukan penyesuaian tampilan lain sesuai kebutuhan
+                //         },
+                //         error: function(xhr, status, error) {
+                //             console.error(xhr.responseText);
+                //         }
+                //     });
+                // });
+                // // end ganti status jabatan
 
 
                 // klik button edit data
@@ -203,13 +192,16 @@
                         url: '/admin/manajemen/' + dataId + '/edit',
                         type: 'GET',
                         success: function(response) {
+                            console.log("Response id_bidang:", response.id_bidang);
+
                             // Isi formulir modal dengan data artikel yang diterima dari server
-                            $('#dataId').val(response.id);
-                            $('#nama').val(response.nama);
-                            $('#nip').val(response.nip);
-                            $('#tempatLahir').val(response.tempat_lahir);
-                            $('#tanggalLahir').val(response.tanggal_lahir);
-                            $('#jabatan').val(response.jabatan);
+                            $('#dataId').val(response.id_jabatan);
+                            $('#jabatanAwal').val(response.periode_jabatan_awal);
+                            $('#jabatanAkhir').val(response.periode_jabatan_awal);
+                            $('#id_bidang').val(response.id_bidang);
+                            $('#id_dokter').val(response.id_dokter);
+                            $('#id_jabatan').val(response.id_jabatan);
+
 
                             // Setelah semua data dimuat, tampilkan modal
                             $('#editModal').modal('show');

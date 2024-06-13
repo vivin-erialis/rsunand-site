@@ -252,7 +252,7 @@ class DokterController extends Controller
             ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
             ->where('m_dokter_spesialis.id_dokter_spesialis', '=', $id_dokter_spesialis)
             ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
-            ->get();
+            ->first();
         return response()->json($dokter);
     }
     public function saveDokterSpesialis(Request $request)
@@ -314,19 +314,21 @@ class DokterController extends Controller
         try {
             // Cari data dokter spesialis berdasarkan ID
             $dokter = DB::table('m_dokter_spesialis')
-            ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
-            ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
-            ->where('m_dokter_spesialis.id_dokter_spesialis', '=', $id_dokter_spesialis)
-            ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
-            ->first();
+                ->where('id_dokter_spesialis', $id_dokter_spesialis)
+                ->first();
+
+            if (!$dokter) {
+                return response()->json(['message' => 'Data tidak ditemukan'], 404);
+            }
 
             // Update data dokter spesialis
-            $dokter->update([
-                'id_dokter' => $request->dokter,
-                'id_spesialis' => $request->spesialis,
-                'idhfis' => $request->idhfis,
-                'statusenabled' => $request->statusenabled
-            ]);
+            DB::table('m_dokter_spesialis')
+                ->where('id_dokter_spesialis', $id_dokter_spesialis)->update([
+                    'id_dokter' => $request->dokter,
+                    'id_spesialis' => $request->spesialis,
+                    'idhfis' => $request->idhfis,
+                    'statusenabled' => $request->statusenabled
+                ]);
 
             DB::commit();
 

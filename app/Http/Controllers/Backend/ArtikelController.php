@@ -108,28 +108,33 @@ class ArtikelController extends Controller
                 return response()->json(['error' => 'Data Artikel tidak ditemukan'], 404);
             }
 
+            // Mengambil gambar lama
             $gambarlama = json_decode($artikel->gambar, true);
-
-            // Hapus gambar-gambar lama
-            foreach ($gambarlama as $gambar) {
-                if (file_exists(public_path('images/artikel/' . $gambar))) {
-                    unlink(public_path('images/artikel/' . $gambar));
-                }
-            }
 
             // Inisialisasi array baru untuk menyimpan nama gambar-gambar baru
             $gambarBaru = [];
 
             if ($request->hasFile('gambar')) {
+                // Jika ada file gambar yang diunggah, proses dan simpan gambar-gambar baru
                 foreach ($request->file('gambar') as $gambar) {
                     $namaGambar = time() . '-' . $gambar->getClientOriginalName();
                     $gambar->move(public_path('images/artikel'), $namaGambar);
                     $gambarBaru[] = $namaGambar;
                 }
+
+                // Hapus file gambar lama yang telah di-replace dengan yang baru
+                foreach ($gambarlama as $gambar) {
+                    if (file_exists(public_path('images/artikel/' . $gambar))) {
+                        unlink(public_path('images/artikel/' . $gambar));
+                    }
+                }
+            } else {
+                // Jika tidak ada file gambar yang diunggah, gunakan gambar lama
+                $gambarBaru = $gambarlama;
             }
 
-            // Update data artikel setelah mengunggah gambar
-            Artikel::find($id)->update([
+            // Update data artikel
+            $artikel->update([
                 'title' => $request->title,
                 'desc' => $request->desc,
                 'isi' => $request->isi,
@@ -144,6 +149,7 @@ class ArtikelController extends Controller
             return response()->json(['message' => 'Gagal memperbarui data: ' . $e->getMessage()]);
         }
     }
+
 
 
     public function editStatus(Request $request, $id)

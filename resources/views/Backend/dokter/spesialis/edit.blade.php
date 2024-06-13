@@ -18,7 +18,7 @@
                         <select id="dokter" name="dokter" class="form-control">
                             <option selected >Pilih Dokter</option>
                             @foreach($pegawai as $dr)
-                                <option value="{{ $dr->id }}">{{ $dr->gelar_depan }} {{ $dr->nama }} {{ $dr->gelar_belakang }}</option>
+                                <option value="{{ $dr->id }}" selected>{{ $dr->gelar_depan }} {{ $dr->nama }} {{ $dr->gelar_belakang }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -27,13 +27,13 @@
                         <select id="spesialis" name="spesialis" class="form-control">
                             <option selected >Pilih Spesialis</option>
                             @foreach($spesialis as $sp)
-                                <option value="{{ $sp->id }}">{{ $sp->title }}</option>
+                                <option value="{{ $sp->id }}" selected>{{ $sp->title }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label>ID Hfis</label>
-                        <input type="number" class="form-control" id="idhfis" name="idhfis" required>
+                        <input type="number" class="form-control" id="idhfis" name="idhfis">
                     </div>
                 </div>
                 <div class="col-md-12">

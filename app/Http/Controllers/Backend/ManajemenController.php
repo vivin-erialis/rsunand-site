@@ -17,22 +17,32 @@ class ManajemenController extends Controller
     //
     public function getDireksi()
     {
-        $direksi = Direksi::all();
+        $manajemen = DB::table('m_jabatan_det')
+            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', 'm_jabatan.id_jabatan')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+            ->select('m_jabatan_det.*', 'dokters.*', 'm_jabatan.*')
+            ->get();
+
 
         // Menambahkan URL foto ke setiap direksi
-        foreach ($direksi as $d) {
+        foreach ($manajemen as $d) {
             $d->foto_url = asset('images/direksi/' . $d->foto);
         }
 
         return response()->json([
-            'direksi' => $direksi
+            'manajemen' => $manajemen
         ]);
     }
 
     public function indexDireksi()
     {
+        $manajemen = DB::table('m_jabatan_det')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+            ->select('m_jabatan_det.*', 'dokters.*')
+            ->first();
         return view('Backend.manajemen.index', [
             'active' => 'admin/manajemen',
+            'manajemen' => $manajemen,
             'dokter' => Dokter::all(),
             'jabatan' => Jabatan::all(),
             'bidang' => DB::table('m_bidang')->get(),
@@ -76,78 +86,65 @@ class ManajemenController extends Controller
         }
     }
 
-    public function getDataForEdit($id)
+    public function getDataForEdit($id_jabatan)
     {
-        $direksi = Direksi::find($id);
-        return response()->json($direksi);
+        $manajemen = DB::table('m_jabatan_det')
+            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', 'm_jabatan.id_jabatan')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+            ->where('m_jabatan_det.id_jabatan', '=', $id_jabatan)
+            ->select('m_jabatan_det.*', 'dokters.*', 'm_jabatan.*')
+            ->first();
+
+        return response()->json($manajemen);
     }
 
-    public function updateDireksi(Request $request, $id)
-{
-    // Validasi request
-    $validator = Validator::make($request->all(), [
-        'nama' => 'required|string',
-        'nip' => 'required|string',
-        'tempat_lahir' => 'required|string',
-        'tanggal_lahir' => 'required|date',
-        'jabatan' => 'required|string',
-    ]);
+    public function updateDireksi(Request $request, $id_jabatan)
+    {
+        // Validasi request
+        $validator = Validator::make($request->all(), [
+            'id_bidang'               => 'required',
+            'pegawai'                 => 'required|string',
+            'jabatan'                 => 'required|string',
+            'periode_jabatan_awal'    => 'required',
+            'periode_jabatan_akhir'   => 'required'
+        ]);
 
-    if ($validator->fails()) {
-        return response()->json(['errors' => $validator->errors()], 400);
-    }
-
-    $direksi = Direksi::find($id);
-
-    if (!$direksi) {
-        return response()->json(['message' => 'Dksi tidak ditemukan'], 404);
-    }
-
-    DB::beginTransaction();
-
-    try {
-        if ($request->hasFile('foto')) {
-            $fotoValidator = Validator::make($request->all(), [
-                'foto' => 'required|image|mimes:jpeg,png,jpg,gif', // Validasi untuk file gambar
-            ]);
-
-            if ($fotoValidator->fails()) {
-                return response()->json(['errors' => $fotoValidator->errors()], 400);
-            }
-
-            // Hapus foto lama jika ada
-            if (File::exists(public_path('images/direksi/' . $direksi->foto))) {
-                File::delete(public_path('images/direksi/' . $direksi->foto));
-            }
-
-            $foto = time() . '_' . $request->file('foto')->getClientOriginalName();
-            $request->file('foto')->move(public_path('images/direksi'), $foto);
-            $direksi->foto = $foto;
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
         }
 
-        $direksi->nama = $request->nama;
-        $direksi->nip = $request->nip;
-        $direksi->tempat_lahir = $request->tempat_lahir;
-        $direksi->tanggal_lahir = $request->tanggal_lahir;
-        $direksi->jabatan = $request->jabatan;
-        $direksi->status = '0';
-        $direksi->save();
+        DB::beginTransaction();
 
-        DB::commit();
+        try {
+            // Temukan entitas Direksi berdasarkan ID jabatan
+            $direksi = DB::table('m_jabatan_det')
+                ->where('id_jabatan', $id_jabatan)
+                ->first();
 
-        return response()->json(['message' => 'Data Berhasil Diubah']);
-    } catch (\Exception $e) {
-        DB::rollBack();
+            if (!$direksi) {
+                return response()->json(['message' => 'Data Direksi tidak ditemukan'], 404);
+            }
 
-        // Hapus file yang sudah terupload jika terjadi error
-        if (isset($foto) && File::exists(public_path('images/direksi/' . $foto))) {
-            File::delete(public_path('images/direksi/' . $foto));
+            // Update nilai-nilai yang sesuai
+            DB::table('m_jabatan_det')
+                ->where('id_jabatan', $id_jabatan)
+                ->update([
+                    'id_dokter' => $request->pegawai,
+                    'id_bidang' => $request->id_bidang,
+                    'id_jabatan' => $request->jabatan,
+                    'periode_jabatan_awal' => $request->periode_jabatan_awal,
+                    'periode_jabatan_akhir' => $request->periode_jabatan_akhir
+                ]);
+
+            DB::commit();
+
+            return response()->json(['message' => 'Data Direksi berhasil diperbarui']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['message' => 'Terjadi kesalahan saat memperbarui data Direksi', 'error' => $e->getMessage()], 500);
         }
-
-        return response()->json(['message' => 'Terjadi kesalahan saat memperbarui data', 'error' => $e->getMessage()], 500);
     }
-}
-
     public function editStatus(Request $request, $id)
     {
         $direksi = Direksi::findOrFail($id);
@@ -178,5 +175,4 @@ class ManajemenController extends Controller
 
         return response()->json(['message' => 'Data berhasil dihapus.']);
     }
-
 }

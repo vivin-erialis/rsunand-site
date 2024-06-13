@@ -141,7 +141,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dokter/spesialis', [DokterController::class, 'indexDokterSpesialis']);
     Route::post('/dokter/spesialis/add', [DokterController::class, 'saveDokterSpesialis'])->name('spesialis.add');
-    Route::get('/dokter/spesialis/{id_dokter_spesialis}/edit', [DokterController::class, 'getDataforEditSpesialis']);
+    Route::get('/dokter/spesialis/{id}/edit', [DokterController::class, 'getDataforEditSpesialis']);
     Route::put('/dokter/spesialis/{id}', [DokterController::class, 'updateDokterSpesialis']);
     Route::delete('/dokter/spesialis/{id}', [DokterController::class, 'hapusDokter']);
 

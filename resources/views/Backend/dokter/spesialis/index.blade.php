@@ -157,24 +157,21 @@
                 });
                 // end tambah data dokter
 
-                // klik button edit data
-                $(document).on('click', '.edit-btn', function() {
+                   // klik button edit data
+                   $(document).on('click', '.edit-btn', function() {
                     var dataId = $(this).data('id');
-                    var pendidikan = editor3.getData();
-
                     console.log("Edit button clicked, dataId:", dataId); // Debugging
                     $.ajax({
-                        url: '/admin/dokter/spesialis/' + dataId + '/edit',
+                        url: '/admin/dokter/spesialis' + dataId + '/edit',
                         type: 'GET',
                         success: function(response) {
+                            console.log("Response id_bidang:", response.id_dokter);
+
                             // Isi formulir modal dengan data artikel yang diterima dari server
                             $('#dataId').val(response.id_dokter_spesialis);
-                            $('#spesialis').val(response.id_spesialis);
+                            $('#dokter').val(response.id_dokter);
                             $('#idhfis').val(response.idhfis);
-
-
-                            // // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
-
+                            $('#spesialis').val(response.id_spesialis);
 
 
                             // Setelah semua data dimuat, tampilkan modal
@@ -186,18 +183,17 @@
                     });
                 });
                 // end klik button edit data
-
                 // simpan perubahan data
                 $('#editForm').on('submit', function(event) {
                     event.preventDefault();
 
-                    var formData = new FormData(this); // Mengambil data formulir
 
-                    var dataId = $('#dataId').val(); // Mengambil ID data jika diperlukan
+                    // Siapkan data form
+                    var formData = new FormData(this);
+                    var dataId = $('#dataId').val();
 
                     $.ajax({
-                        url: '/admin/dokter/spesialis/' +
-                        dataId, // Sesuaikan dengan URL endpoint yang sesuai
+                        url: '/admin/dokter/spesialis/' + dataId,
                         method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
                         data: formData,
                         contentType: false,
@@ -206,25 +202,21 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(response) {
-                            $('#editModal').modal(
-                            'hide'); // Menutup modal setelah berhasil disimpan
-                            $('.modal-backdrop').remove(); // Menghapus backdrop modal jika ada
-                            toastr.success(response
-                            .message); // Menampilkan pesan sukses menggunakan toastr atau cara lain
-                            loadData(); // Memuat ulang data setelah penyimpanan berhasil
+                            // alert('Artikel berhasil diperbarui!');
+                            $('#editModal').modal('hide');
+                            $('.modal-backdrop').remove();
+                            toastr.success(response.message);
+                            loadData();
                         },
                         error: function(xhr) {
                             var errors = xhr.responseJSON.errors;
                             var errorMessage = '';
-
                             for (var key in errors) {
                                 if (errors.hasOwnProperty(key)) {
                                     errorMessage += errors[key][0] + '\n';
                                 }
                             }
-
-                            alert('Terjadi kesalahan:\n' +
-                            errorMessage); // Menampilkan pesan kesalahan jika validasi gagal
+                            alert('Terjadi kesalahan:\n' + errorMessage);
                         }
                     });
                 });

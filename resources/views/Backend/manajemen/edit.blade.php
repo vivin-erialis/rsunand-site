@@ -13,35 +13,45 @@
               <div class="col-md-12">
                 <input type="hidden" id="dataId" name="" value="">
 
-                <label>Nama</label>
-                <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="masukan nama direksi"
-                    aria-label="Name" aria-describedby="name-addon" id="nama" name="nama" >
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Bidang</label>
+                        <select id="id_bidang" name="id_bidang" class="form-control">
+                            <option value="" selected>Pilih Bidang</option>
+                            @foreach($bidang as $bid)
+                                <option value="{{ $bid->id_bidang }}" selected>{{ $bid->nama_bidang }}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Nama Pegawai</label>
+                        <select id="pegawai" name="pegawai" class="form-control">
+                            <option selected >Pilih Pegawai</option>
+                            @foreach($dokter as $dr)
+                                <option value="{{ $dr->id }}" selected>{{ $dr->gelar_depan }} {{ $dr->nama }} {{ $dr->gelar_belakang }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Jabatan</label>
+                        <select id="jabatan" name="jabatan" class="form-control">
+                            <option selected >Pilih Jabatan</option>
+                            @foreach($jabatan as $jbt)
+                                <option value="{{ $jbt->id_jabatan }}" selected>{{ $jbt->desc_jabatan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-                <label>NIP</label>
-                <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="masukan NIP direksi"
-                    aria-label="Name" aria-describedby="name-addon" id="nip" name="nip" >
-                </div>
-                <label>Tempat Lahir</label>
-                <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="masukan tempat lahir"
-                    aria-label="Name" aria-describedby="name-addon" id="tempatLahir" name="tempat_lahir" >
-                </div>
-                <label>Tanggal Lahir</label>
-                <div class="mb-3">
-                  <input type="date" class="form-control" placeholder="masukan tempat lahir"
-                    aria-label="Name" aria-describedby="name-addon" id="tanggalLahir" name="tanggal_lahir">
-                </div>
-                <label>Jabatan</label>
-                <div class="mb-3">
-                  <input type="text" class="form-control" id="jabatan" placeholder="masukan jabatan direksi" aria-label="Name"
-                    aria-describedby="name-addon" name="jabatan" ></input>
-                </div>
-                <label>Foto</label>
-                <div class="mb-3">
-                  <input type="file" class="form-control" aria-describedby="email-addon"
-                    name="foto">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Awal Jabatan</label>
+                        <input type="date" class="form-control" name="periode_jabatan_awal" id="jabatanAwal" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Akhir Jabatan</label>
+                        <input type="date" class="form-control" name="periode_jabatan_akhir" id="jabatanAkhir" required>
+                    </div>
                 </div>
               </div>
             </div>
