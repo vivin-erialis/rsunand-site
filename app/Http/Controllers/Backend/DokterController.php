@@ -209,13 +209,52 @@ class DokterController extends Controller
 
     public function indexDokterSpesialis()
     {
+        $dokter = DB::table('m_dokter_spesialis')
+            ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
+            ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
+            ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
+            ->get();
+
+        $pegawai = Dokter::all();
+
         return view('Backend.dokter.spesialis.index', [
             'active' => 'admin/dokter/spesialis',
-            'dokter' => Dokter::all(),
+            'dokter' => $dokter,
+            'pegawai' => $pegawai,
             'spesialis' => Spesialis::all()
+
         ]);
     }
 
+    public function getDokterSpesialis()
+    {
+        $dokter = DB::table('m_dokter_spesialis')
+            ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
+            ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
+            ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
+            ->get();
+
+        // Menambahkan URL foto ke setiap dokter
+        foreach ($dokter as $d) {
+            $d->foto_url = asset('images/dokter/' . $d->foto);
+        }
+
+        return response()->json([
+            'active' => 'admin/dokter',
+            'dokter' => $dokter
+        ]);
+    }
+
+    public function getDataForEditSpesialis($id_dokter_spesialis)
+    {
+        $dokter = DB::table('m_dokter_spesialis')
+            ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
+            ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
+            ->where('m_dokter_spesialis.id_dokter_spesialis', '=', $id_dokter_spesialis)
+            ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
+            ->get();
+        return response()->json($dokter);
+    }
     public function saveDokterSpesialis(Request $request)
     {
         // Validasi input
@@ -254,6 +293,52 @@ class DokterController extends Controller
             DB::rollBack();
 
             return response()->json(['message' => 'Gagal menambah data: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function updateDokterSpesialis(Request $request, $id_dokter_spesialis)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'dokter' => 'required',
+            'spesialis' => 'required'
+        ]);
+
+        // Jika validasi gagal, kembalikan pesan kesalahan sebagai respons JSON
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // Cari data dokter spesialis berdasarkan ID
+            $dokter = DB::table('m_dokter_spesialis')
+            ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
+            ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
+            ->where('m_dokter_spesialis.id_dokter_spesialis', '=', $id_dokter_spesialis)
+            ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
+            ->first();
+
+            // Update data dokter spesialis
+            $dokter->update([
+                'id_dokter' => $request->dokter,
+                'id_spesialis' => $request->spesialis,
+                'idhfis' => $request->idhfis,
+                'statusenabled' => $request->statusenabled
+            ]);
+
+            DB::commit();
+
+            // Kembalikan respons JSON
+            return response()->json([
+                'message' => 'Data Dokter Spesialis Berhasil Diupdate',
+                'dokter' => $dokter
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json(['message' => 'Gagal mengupdate data: ' . $e->getMessage()], 500);
         }
     }
 }

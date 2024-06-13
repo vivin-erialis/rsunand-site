@@ -43,8 +43,8 @@
             </div>
         </div>
         @include('Backend.dokter.spesialis.create')
-        @include('Backend.dokter.edit')
-        @include('Backend.dokter.hapus')
+        @include('Backend.dokter.spesialis.edit')
+        {{-- @include('Backend.dokter.spesialis.hapus') --}}
         <script>
             $(document).ready(function() {
                 // Setup CSRF token
@@ -61,7 +61,7 @@
                 function loadData() {
 
                     $.ajax({
-                        url: "{{ route('getDokter') }}",
+                        url: "{{ route('getDokterSpesialis') }}",
                         type: 'GET',
                         dataType: 'json',
                         success: function(response) {
@@ -69,12 +69,14 @@
                             let html = '';
                             response.dokter.forEach(function(dokter) {
                                 html += '<tr>';
-
                                 html += '<td><p class="px-3 mb-0">' +
-                                    '<img src="' + dokter.foto_url + // Menggunakan foto_url
-                                    '" alt="Foto Dokter" style="width:100px; height:auto;"><br>' +
-                                    dokter.nama + '<br>' + dokter.nip + '<br>' + dokter.tempat_lahir +`/` +dokter.tanggal_lahir +
+                                    '<img src="' + dokter.foto_url +
+                                    '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
+                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' +
+                                    dokter.nama + '<br>' + dokter.nip + '<br>' + dokter
+                                    .tempat_lahir + '/' + dokter.tanggal_lahir +
                                     '<br></p></td>';
+
                                 html += '<td><p class="px-3 mb-0">' + dokter.pendidikan +
                                     '</p></td>';
                                 html += '<td><p class="px-3 mb-0">' + dokter.title +
@@ -82,11 +84,11 @@
                                 html += '<td>';
                                 html +=
                                     '<button class="btn btn-sm btn-warning edit-btn" data-id="' +
-                                    dokter.id +
+                                    dokter.id_dokter_spesialis +
                                     '" data-toggle="modal" data-target="#editModal"> <i class="fa fa-edit text-xs me-2"></i> Edit</button>';
                                 html +=
                                     '<button class="btn btn-sm btn-danger mx-2 delete-btn" data-id="' +
-                                    dokter.id +
+                                    dokter.id_dokter_spesialis +
                                     '" data-toggle="modal" data-target="#deleteModal"> <i class="fa fa-trash text-xs me-2"></i> Hapus</button>';
                                 html += '</td>';
                                 html += '</tr>';
@@ -155,41 +157,25 @@
                 });
                 // end tambah data dokter
 
-                //inisialisasi ckeditor
-                ClassicEditor
-                    .create(document.querySelector('#pendidikan'))
-                    .then(editor => {
-                        // CKEditor #editor-4 siap, tetapkan editor ke variabel global
-                        window.editor3 = editor;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-                // end inisialisasi ckeditor
-
                 // klik button edit data
                 $(document).on('click', '.edit-btn', function() {
                     var dataId = $(this).data('id');
+                    var pendidikan = editor3.getData();
+
                     console.log("Edit button clicked, dataId:", dataId); // Debugging
                     $.ajax({
-                        url: '/admin/dokter/' + dataId + '/edit',
+                        url: '/admin/dokter/spesialis/' + dataId + '/edit',
                         type: 'GET',
                         success: function(response) {
                             // Isi formulir modal dengan data artikel yang diterima dari server
-                            $('#dataId').val(response.id);
-                            $('#nama').val(response.nama);
-                            $('#nip').val(response.nip);
-                            $('#tempatLahir').val(response.tempat_lahir);
-                            $('#tanggalLahir').val(response.tanggal_lahir);
-                            $('#pendidikan').val(response.pendidikan);
+                            $('#dataId').val(response.id_dokter_spesialis);
+                            $('#spesialis').val(response.id_spesialis);
+                            $('#idhfis').val(response.idhfis);
+
 
                             // // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
 
-                            if (window.editor3) {
-                                window.editor3.setData(response.pendidikan);
-                            }
 
-                            $('#spesialisId').val(response.spesialis_id);
 
                             // Setelah semua data dimuat, tampilkan modal
                             $('#editModal').modal('show');
@@ -205,16 +191,13 @@
                 $('#editForm').on('submit', function(event) {
                     event.preventDefault();
 
-                    var pendidikan = editor3.getData();
+                    var formData = new FormData(this); // Mengambil data formulir
 
-                    // Siapkan data form
-                    var formData = new FormData(this);
-                    formData.set('pendidikan', pendidikan);
-
-                    var dataId = $('#dataId').val();
+                    var dataId = $('#dataId').val(); // Mengambil ID data jika diperlukan
 
                     $.ajax({
-                        url: '/admin/dokter/' + dataId,
+                        url: '/admin/dokter/spesialis/' +
+                        dataId, // Sesuaikan dengan URL endpoint yang sesuai
                         method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
                         data: formData,
                         contentType: false,
@@ -223,24 +206,29 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(response) {
-                            // alert('Artikel berhasil diperbarui!');
-                            $('#editModal').modal('hide');
-                            $('.modal-backdrop').remove();
-                            toastr.success(response.message);
-                            loadData();
+                            $('#editModal').modal(
+                            'hide'); // Menutup modal setelah berhasil disimpan
+                            $('.modal-backdrop').remove(); // Menghapus backdrop modal jika ada
+                            toastr.success(response
+                            .message); // Menampilkan pesan sukses menggunakan toastr atau cara lain
+                            loadData(); // Memuat ulang data setelah penyimpanan berhasil
                         },
                         error: function(xhr) {
                             var errors = xhr.responseJSON.errors;
                             var errorMessage = '';
+
                             for (var key in errors) {
                                 if (errors.hasOwnProperty(key)) {
                                     errorMessage += errors[key][0] + '\n';
                                 }
                             }
-                            alert('Terjadi kesalahan:\n' + errorMessage);
+
+                            alert('Terjadi kesalahan:\n' +
+                            errorMessage); // Menampilkan pesan kesalahan jika validasi gagal
                         }
                     });
                 });
+
                 // end simpan perubahan data
 
                 // delete data

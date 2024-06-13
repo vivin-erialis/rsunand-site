@@ -17,7 +17,7 @@ aria-hidden="true">
                                 <label>Nama Dokter</label>
                                 <select id="dokter" name="dokter" class="form-control">
                                     <option selected >Pilih Dokter</option>
-                                    @foreach($dokter as $dr)
+                                    @foreach($pegawai as $dr)
                                         <option value="{{ $dr->id }}">{{ $dr->gelar_depan }} {{ $dr->nama }} {{ $dr->gelar_belakang }}</option>
                                     @endforeach
                                 </select>

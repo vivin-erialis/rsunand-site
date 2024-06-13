@@ -141,6 +141,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('/dokter/spesialis', [DokterController::class, 'indexDokterSpesialis']);
     Route::post('/dokter/spesialis/add', [DokterController::class, 'saveDokterSpesialis'])->name('spesialis.add');
+    Route::get('/dokter/spesialis/{id_dokter_spesialis}/edit', [DokterController::class, 'getDataforEditSpesialis']);
+    Route::put('/dokter/spesialis/{id}', [DokterController::class, 'updateDokterSpesialis']);
+    Route::delete('/dokter/spesialis/{id}', [DokterController::class, 'hapusDokter']);
 
     //profile
     Route::get('/profile', [TentangKamiController::class, 'indexProfile']);
@@ -163,6 +166,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 // get data for index
 Route::get('/get-data-artikel', [BackendArtikelController::class, 'getArtikel'])->name('getArtikel');
 Route::get('/get-data-dokter', [DokterController::class, 'getDokter'])->name('getDokter');
+Route::get('/get-dokter-spesialis', [DokterController::class, 'getDokterSpesialis'])->name('getDokterSpesialis');
 Route::get('/get-data-direksi', [ManajemenController::class, 'getDireksi'])->name('getDireksi');
 Route::get('/get-data-slider', [SliderController::class, 'getSlider'])->name('getSlider');
 Route::get('/get-data-layanan', [LayananController::class, 'getLayanan'])->name('getLayanan');

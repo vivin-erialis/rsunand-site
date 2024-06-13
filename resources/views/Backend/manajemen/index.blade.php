@@ -82,10 +82,11 @@
 
                                 html += '</td>'
                                 html += '<td><p class="px-3 mb-0">' +
-                                    '<img src="' + direksi.foto_url + // Menggunakan foto_url
-                                    '" alt="Foto Dokter" style="width:100px; height:auto;"><br>' +
+                                    '<img src="' + direksi.foto_url +
+                                    '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
+                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' +
                                     direksi.nama + '<br>' + direksi.nip + '<br>' + direksi
-                                    .tempat_lahir + `/` + direksi.tanggal_lahir +
+                                    .tempat_lahir + '/' + direksi.tanggal_lahir +
                                     '<br></p></td>';
                                 html += '<td><p class="px-3 mb-0">' + direksi.jabatan +
                                     '</p></td>';
