@@ -26,7 +26,11 @@
                         <table id="myTable" class="table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="text-dark text-xs font-weight-semibold">Data</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Foto</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Nama</th>
+                                    <th class="text-dark text-xs font-weight-semibold">NIP</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Tanggal Lahir</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Pendidikan</th>
                                     <th class="text-dark text-xs font-weight-semibold">Jabatan</th>
 
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
@@ -73,12 +77,14 @@
                                     html += '<td><p class="px-3 mb-0">' +
                                     '<img src="' + manajemen.foto_url +
                                     '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
-                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' +
-                                    manajemen.nama + '<br>' + manajemen.nip + '<br>' + manajemen
-                                    .tempat_lahir + '/' + manajemen.tanggal_lahir +
+                                    'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>'
                                     '<br></p></td>';
-                                html += '<td><p class="px-3 mb-0">' + manajemen.desc_jabatan +
-                                    '</p></td>';
+                                    html += '<td><p class="px-3 mb-0">' + (manajemen.nama ? manajemen.nama : '-') + '</p></td>';
+html += '<td><p class="px-3 mb-0">' + (manajemen.nip ? manajemen.nip : '-') + '</p></td>';
+html += '<td><p class="px-3 mb-0">' + (manajemen.tanggal_lahir ? manajemen.tanggal_lahir : '-') + '</p></td>';
+html += '<td><p class="px-3 mb-0">' + (manajemen.pendidikan ? manajemen.pendidikan : '-') + '</p></td>';
+html += '<td><p class="px-3 mb-0">' + (manajemen.desc_jabatan ? manajemen.desc_jabatan : '-') + '</p></td>';
+
 
                                 html += '<td>';
                                 html +=
