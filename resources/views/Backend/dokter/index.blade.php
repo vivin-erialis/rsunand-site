@@ -74,7 +74,7 @@
 
                                 html += '<td><p class="px-3 mb-0">' +
                                     '<img src="' + dokter.foto_url +
-                                    '" alt="Foto Pegawai" style="width:50px; height:auto;" ' +
+                                    '" alt="Foto Pegawai" style="width:80px; height:auto;" ' +
                                     'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>' 
                                     '<br></p></td>';
                                 html += '<td><p class="px-3 mb-0">' + dokter.gelar_depan + dokter.nama + dokter.gelar_belakang +
