@@ -87,13 +87,50 @@ class ArtikelController extends Controller
     }
 
 
+    // public function detailPenyakitPengobatan($id)
+    // {
+    //     return view('Frontend.artikel.detail-penyakit-pengobatan', [
+    //         'headerStart' => Artikel::where('url', $id)->first()->title,
+    //         'penyakitPengobatan' => Artikel::where('url', $id)->first(),
+    //         'kategori' => KategoriArtikel::all(),
+    //     ]);
+    // }
+
     public function detailPenyakitPengobatan($id)
     {
+        $penyakitPengobatan = Artikel::where('url', $id)->first();
+        $penyakitPengobatan->isi = $this->convertOEmbedToIframe($penyakitPengobatan->isi);
+
         return view('Frontend.artikel.detail-penyakit-pengobatan', [
             'headerStart' => Artikel::where('url', $id)->first()->title,
-            'penyakitPengobatan' => Artikel::where('url', $id)->first(),
             'kategori' => KategoriArtikel::all(),
+            'penyakitPengobatan' => $penyakitPengobatan
         ]);
+    }
+
+    private function convertOEmbedToIframe($content)
+    {
+        $pattern = '/<oembed url="([^"]+)"><\/oembed>/i';
+
+        $content = preg_replace_callback($pattern, function ($matches) {
+            $url = $matches[1];
+            // Parse the video ID from the URL
+            parse_str(parse_url($url, PHP_URL_QUERY), $query);
+            $videoId = $query['v'] ?? basename(parse_url($url, PHP_URL_PATH));
+            // Clean up the video ID if it contains additional parameters
+            if (strpos($videoId, '?') !== false) {
+                $videoId = substr($videoId, 0, strpos($videoId, '?'));
+            }
+            if (strpos($videoId, '&') !== false) {
+                $videoId = substr($videoId, 0, strpos($videoId, '&'));
+            }
+            // Create the embed URL
+            $embedUrl = 'https://www.youtube.com/embed/' . $videoId;
+            // Return the iframe HTML
+            return '<iframe width="560" height="315" src="' . $embedUrl . '" frameborder="0" allowfullscreen></iframe>';
+        }, $content);
+
+        return $content;
     }
 
 

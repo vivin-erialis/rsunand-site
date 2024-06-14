@@ -7,25 +7,25 @@
     <div class="container">
         <div class="">
             <div class="p-5" style="font-size: 15px !important;">
-                @php
-                    // Decode the JSON containing the image file names
-                    $gambar = json_decode($penyakitPengobatan->gambar);
+            @php
+    // Decode the JSON containing the image file names
+    $gambar = json_decode($penyakitPengobatan->gambar, true);
 
-                    // Split the content into paragraphs
-                    $paragraf = explode("</p>", $penyakitPengobatan->isi);
+    // Split the content into paragraphs
+    $paragraf = explode("</p>", $penyakitPengobatan->isi);
+@endphp
 
-                    // Output the first image as cover at the top
-                    if (!empty($gambar)) {
-                        echo '<div class="cover-image mb-4">';
-                        echo '<img loading="lazy" class="" style="width: 100%" src="' . asset('/../images/artikel/' . $gambar[0]) . '">';
-                        echo '</div>';
-                    }
+<!-- Display the first image as the cover if it exists -->
+@if (!empty($gambar) && isset($gambar[0]))
+    <div class="cover-image mb-4">
+        <img loading="lazy" class="img-fluid" style="width: 100%;" src="{{ asset('/../images/artikel/' . $gambar[0]) }}" alt="Cover Image">
+    </div>
+@endif
 
-                    // Output paragraphs
-                    for ($i = 0; $i < count($paragraf); $i++) {
-                        echo '<p class="">' . $paragraf[$i] . '</p>';
-                    }
-                @endphp
+<!-- Display the content paragraphs -->
+@foreach ($paragraf as $paragrafItem)
+    <p>{!! $paragrafItem !!}</p>
+@endforeach
 
             </div>
             <div class="mt-2 px-5">
