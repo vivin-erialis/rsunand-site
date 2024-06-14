@@ -74,16 +74,24 @@
 
                                 html += '<tr>';
 
-                                    html += '<td><p class="px-3 mb-0">' +
+                                html += '<td><p class="px-3 mb-0">' +
                                     '<img src="' + manajemen.foto_url +
                                     '" alt="Foto Pegawai" style="width:100px; height:auto;" ' +
                                     'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>'
-                                    '<br></p></td>';
-                                    html += '<td><p class="px-3 mb-0">' + (manajemen.nama ? manajemen.nama : '-') + '</p></td>';
-html += '<td><p class="px-3 mb-0">' + (manajemen.nip ? manajemen.nip : '-') + '</p></td>';
-html += '<td><p class="px-3 mb-0">' + (manajemen.tanggal_lahir ? manajemen.tanggal_lahir : '-') + '</p></td>';
-html += '<td><p class="px-3 mb-0">' + (manajemen.pendidikan ? manajemen.pendidikan : '-') + '</p></td>';
-html += '<td><p class="px-3 mb-0">' + (manajemen.desc_jabatan ? manajemen.desc_jabatan : '-') + '</p></td>';
+                                '<br></p></td>';
+                                html += '<td><p class="px-3 mb-0">' +
+                                    (manajemen.gelar_depan ? manajemen.gelar_depan : '') + ' ' +
+                                    (manajemen.nama ? manajemen.nama : '-') + ' ' +
+                                    (manajemen.gelar_belakang ? manajemen.gelar_belakang : '') +
+                                    '</p></td>';
+                                html += '<td><p class="px-3 mb-0">' + (manajemen.nip ? manajemen
+                                    .nip : '-') + '</p></td>';
+                                html += '<td><p class="px-3 mb-0">' + (manajemen.tanggal_lahir ?
+                                    manajemen.tanggal_lahir : '-') + '</p></td>';
+                                html += '<td><p class="px-3 mb-0">' + (manajemen.pendidikan ?
+                                    manajemen.pendidikan : '-') + '</p></td>';
+                                html += '<td><p class="px-3 mb-0">' + (manajemen.desc_jabatan ?
+                                    manajemen.desc_jabatan : '-') + '</p></td>';
 
 
                                 html += '<td>';

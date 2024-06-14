@@ -15,13 +15,13 @@
                         @forelse ($dokter as $data)
                             <div class=" col-md-4 p-3 wow fadeInUp " data-wow-delay="0.3s">
                                 <div class="row team-item position-relative card-dokter">
-                                    <div class="col-md-4 position-relative text-center">
-                                        <img class="img-fluid"
+                                    <div class="col-md-5 position-relative text-center">
+                                        <img class="img-fluid m-2"
                                             src="{{ empty($data->foto) ? asset('assets/img/rsunandlogo.png') : asset('images/dokter/' . $data->foto) }}"
                                            >
                                     </div>
-                                    <div class="col-md-8 bg-light p-3">
-                                        <h5 class="mt-1">{{ $data->gelar_depan }} {{ $data->nama }}
+                                    <div class="col-md-7 bg-light p-3">
+                                        <h5 class="mt-1">{{ $data->gelar_depan  ?? '-' }} {{ $data->nama ?? '-' }}
                                             {{ $data->gelar_belakang }}</h5>
                                         {{-- <strong> <span class="text-primary" style="font-size: 13px">Dokter {{$data->spesialis->title}}</span></strong> --}}
                                         <?php if ($data->title != 'Umum') { ?>

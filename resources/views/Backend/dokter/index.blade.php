@@ -78,9 +78,9 @@
                                     'onerror="this.onerror=null; this.src=\'/../assets/img/user.png\';"><br>'
                                 '<br></p></td>';
                                 html += '<td><p class="px-3 mb-0">' +
-                                    (dokter.gelar_depan ? dokter.gelar_depan : '-') + ' ' +
+                                    (dokter.gelar_depan ? dokter.gelar_depan : '') + ' ' +
                                     (dokter.nama ? dokter.nama : '-') + ' ' +
-                                    (dokter.gelar_belakang ? dokter.gelar_belakang : '-') +
+                                    (dokter.gelar_belakang ? dokter.gelar_belakang : '') +
                                     '</p></td>';
                                 html += '<td><p class="px-3 mb-0">' +
                                     (dokter.nip ? dokter.nip : '-') +

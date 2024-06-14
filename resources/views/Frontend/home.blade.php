@@ -1,31 +1,36 @@
 @extends('Frontend.layouts.main')
 @section('title', 'Website Resmi')
 @section('content')
-    <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="owl-carousel header-carousel position-relative">
-            @foreach ($slider as $slider)
-                <div class="owl-carousel-item position-relative"
-                    data-dot="<img src='{{ asset('../images/slider/' . $slider->img) }}'>">
-                    <img class="img-fluid" src="{{ asset('images/slider/' . $slider->img) }}" alt=""
-                        style="height: 500px; object-fit: cover;">
-                    <div class="owl-carousel-inner home-img">
-                        <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-12 col-lg-12 text-center">
-                                    <!-- <p class="display-1 fs-7 text-white animated slideInDown" style="font-size: vw !important">
-                                        {{ $slider->title }}
-                                    </p> -->
-                                    <!-- <h4 class="display-1 fs-7 text-white text-white mb-4 pb-3" style="padding-top: 20px;font-size: vw !important">
-                                        {{ $slider->desc }}
-                                    </h4> -->
-                                    {{-- <a href="{{ $slider->link }}" class="py-3 px-5 btn-home fs-7 mt-3">SELENGKAPNYA</a> --}}
-                                </div>
-                            </div>
-                        </div>
+    {{-- <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                @foreach ($slider as $slider)
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="{{ asset('images/slider/' . $slider->img) }}" alt=""
+                            style="max-width: 100%; height: auto; object-fit: cover;">
                     </div>
+                @endforeach
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+    </div> --}}
+
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach ($slider as $key => $slide)
+                <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                    <img class="d-block w-100" src="{{ asset('images/slider/' . $slide->img) }}" alt="Slide {{ $key + 1 }}">
                 </div>
             @endforeach
-
         </div>
     </div>
 
