@@ -21,8 +21,8 @@
     <select name="spesialis">
         <option value="">Pilih Spesialis</option>
         @foreach ($spesialis as $item)
-            <option value="{{$item->id}}">{{$item->title}}</option>
+            <option value="{{$item->id}}" {{ $item->id == $spesialisasi ? 'selected' : '' }}>{{$item->title}}</option>
         @endforeach
     </select>
-    <button type="submit"><i class="fa fa-search me-2"></i>Cari</button>
+    <button type="submit" class="m-1"><i class="fa fa-search me-2"></i>Cari</button>
 </form>

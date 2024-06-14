@@ -5,7 +5,7 @@
 <div class="">
     <div class="container">
         <div class="">
-            <div class="p-5" style="font-size: 15px !important;">
+            <div class="p-2" style="font-size: 15px !important;">
                 @php
                     // Decode the JSON containing the image file names
                     $gambar = json_decode($layanan->gambar);
@@ -27,7 +27,7 @@
                 @endphp
 
             </div>
-            <div class="slider mt-2 px-5">
+            <div class="slider mt-2 px-2">
                 @if(!empty($gambar))
                     <h3>Foto Lainnya</h3>
                     <div class="slider-wrapper">

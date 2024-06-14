@@ -13,12 +13,12 @@
             <div class="col-lg-12">
                 <div class="tab-content w-100">
                     {{-- Sejarah --}}
-                    <div class="tab-pane fade show active" style="padding:0px 20px" id="tab-pane-1">
+                    <div class="tab-pane fade show active" style="padding:0px 10px" id="tab-pane-1">
                         <div class="row g-4">
                             <div class="col-md-12" style="min-height: 350px;">
                                 <div class="position-relative h-100">
-                                    <img class="position-absolute img-fluid w-100 h-100"
-                                        src="/../assets/img/sejarah.png" style="object-fit: cover;" alt="">
+                                    <img class="position-absolute img-fluid"
+                                        src="/../assets/img/sejarah.png" style="object-fit: cover; height: auto;" alt="">
                                 </div>
                             </div>
                             <div class="col-md-12">

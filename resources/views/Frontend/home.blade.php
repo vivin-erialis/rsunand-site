@@ -26,7 +26,7 @@
                     <h4 class="section-title">about us</h4>
                     <h1 class="display-5 mb-4">Rumah Sakit Univeristas Andalas</h1>
                     @foreach ($about as $about)
-                        <div style="font-size: 14px">
+                        <div style="font-size: 14px; text-align: justify">
                             <p style="">{{ $about->desc }}</p>
                             <p class="mb-4">{!! $about->isi !!}</p>
                         </div>
@@ -304,8 +304,16 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="feature-img">
                         <img class="img-fluid" src="../images/akreditasi/akreditasi1.jpeg" alt="">
-                        <img class="img-fluid" src="../images/akreditasi/akreditasi1.jpeg" alt="">
+                        <img class="img-fluid" src="../images/akreditasi/akreditasi2.jpeg" alt="">
                     </div>
+                    {{-- <div class="row">
+                        <div class="col-md-6 text-center">
+                            <img class="img-fluid" src="../images/akreditasi/akreditasi1.jpeg" alt="">
+                        </div>
+                        <div class="col-md-6 mt-1 text-center">
+                            <img class="img-fluid" src="../images/akreditasi/akreditasi2.jpeg" alt="">
+                        </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

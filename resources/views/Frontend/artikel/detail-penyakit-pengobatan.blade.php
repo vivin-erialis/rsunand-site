@@ -6,7 +6,7 @@
 <div class="">
     <div class="container">
         <div class="">
-            <div class="p-5" style="font-size: 15px !important;">
+            <div class="p-2" style="font-size: 15px !important;">
             @php
                 // Decode the JSON containing the image file names
                 $gambar = json_decode($penyakitPengobatan->gambar, true);

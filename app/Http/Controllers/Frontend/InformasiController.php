@@ -24,33 +24,30 @@ class InformasiController extends Controller
     }
     public function informasiDokter(Request $request)
     {
-        $spesialis = $request->input('spesialis'); // Ambil nilai spesialis dari request
+        $spesialisasi = $request->input('spesialis'); // Ambil nilai spesialis dari request
 
-        // Jika spesialis tidak ditentukan, tampilkan semua dokter
-        if ($spesialis === null) {
-            $dokter = DB::table('m_dokter_spesialis')
-                ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
-                ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
-                ->where('m_dokter_spesialis.id_spesialis', '=', '28')
-                ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
-                ->get();
-            // return $dokter;
-
-        } else {
-            // Jika spesialis ditentukan, tampilkan dokter berdasarkan spesialis
-            $dokter = DB::table('m_dokter_spesialis')
-                ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
-                ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
-                ->where('m_dokter_spesialis.id_spesialis', '=', $spesialis)
-                ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
-                ->get();
+        // Jika spesialis tidak ditentukan, default ke spesialis "Umum" (misal ID 28)
+        if ($spesialisasi === null) {
+            $spesialisasi = 28; // ID untuk spesialis "Umum"
         }
+
+        // Ambil data dokter berdasarkan spesialisasi yang dipilih
+        $dokter = DB::table('m_dokter_spesialis')
+            ->join('dokters', 'm_dokter_spesialis.id_dokter', '=', 'dokters.id')
+            ->join('spesialis', 'm_dokter_spesialis.id_spesialis', '=', 'spesialis.id')
+            ->where('m_dokter_spesialis.id_spesialis', '=', $spesialisasi)
+            ->select('m_dokter_spesialis.*', 'dokters.*', 'spesialis.*')
+            ->get();
+
         return view('Frontend.informasi.informasi-dokter', [
             'dokter' => $dokter,
             'spesialis' => Spesialis::all(),
+            'spesialisasi' => $spesialisasi,
             'headerStart' => 'Informasi Dokter',
         ]);
     }
+
+
 
     public function bagianInstalasi()
     {
