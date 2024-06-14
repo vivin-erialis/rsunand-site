@@ -7,29 +7,25 @@
     <div class="container">
         <div class="">
             <div class="p-5" style="font-size: 15px !important;">
-                
                 @php
-    // Decode the JSON containing the image file names
-    $gambar = json_decode($penyakitPengobatan->gambar);
+                    // Decode the JSON containing the image file names
+                    $gambar = json_decode($penyakitPengobatan->gambar);
 
-    // Convert <oembed> tags to <iframe>
-    $content = convertOEmbedToIframe($penyakitPengobatan->isi);
+                    // Split the content into paragraphs
+                    $paragraf = explode("</p>", $penyakitPengobatan->isi);
 
-    // Split the content into paragraphs
-    $paragraf = explode("</p>", $content);
+                    // Output the first image as cover at the top
+                    if (!empty($gambar)) {
+                        echo '<div class="cover-image mb-4">';
+                        echo '<img loading="lazy" class="" style="width: 100%" src="' . asset('/../images/artikel/' . $gambar[0]) . '">';
+                        echo '</div>';
+                    }
 
-    // Output the first image as cover at the top
-    if (!empty($gambar)) {
-        echo '<div class="cover-image mb-4">';
-        echo '<img loading="lazy" class="" style="width: 100%" src="' . asset('/../images/artikel/' . $gambar[0]) . '">';
-        echo '</div>';
-    }
-@endphp
-
-<!-- Output paragraphs with embedded YouTube videos -->
-@foreach ($paragraf as $par)
-    {!! $par !!}
-@endforeach
+                    // Output paragraphs
+                    for ($i = 0; $i < count($paragraf); $i++) {
+                        echo '<p class="">' . $paragraf[$i] . '</p>';
+                    }
+                @endphp
 
             </div>
             <div class="mt-2 px-5">
