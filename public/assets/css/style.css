@@ -667,7 +667,7 @@ transition: all ease-in-out 0.8s;
 .container-berita-home {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 20px;
+    grid-column-gap: 10px;
     /* Menambahkan jarak antara kolom */
     grid-row-gap: 20px;
     /* Menambahkan jarak antara baris */
@@ -686,8 +686,27 @@ transition: all ease-in-out 0.8s;
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .container-berita {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media screen and (max-width: 950px) {
+    .container-berita-home {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .container-berita-home {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container-berita-home {
         grid-template-columns: 1fr;
     }
 }

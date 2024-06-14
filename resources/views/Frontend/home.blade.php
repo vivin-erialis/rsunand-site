@@ -1,34 +1,12 @@
 @extends('Frontend.layouts.main')
 @section('title', 'Website Resmi')
 @section('content')
-    {{-- <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                @foreach ($slider as $slider)
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="{{ asset('images/slider/' . $slider->img) }}" alt=""
-                            style="max-width: 100%; height: auto; object-fit: cover;">
-                    </div>
-                @endforeach
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-
-    </div> --}}
-
-
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             @foreach ($slider as $key => $slide)
                 <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                    <img class="d-block w-100" src="{{ asset('images/slider/' . $slide->img) }}" alt="Slide {{ $key + 1 }}">
+                    <img class="d-block w-100" src="{{ asset('images/slider/' . $slide->img) }}"
+                        alt="Slide {{ $key + 1 }}">
                 </div>
             @endforeach
         </div>
@@ -72,7 +50,8 @@
                 <div class="slider" id="slider">
                     @foreach ($kerjaSama as $item)
                         <div class="slide mx-2">
-                            <img src="{{ asset('images/kerjasama/' . $item->gambar) }}" class="mx-1"
+                            <img style="width: 100%; height: 100%; object-fit: cover"
+                                src="{{ asset('images/kerjasama/' . $item->gambar) }}" class="mx-1"
                                 alt="{{ $item->nama_kerjasama }}">
                         </div>
                     @endforeach
@@ -143,7 +122,7 @@
                 <div class="col-lg-8">
                     <div class="container-berita-home">
                         @foreach ($artikel as $item)
-                            <div class="card mb-4">
+                            <div class="card">
                                 @if ($item->gambar)
                                     @php
                                         $gambarArray = json_decode($item->gambar);
