@@ -1,4 +1,3 @@
-
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 bg-slate-900 fixed-start " id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -15,8 +14,7 @@
                     <h5 class="mb-0">
                         <button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseOne"
                             aria-expanded="true" aria-controls="collapseOne">
-                            <i class="fas fa-hospital me-3"> </i>Data Rs Unand <i
-                                class="fas fa-chevron-down mx-3"></i>
+                            <i class="fas fa-hospital me-3"> </i>About RS Unand<i class="fas fa-chevron-down mx-3"></i>
                         </button>
                     </h5>
                     <div id="collapseOne" class="collapse show mx-4 mt-0" aria-labelledby="headingOne"
@@ -29,15 +27,60 @@
                                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                                         <i class="fa fa-hospital"></i>
                                     </div>
-                                    <span class="nav-link-text ms-1">About</span>
+                                    <span class="nav-link-text ms-1">Profile</span>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link  {{ $active == 'admin/sejarah' ? 'active' : '' }} "
+                                    href="/admin/sejarah">
+                                    <div
+                                        class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-hospital"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Sejarah</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  {{ $active == 'admin/perkembangan' ? 'active' : '' }} "
+                                    href="/admin/perkembangan">
+                                    <div
+                                        class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-hospital"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Perkembangan</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  {{ $active == 'admin/struktur-organisasi' ? 'active' : '' }} "
+                                    href="/admin/struktur-organisasi">
+                                    <div
+                                        class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-hospital"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Struktur Organisasi</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fa fa-book me-3"></i>Manajemen  <i class="fas fa-chevron-down mx-3"></i>
+                        </button>
+                    </h5>
+                    <div id="collapseTwo" class="collapse show mx-4 mt-0" aria-labelledby="headingTwo"
+                        data-parent="#accordion">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link  {{ $active == 'admin/manajemen' ? 'active' : '' }} "
                                     href="/admin/manajemen">
                                     <div
                                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-users"></i>
+                                        <i class="fa fa-user"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Manajemen</span>
                                 </a>
@@ -47,11 +90,23 @@
                                     href="/admin/dokter">
                                     <div
                                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-users"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Pegawai</span>
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link  {{ $active == 'admin/dokter/spesialis' ? 'active' : '' }} "
+                                    href="/admin/dokter/spesialis">
+                                    <div
+                                        class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-user-nurse"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Dokter</span>
+                                </a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link  {{ $active == 'admin/kerjasama' ? 'active' : '' }} "
                                     href="/admin/kerjasama">
@@ -62,27 +117,20 @@
                                     <span class="nav-link-text ms-1">Kerja Sama</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link  {{ $active == 'admin/dokter/spesialis' ? 'active' : '' }} "
-                                    href="/admin/dokter/spesialis">
-                                    <div
-                                        class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Dokter Spesialis</span>
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
+
+                    <!-- Tambahkan menu lainnya disini jika diperlukan -->
                 </div>
-                <div class="" id="headingTwo">
+                <div class="" id="headingThree">
                     <h5 class="mb-0">
-                        <button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseTwo"
-                            aria-expanded="true" aria-controls="collapseTwo">
+                        <button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="true" aria-controls="collapseThree">
                             <i class="fa fa-book me-3"></i>Konten <i class="fas fa-chevron-down mx-3"></i>
                         </button>
                     </h5>
-                    <div id="collapseTwo" class="collapse show mx-4 mt-0" aria-labelledby="headingTwo"
+                    <div id="collapseThree" class="collapse show mx-4 mt-0" aria-labelledby="headingThree"
                         data-parent="#accordion">
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -150,12 +198,12 @@
                                 </a>
                             </li>
                         </ul>
-                </div>
+                    </div>
 
-                <!-- Tambahkan menu lainnya disini jika diperlukan -->
+                    <!-- Tambahkan menu lainnya disini jika diperlukan -->
+                </div>
             </div>
         </div>
-    </div>
 </aside>
 
 <script>

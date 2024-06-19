@@ -108,4 +108,59 @@ class HomeController extends Controller
         ]);
     }
 
+    public function rektor() {
+
+        $data = DB::table('m_jabatan_det')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
+            ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
+            ->where('m_jabatan.aliase_jabatan', '=', 'Rektor')
+            ->select('dokters.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
+            ->get();
+
+
+        // return $data;
+
+        return view('Frontend.manajemen.rektor', [
+            'data' => $data,
+            'headerStart' => 'Rektor Universitas Andalas',
+        ]);
+    }
+    public function dewanPengawas() {
+
+        $data = DB::table('m_jabatan_det')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
+            ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
+            ->where('m_jabatan.aliase_jabatan', '=', 'Dewas')
+            ->select('dokters.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
+            ->get();
+
+
+        // return $data;
+
+        return view('Frontend.manajemen.dewan-pengawas', [
+            'data' => $data,
+            'headerStart' => 'Dewan Pengawas RS Universitas Andalas',
+        ]);
+    }
+    public function direksi() {
+
+        $data = DB::table('m_jabatan_det')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
+            ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
+            ->where('m_jabatan.aliase_jabatan', '=', 'Direksi')
+            ->select('dokters.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
+            ->get();
+
+
+        // return $data;
+
+        return view('Frontend.manajemen.direksi', [
+            'data' => $data,
+            'headerStart' => 'Direksi RS Universitas Andalas',
+        ]);
+    }
+
 }

@@ -13,15 +13,20 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
-                                <label>Milestone</label>
+                                <label>Perkembangan</label>
                                 <div class="mb-3">
                                     <textarea type="text" id="editor" placeholder="" aria-label="Name"
-                                        aria-describedby="name-addon" name="milestone"></textarea>
+                                        aria-describedby="name-addon" name="perkembangan"></textarea>
                                 </div>
                                 <label>Sejarah</label>
                                 <div class="mb-3">
                                     <textarea type="text" id="editor-2" placeholder="" aria-label="Name"
                                         aria-describedby="name-addon" name="sejarah"></textarea>
+                                </div>
+                                <label>Struktur Organisasi</label>
+                                <div class="mb-3">
+                                    <input type="file" class="form-control" placeholder="masukan alamat" aria-label="Name"
+                                        aria-describedby="name-addon" name="struktur_organisasi"></input>
                                 </div>
 
                                 <div class="row">

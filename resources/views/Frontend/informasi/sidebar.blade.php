@@ -19,7 +19,7 @@
 
 <form action="/informasi-dokter" method="GET" class="text-center">
     <select name="spesialis">
-        <option value="">Pilih Spesialis</option>
+        <option value="">Cari Dokter</option>
         @foreach ($spesialis as $item)
             <option value="{{$item->id}}" {{ $item->id == $spesialisasi ? 'selected' : '' }}>{{$item->title}}</option>
         @endforeach

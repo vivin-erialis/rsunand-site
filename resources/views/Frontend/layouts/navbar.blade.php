@@ -51,15 +51,14 @@
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">information</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Dokter</a>
                 <div class="dropdown-menu border-0 m-0">
                     <a href="/jadwal-doker" class="dropdown-item">Jadwal Dokter</a>
-                    <a href="/informasi-dokter" class="dropdown-item">Informasi Dokter</a>
-                    <a href="/kamar" class="dropdown-item">Ketersediaan Kamar</a>
+                    <a href="/informasi-dokter" class="dropdown-item">Profile Dokter</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">berita</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Artikel</a>
                 <div class="dropdown-menu border-0 m-0">
                     <a href="/berita" class="dropdown-item">Berita</a>
                     <a href="/video" class="dropdown-item">Video</a>

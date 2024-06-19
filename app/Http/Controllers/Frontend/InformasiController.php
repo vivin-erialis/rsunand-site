@@ -100,30 +100,41 @@ class InformasiController extends Controller
     }
     public function medikKeperawatan()
     {
-        $data = DB::table('dokters as dokter')
-            ->join('m_jabatan_det', 'dokter.id', '=', 'm_jabatan_det.id_dokter')
+        $data = DB::table('m_jabatan_det')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
             ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
             ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
             ->where('m_bidang.id_bidang', '=', '1')
-            ->select('dokter.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
+            ->select('dokters.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
             ->get();
+
+        // $direktur = DB::table('m_jabatan_det')
+        //     ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+        //     ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
+        //     ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
+        //     ->where('m_bidang.id_bidang', '=', '1')
+        //     ->where('m_jabatan_det.aliase_jabatan', '=', 'Dir PMK')
+        //     ->select('dokters.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
+        //     ->get();
 
         // return $data;
 
         return view('Frontend.tentang-kami.medik-keperawatan', [
             'data' => $data,
+            // 'direktur' => $direktur,
             'headerStart' => 'Bidang Pelayanan Medik dan Keperawatan',
         ]);
     }
     public function umumSumberDaya()
     {
-        $data = DB::table('dokters as dokter')
-            ->join('m_jabatan_det', 'dokter.id', '=', 'm_jabatan_det.id_dokter')
+        $data = DB::table('m_jabatan_det')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
             ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
             ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
             ->where('m_bidang.id_bidang', '=', '2')
-            ->select('dokter.*')
+            ->select('dokters.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
             ->get();
+
 
         // return $data;
 
@@ -134,13 +145,14 @@ class InformasiController extends Controller
     }
     public function keuanganPerencanaan()
     {
-        $data = DB::table('dokters as dokter')
-            ->join('m_jabatan_det', 'dokter.id', '=', 'm_jabatan_det.id_dokter')
+       $data = DB::table('m_jabatan_det')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
             ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
             ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
             ->where('m_bidang.id_bidang', '=', '3')
-            ->select('dokter.*')
+            ->select('dokters.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
             ->get();
+
 
         // return $data;
 

@@ -78,6 +78,11 @@ Route::get('/pelayanan-medik-keperawatan', [InformasiController::class, 'medikKe
 Route::get('/umum-sumber-daya', [InformasiController::class, 'umumSumberDaya']);
 Route::get('/keuangan-perencanaan', [InformasiController::class, 'keuanganPerencanaan']);
 
+//manajemen
+Route::get('/rektor', [HomeController::class, 'rektor']);
+Route::get('/dewan-pengawas', [HomeController::class, 'dewanPengawas']);
+Route::get('/direksi', [HomeController::class, 'direksi']);
+
 
 
 // not found
@@ -131,6 +136,21 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/slider/{id}/status', [SliderController::class, 'editStatus']);
     Route::put('/slider/{id}', [SliderController::class, 'updateSlider']);
     Route::delete('/slider/{id}', [SliderController::class, 'hapusSlider']);
+
+    // sejarah
+    Route::get('/sejarah', [TentangKamiController::class, 'indexSejarah']);
+    Route::get('/sejarah/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
+    Route::put('/sejarah/{id}', [TentangKamiController::class, 'updateSejarah']);
+
+    // perkembangan
+    Route::get('/perkembangan', [TentangKamiController::class, 'indexPerkembangan']);
+    Route::get('/perkembangan/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
+    Route::put('/perkembangan/{id}', [TentangKamiController::class, 'updatePerkembangan']);
+
+    // struktur organisasi
+    Route::get('/sejarah', [TentangKamiController::class, 'indexSejarah']);
+    Route::get('/sejarah/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
+    Route::put('/sejarah/{id}', [TentangKamiController::class, 'updateSejarah']);
 
     // dokter
     Route::get('/dokter', [DokterController::class, 'indexDokter']);

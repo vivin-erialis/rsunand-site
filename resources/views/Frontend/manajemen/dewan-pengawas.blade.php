@@ -1,14 +1,13 @@
 @extends('Frontend.layouts.main')
-@section('title', 'Bidang Medik dan Keperawatan')
+@section('title', 'Dewan Pengawas RS Universitas Andalas')
 @section('content')
     @include('Frontend.layouts.header')
     <div class="container-xxl project py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h4 class="section-title"> Bidang medik dan keperawatan</h4>
-                <h1 class="display-5 mb-4">Rumah Sakit Universitas Andalas</h1>
+                <h4 class="section-title"> Dewan Pengawas</h4>
+                <h1 class="display-5 mb-4">RS Universitas Andalas</h1>
             </div>
-
             <div class="container-xxl py-5">
                 <div class="container">
                     <div class="row g-0 team-items">
@@ -34,4 +33,5 @@
             </div>
 
         </div>
-    @endsection
+    </div>
+@endsection

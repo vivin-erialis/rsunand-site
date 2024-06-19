@@ -35,32 +35,17 @@ class TentangKamiController extends Controller
     //Menyimpan data
     public function saveProfile(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'sejarah' => 'required',
-            'email' => 'required|email',
-            'telp' => 'required',
-            'alamat' => 'required',
-            'milestone' => 'required'
-        ]);
-
-        // Jika validasi gagal, kembalikan respon JSON dengan pesan error
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation errors',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
 
         // Simpan data ke database menggunakan transaksi
         DB::beginTransaction();
         try {
             $data = new TentangKami();
+            $data->perkembangan = $request->input('perkembangan');
             $data->sejarah = $request->input('sejarah');
+            $data->struktur_organisasi = $request->input('struktur_organisasi');
             $data->email = $request->input('email');
             $data->telp = $request->input('telp');
             $data->alamat = $request->input('alamat');
-            $data->milestone = $request->input('milestone');
             $data->save();
 
             // Komit transaksi jika berhasil
@@ -96,23 +81,6 @@ class TentangKamiController extends Controller
     // Edit Data
     public function updateProfile(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'sejarah' => 'required',
-            'email' => 'required|email',
-            'telp' => 'required',
-            'alamat' => 'required',
-            'milestone' => 'required'
-        ]);
-
-        // Jika validasi gagal, kembalikan respon JSON dengan pesan error
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation errors',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
         // Temukan data berdasarkan ID
         $data = TentangKami::find($id);
 
@@ -124,14 +92,33 @@ class TentangKamiController extends Controller
             ], 404);
         }
 
+
         // Update data di database menggunakan transaksi
         DB::beginTransaction();
         try {
+            // Update field
+            $data->perkembangan = $request->input('perkembangan');
             $data->sejarah = $request->input('sejarah');
             $data->email = $request->input('email');
             $data->telp = $request->input('telp');
             $data->alamat = $request->input('alamat');
-            $data->milestone = $request->input('milestone');
+
+            // Handle file upload
+            if ($request->hasFile('foto')) {
+                // Hapus file lama jika ada
+                if ($data->foto && file_exists(storage_path('../images/dokter' . $data->struktur_organisasi))) {
+                    unlink(storage_path('../images/dokter' . $data->struktur_organisasi));
+                }
+
+                // Upload file baru
+                $file = $request->file('foto');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('uploads', $fileName, 'public');
+
+                // Simpan path file baru ke database
+                $data->foto = $filePath;
+            }
+
             $data->save();
 
             // Komit transaksi jika berhasil
@@ -156,44 +143,134 @@ class TentangKamiController extends Controller
         }
     }
 
+
     public function hapusProfile($id)
-{
-    // Temukan data berdasarkan ID
-    $data = TentangKami::find($id);
+    {
+        // Temukan data berdasarkan ID
+        $data = TentangKami::find($id);
 
-    // Jika data tidak ditemukan, kembalikan respon JSON dengan pesan error
-    if (!$data) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Data not found',
-        ], 404);
+        // Jika data tidak ditemukan, kembalikan respon JSON dengan pesan error
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data not found',
+            ], 404);
+        }
+
+        // Hapus data dari database menggunakan transaksi
+        DB::beginTransaction();
+        try {
+            $data->delete();
+
+            // Komit transaksi jika berhasil
+            DB::commit();
+
+            // Kembalikan respon JSON dengan pesan sukses
+            return response()->json([
+                'success' => true,
+                'message' => 'Data deleted successfully',
+            ], 200);
+        } catch (\Exception $e) {
+            // Batalkan transaksi jika terjadi error
+            DB::rollBack();
+
+            // Kembalikan respon JSON dengan pesan error
+            return response()->json([
+                'success' => false,
+                'message' => 'Error deleting data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
-    // Hapus data dari database menggunakan transaksi
-    DB::beginTransaction();
-    try {
-        $data->delete();
-
-        // Komit transaksi jika berhasil
-        DB::commit();
-
-        // Kembalikan respon JSON dengan pesan sukses
-        return response()->json([
-            'success' => true,
-            'message' => 'Data deleted successfully',
-        ], 200);
-    } catch (\Exception $e) {
-        // Batalkan transaksi jika terjadi error
-        DB::rollBack();
-
-        // Kembalikan respon JSON dengan pesan error
-        return response()->json([
-            'success' => false,
-            'message' => 'Error deleting data',
-            'error' => $e->getMessage(),
-        ], 500);
+    public function indexSejarah()
+    {
+        return view('Backend.profile.sejarah.index', [
+            'active' => 'admin/sejarah',
+        ]);
     }
-}
 
+    public function updateSejarah(Request $request, $id)
+    {
+        // Temukan data berdasarkan ID
+        $data = TentangKami::find($id);
 
+        // Jika data tidak ditemukan, kembalikan respon JSON dengan pesan error
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data not found',
+            ], 404);
+        }
+
+        // Update data di database menggunakan transaksi
+        DB::beginTransaction();
+        try {
+
+            $data->sejarah = $request->input('sejarah');
+
+            $data->save();
+
+            // Komit transaksi jika berhasil
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data updated successfully',
+                'data' => $data,
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function indexPerkembangan() {
+        return view('Backend.profile.perkembangan.index', [
+            'active' => 'admin/perkembangan'
+        ]);
+    }
+
+    public function updatePerkembangan(Request $request, $id)
+    {
+        // Temukan data berdasarkan ID
+        $data = TentangKami::find($id);
+
+        // Jika data tidak ditemukan, kembalikan respon JSON dengan pesan error
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data not found',
+            ], 404);
+        }
+
+        // Update data di database menggunakan transaksi
+        DB::beginTransaction();
+        try {
+
+            $data->perkembangan = $request->input('perkembangan');
+
+            $data->save();
+
+            // Komit transaksi jika berhasil
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data updated successfully',
+                'data' => $data,
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
