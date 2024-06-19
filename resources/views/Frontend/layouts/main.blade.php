@@ -80,13 +80,14 @@
 
         .slides {
             flex: 0 0 auto;
-            width: 24%;
+            width: 26%;
         }
 
 
         .slides img {
             width: 100% !important;
             height: auto !important;
+
         }
 
         @media (max-width: 1200px) {
