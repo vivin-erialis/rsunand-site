@@ -57,8 +57,8 @@
             <div class="slider-container">
                 <div class="slider" id="slider">
                     @foreach ($kerjaSama as $item)
-                        <div class="slide mx-2">
-                            <img style="width: 100%; height: 100%; object-fit: cover"
+                        <div class="slides" style="margin: auto !important">
+                            <img style="width: 100%; height: 100%; object-fit: cover; padding: 5px;"
                                 src="{{ asset('images/kerjasama/' . $item->gambar) }}" class="mx-1"
                                 alt="{{ $item->nama_kerjasama }}">
                         </div>

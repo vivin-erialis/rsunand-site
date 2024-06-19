@@ -46,26 +46,58 @@
             display: flex;
             transition: transform 0.5s ease;
         }
-
-        .slide {
-            flex: 0 0 20%;
-            /* Default 4 gambar dalam satu slide */
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 100;
         }
 
-        .slide img {
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        .slider-container {
+            position: relative;
             width: 100%;
-            height: auto;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .slides {
+            flex: 0 0 auto;
+            width: 24%;
+        }
+
+
+        .slides img {
+            width: 100% !important;
+            height: auto !important;
         }
 
         @media (max-width: 1200px) {
-            .slide {
+            .slides {
                 flex: 0 0 33.33%;
                 /* 3 gambar dalam satu slide */
             }
         }
 
         @media (max-width: 768px) {
-            .slide {
+            .slides {
                 flex: 0 0 50%;
                 /* 2 gambar dalam satu slide */
             }
@@ -149,7 +181,7 @@
         let slideIndex = 0;
 
         function showSlide(n) {
-            const slides = document.querySelectorAll('.slide');
+            const slides = document.querySelectorAll('.slides');
             const slideWidth = slides[0].clientWidth;
             const slider = document.querySelector('.slider');
 
