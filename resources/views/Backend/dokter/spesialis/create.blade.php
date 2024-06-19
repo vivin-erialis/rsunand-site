@@ -26,7 +26,7 @@ aria-hidden="true">
                                 <label>Spesialisasi</label>
                                 <select id="spesialis" name="spesialis" class="form-control">
                                     <option selected >Pilih Spesialis</option>
-                                    @foreach($spesialis as $sp)
+                                    @foreach($spesialisDokter as $sp)
                                         <option value="{{ $sp->id }}">{{ $sp->title }}</option>
                                     @endforeach
                                 </select>
