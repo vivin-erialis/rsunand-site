@@ -45,7 +45,6 @@
                                 <textarea type="text" class="form-control" id="alamat" placeholder="masukan alamat" aria-label="Name"
                                     aria-describedby="name-addon" name="alamat"></textarea>
                             </div> --}}
-
                             <div class="">
                                 <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">
                                     <i class="fa fa-save me-1 text-xs"></i> Simpan

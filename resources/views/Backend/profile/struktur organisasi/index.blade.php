@@ -23,7 +23,6 @@
                         </div>
                     </div>
                     <div class="container p-3">
-
                         <table id="myTable" class="display">
                             <thead>
                                 <tr>

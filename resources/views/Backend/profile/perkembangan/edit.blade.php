@@ -21,7 +21,6 @@
                             <div class="mb-3">
                                 <textarea id="perkembangan" class="form-control" name="perkembangan" placeholder="Masukkan perkembangan"></textarea>
                             </div>
-
                             <div class="">
                                 <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">
                                     <i class="fa fa-save me-1 text-xs"></i> Simpan

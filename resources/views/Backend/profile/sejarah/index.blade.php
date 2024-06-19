@@ -28,14 +28,11 @@
                             <thead>
                                 <tr>
                                     <th class="text-dark text-xs font-weight-semibold">Sejarah</th>
-
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="artikel-table-body">
-
                             </tbody>
-
                         </table>
                     </div>
                 </div>

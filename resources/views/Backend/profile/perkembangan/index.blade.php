@@ -89,7 +89,6 @@
                         }
                     });
                 }
-
                 // Event handler untuk form submit
                 $('#artikelForm').on('submit', function(e) {
                     e.preventDefault();

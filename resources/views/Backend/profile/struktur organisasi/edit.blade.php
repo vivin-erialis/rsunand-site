@@ -16,7 +16,6 @@
 
                     <div class="row">
                         <div class="col-md-12">
-
                             {{-- <label>Perkembangan</label>
                             <div class="mb-3">
                                 <textarea id="perkembangan" class="form-control" name="perkembangan" placeholder="Masukkan perkembangan"></textarea>
