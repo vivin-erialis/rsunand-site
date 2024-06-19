@@ -28,7 +28,7 @@ class InformasiController extends Controller
 
         // Jika spesialis tidak ditentukan, default ke spesialis "Umum" (misal ID 28)
         if ($spesialisasi === null) {
-            $spesialisasi = 28; // ID untuk spesialis "Umum"
+            $spesialisasi = '1'; // ID untuk spesialis "Umum"
         }
 
         // Ambil data dokter berdasarkan spesialisasi yang dipilih
