@@ -82,6 +82,7 @@ Route::get('/keuangan-perencanaan', [InformasiController::class, 'keuanganPerenc
 Route::get('/rektor', [HomeController::class, 'rektor']);
 Route::get('/dewan-pengawas', [HomeController::class, 'dewanPengawas']);
 Route::get('/direksi', [HomeController::class, 'direksi']);
+Route::get('/struktur-organisasi', [HomeController::class, 'struktur']);
 
 
 
@@ -148,9 +149,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/perkembangan/{id}', [TentangKamiController::class, 'updatePerkembangan']);
 
     // struktur organisasi
-    Route::get('/sejarah', [TentangKamiController::class, 'indexSejarah']);
-    Route::get('/sejarah/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
-    Route::put('/sejarah/{id}', [TentangKamiController::class, 'updateSejarah']);
+    Route::get('/struktur-organisasi', [TentangKamiController::class, 'indexStrukturOrganisasi']);
+    Route::get('/struktur-organisasi/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
+    Route::put('/struktur-organisasi/{id}', [TentangKamiController::class, 'updateStrukturOrganisasi']);
+
+    //visi misi
+    Route::get('/visi-misi', [TentangKamiController::class, 'indexVisiMisi']);
+    Route::get('/visi-misi/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
+    Route::put('/visi-misi/{id}', [TentangKamiController::class, 'updateVisiMisi']);
 
     // dokter
     Route::get('/dokter', [DokterController::class, 'indexDokter']);

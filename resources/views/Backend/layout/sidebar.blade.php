@@ -51,13 +51,23 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link  {{ $active == 'admin/visi-misi' ? 'active' : '' }} "
+                                    href="/admin/visi-misi">
+                                    <div
+                                        class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-hospital"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Visi Misi</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link  {{ $active == 'admin/struktur-organisasi' ? 'active' : '' }} "
                                     href="/admin/struktur-organisasi">
                                     <div
                                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                                         <i class="fa fa-hospital"></i>
                                     </div>
-                                    <span class="nav-link-text ms-1">Struktur Organisasi</span>
+                                    <span class="nav-link-text ms-1" style="font-size: 12px">Struktur Organisasi</span>
                                 </a>
                             </li>
 

@@ -23,6 +23,11 @@
                                     <textarea type="text" id="editor-2" placeholder="" aria-label="Name"
                                         aria-describedby="name-addon" name="sejarah"></textarea>
                                 </div>
+                                <label>Visi Misi</label>
+                                <div class="mb-3">
+                                    <textarea type="text" id="editor3" placeholder="" aria-label="Name"
+                                        aria-describedby="name-addon" name="visi_misi"></textarea>
+                                </div>
                                 <label>Struktur Organisasi</label>
                                 <div class="mb-3">
                                     <input type="file" class="form-control" placeholder="masukan alamat" aria-label="Name"

@@ -1,5 +1,5 @@
 @extends('Backend.layout.main')
-@section('title', 'Halaman Data Sejarah')
+@section('title', 'Halaman Data Struktur Organisasi')
 @section('content')
     <div class="container-fluid py-3 px-3">
         <div class="row">
@@ -8,8 +8,8 @@
                     <div class="card-header border-bottom pb-0 mb-3">
                         <div class="d-sm-flex align-items-center">
                             <div>
-                                <h6 class="font-weight-semibold text-lg mb-0">Data Sejarah</h6>
-                                <p class="text-sm">Sejarah RS Unand</p>
+                                <h6 class="font-weight-semibold text-lg mb-0">Data Struktur Organisasi</h6>
+                                <p class="text-sm">Struktur Organisasi RS Unand</p>
                             </div>
                             {{-- <div class="ms-auto d-flex">
                                 <button class="btn btn-sm btn-dark btn-icon d-flex align-items-center" data-toggle="modal"
@@ -23,24 +23,22 @@
                         </div>
                     </div>
                     <div class="container p-3">
+
                         <table id="myTable" class="display">
                             <thead>
                                 <tr>
-                                    <th class="text-dark text-xs font-weight-semibold">Sejarah</th>
-
+                                    <th class="text-dark text-xs font-weight-semibold" style="text-align: left">Gambar</th>
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="artikel-table-body">
-
                             </tbody>
-
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        @include('Backend.profile.sejarah.edit')
+        @include('Backend.profile.struktur organisasi.edit')
         <script>
             $(document).ready(function() {
                 // Setup CSRF token
@@ -66,8 +64,10 @@
                             let html = '';
                             response.profile.forEach(function(profile) {
                                 html += '<tr>';
-                                html += '<td><p class="px-3 mb-0">' + profile.sejarah +
-                                    '</td>';
+                                    html += '<td style="text-align: center;"><p class="px-3 mb-0">' +
+                                    '<img src="' + profile.foto_url +
+                                    '" alt="Foto profile" style="width:400px; height:auto;"><br>' +
+                                    '</p></td>';
 
                                 html += '<td>';
                                 html +=
@@ -96,7 +96,7 @@
                     var formData = new FormData(this);
 
                     $.ajax({
-                        url: '/admin/sejarah',
+                        url: '/admin/struktur-organisasi',
                         method: 'POST',
                         data: formData,
                         processData: false,
@@ -163,7 +163,7 @@
                     var dataId = $(this).data('id');
                     console.log("Edit button clicked, dataId:", dataId); // Debugging
                     $.ajax({
-                        url: '/admin/sejarah/' + dataId + '/edit',
+                        url: '/admin/struktur-organisasi/' + dataId + '/edit',
                         type: 'GET',
                         success: function(response) {
                             // Isi formulir modal dengan data artikel yang diterima dari server
@@ -192,45 +192,40 @@
                 });
 
                 $('#editArtikelForm').on('submit', function(event) {
-                    event.preventDefault();
+    event.preventDefault();
 
-                    var isi = editor3.getData();
+    // Siapkan data form
+    var formData = new FormData(this);
+    var dataId = $('#dataId').val();
 
-                    // Siapkan data form
-                    var formData = new FormData(this);
-                    formData.set('isi', isi);
-
-                    var dataId = $('#dataId').val();
-
-                    $.ajax({
-                        url: '/admin/sejarah/' + dataId,
-                        method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            // alert('Artikel berhasil diperbarui!');
-                            $('#editModal').modal('hide');
-                            $('.modal-backdrop').remove();
-                            toastr.success(response.message);
-
-                            loadData();
-                        },
-                        error: function(xhr) {
-                            var errors = xhr.responseJSON.errors;
-                            var errorMessage = '';
-                            for (var key in errors) {
-                                if (errors.hasOwnProperty(key)) {
-                                    errorMessage += errors[key][0] + '\n';
-                                }
-                            }
-                            alert('Terjadi kesalahan:\n' + errorMessage);
-                        }
-                    });
-                });
+    $.ajax({
+        url: '/admin/struktur-organisasi/' + dataId,
+        method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
+        data: formData,
+        contentType: false,
+        processData: false,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'X-HTTP-Method-Override': 'PUT' // Ini untuk memastikan metode PUT dikirim dengan benar
+        },
+        success: function(response) {
+            $('#editModal').modal('hide');
+            $('.modal-backdrop').remove();
+            toastr.success(response.message);
+            loadData();
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON.errors;
+            var errorMessage = '';
+            for (var key in errors) {
+                if (errors.hasOwnProperty(key)) {
+                    errorMessage += errors[key][0] + '\n';
+                }
+            }
+            alert('Terjadi kesalahan:\n' + errorMessage);
+        }
+    });
+});
 
                 // Event delegation for delete button
                 $(document).on('click', '.delete-btn', function() {
@@ -241,7 +236,7 @@
                     // Saat konfirmasi hapus diklik, kirim permintaan penghapusan
                     $('#deleteBtn').off('click').on('click', function() {
                         $.ajax({
-                            url: '/admin/sejarah/' + dataId,
+                            url: '/admin/struktur-organisasi/' + dataId,
                             type: 'DELETE',
                             success: function(response) {
                                 console.log(response);

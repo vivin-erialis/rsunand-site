@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TentangKami;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -14,9 +15,13 @@ class TentangKamiController extends Controller
     //
     public function indexProfile()
     {
+        $tentangKami = TentangKami::all();
+        foreach ($tentangKami as $d) {
+            $d->foto_url = asset('images/profile/' . $d->struktur_organisasi);
+        }
         return view('Backend.profile.index', [
             'active' => 'admin/profile',
-            'profile' => TentangKami::all(),
+            'profile' => $tentangKami,
 
         ]);
     }
@@ -24,6 +29,9 @@ class TentangKamiController extends Controller
     public function getProfile()
     {
         $profile = TentangKami::all();
+        foreach ($profile as $d) {
+            $d->foto_url = asset('images/profile/' . $d->struktur_organisasi);
+        }
 
         return response()->json([
             'active' => 'admin/profile',
@@ -39,10 +47,19 @@ class TentangKamiController extends Controller
         // Simpan data ke database menggunakan transaksi
         DB::beginTransaction();
         try {
+
+
+            // Handle file upload
+            if ($request->hasFile('struktur_organisasi')) {
+                $foto = time() . '_' . $request->file('struktur_organisasi')->getClientOriginalName();
+                $request->file('struktur_organisasi')->move(public_path('images/profile'), $foto);
+            }
+
             $data = new TentangKami();
             $data->perkembangan = $request->input('perkembangan');
             $data->sejarah = $request->input('sejarah');
-            $data->struktur_organisasi = $request->input('struktur_organisasi');
+            $data->visi_misi = $request->input('visi_misi');
+            $data->struktur_organisasi = $foto;
             $data->email = $request->input('email');
             $data->telp = $request->input('telp');
             $data->alamat = $request->input('alamat');
@@ -99,6 +116,7 @@ class TentangKamiController extends Controller
             // Update field
             $data->perkembangan = $request->input('perkembangan');
             $data->sejarah = $request->input('sejarah');
+            $data->visi_misi = $request->input('visi_misi');
             $data->email = $request->input('email');
             $data->telp = $request->input('telp');
             $data->alamat = $request->input('alamat');
@@ -106,8 +124,8 @@ class TentangKamiController extends Controller
             // Handle file upload
             if ($request->hasFile('foto')) {
                 // Hapus file lama jika ada
-                if ($data->foto && file_exists(storage_path('../images/dokter' . $data->struktur_organisasi))) {
-                    unlink(storage_path('../images/dokter' . $data->struktur_organisasi));
+                if ($data->foto && file_exists(storage_path('../images/profile' . $data->struktur_organisasi))) {
+                    unlink(storage_path('../images/profile' . $data->struktur_organisasi));
                 }
 
                 // Upload file baru
@@ -229,7 +247,8 @@ class TentangKamiController extends Controller
         }
     }
 
-    public function indexPerkembangan() {
+    public function indexPerkembangan()
+    {
         return view('Backend.profile.perkembangan.index', [
             'active' => 'admin/perkembangan'
         ]);
@@ -253,6 +272,106 @@ class TentangKamiController extends Controller
         try {
 
             $data->perkembangan = $request->input('perkembangan');
+
+            $data->save();
+
+            // Komit transaksi jika berhasil
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data updated successfully',
+                'data' => $data,
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function indexVisiMisi()
+    {
+        return view('Backend.profile.visi misi.index', [
+            'active' => 'admin/visi-misi'
+        ]);
+    }
+
+    public function updateVisiMisi(Request $request, $id)
+    {
+        // Temukan data berdasarkan ID
+        $data = TentangKami::find($id);
+
+        // Jika data tidak ditemukan, kembalikan respon JSON dengan pesan error
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data not found',
+            ], 404);
+        }
+
+        // Update data di database menggunakan transaksi
+        DB::beginTransaction();
+        try {
+
+            $data->visi_misi = $request->input('visi_misi');
+
+            $data->save();
+
+            // Komit transaksi jika berhasil
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data updated successfully',
+                'data' => $data,
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function indexStrukturOrganisasi()
+    {
+        return view('Backend.profile.struktur organisasi.index', [
+            'active' => 'admin/struktur-organisasi',
+        ]);
+    }
+
+    public function updateStrukturOrganisasi(Request $request, $id)
+    {
+        // Temukan data berdasarkan ID
+        $data = TentangKami::find($id);
+
+        // Jika data tidak ditemukan, kembalikan respon JSON dengan pesan error
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data not found',
+            ], 404);
+        }
+
+        // Update data di database menggunakan transaksi
+        DB::beginTransaction();
+        try {
+            if ($request->hasFile('struktur_organisasi')) {
+                // Hapus gambar lama jika ada
+                if ($data->struktur_organisasi && File::exists(public_path('images/profile/' . $data->struktur_organisasi))) {
+                    File::delete(public_path('images/profile/' . $data->struktur_organisasi));
+                }
+
+                // Simpan gambar baru
+                $struktur_organisasi = time() . '_' . $request->file('struktur_organisasi')->getClientOriginalName();
+                $request->file('struktur_organisasi')->move(public_path('images/profile'), $struktur_organisasi);
+                $data->struktur_organisasi = $struktur_organisasi;
+            }
 
             $data->save();
 

@@ -1,6 +1,6 @@
 <!-- Form Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="background-color: whitesmoke;">
                 <h5 class="modal-title" id="editArticleModalLabel">Edit Data Perkembangan</h5>

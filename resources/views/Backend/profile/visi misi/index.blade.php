@@ -1,5 +1,5 @@
 @extends('Backend.layout.main')
-@section('title', 'Halaman Data Profile')
+@section('title', 'Halaman Data Visi Misi')
 @section('content')
     <div class="container-fluid py-3 px-3">
         <div class="row">
@@ -8,29 +8,18 @@
                     <div class="card-header border-bottom pb-0 mb-3">
                         <div class="d-sm-flex align-items-center">
                             <div>
-                                <h6 class="font-weight-semibold text-lg mb-0">Data Profile</h6>
-                                <p class="text-sm">Profile RS Unand</p>
+                                <h6 class="font-weight-semibold text-lg mb-0">Visi Misi</h6>
+                                <p class="text-sm">Visi Misi RS Unand</p>
                             </div>
-                            <div class="ms-auto d-flex">
-                                <button class="btn btn-sm btn-dark btn-icon d-flex align-items-center" data-toggle="modal"
-                                    data-target="#addModal">
-                                    <span class="btn-inner--icon">
-                                        <i class="fa fa-plus mx-2"></i>
-                                    </span>
-                                    <span class="btn-inner--text">Tambah Data</span>
-                                </button>
-                            </div>
+
                         </div>
                     </div>
                     <div class="container p-3">
-
                         <table id="myTable" class="display">
                             <thead>
                                 <tr>
-                                    <th class="text-dark text-xs font-weight-semibold">Sejarah</th>
-                                    <th class="text-dark text-xs font-weight-semibold">Email</th>
-                                    <th class="text-dark text-xs font-weight-semibold">Telepon</th>
-                                    <th class="text-dark text-xs font-weight-semibold">Alamat</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Gambar</th>
+
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
                                 </tr>
                             </thead>
@@ -43,9 +32,7 @@
                 </div>
             </div>
         </div>
-        @include('Backend.profile.create')
-        @include('Backend.profile.edit')
-        @include('Backend.profile.hapus')
+        @include('Backend.profile.visi misi.edit')
         <script>
             $(document).ready(function() {
                 // Setup CSRF token
@@ -71,22 +58,15 @@
                             let html = '';
                             response.profile.forEach(function(profile) {
                                 html += '<tr>';
-                                html += '<td><p class="px-3 mb-0">' + profile.sejarah +
-                                    '</td>';
-                                html += '<td><p class="px-3 mb-0">' + profile.email +'</p></td>';
-                                html += '<td><p class="px-3 mb-0">' + profile.telp +'</p></td>';
-                                html += '<td><p class="px-3 mb-0">' + profile.alamat +'</p></td>';
-
+                                html += '<td><p class="px-3 mb-0">' + profile.visi_misi +
+                                    '</p></td>';
 
                                 html += '<td>';
-                                // html +=
-                                //     '<button class="btn btn-sm btn-warning edit-btn" data-id="' +
-                                //     profile.id +
-                                //     '" data-toggle="modal" data-target="#editModal"> <i class="fa fa-edit text-xs me-2"></i> Edit</button>';
                                 html +=
-                                    '<button class="btn btn-sm btn-danger mx-2 delete-btn" data-id="' +
+                                    '<button class="btn btn-sm btn-warning edit-btn" data-id="' +
                                     profile.id +
-                                    '" data-toggle="modal" data-target="#deleteModal"> <i class="fa fa-trash text-xs me-2"></i> Hapus</button>';
+                                    '" data-toggle="modal" data-target="#editModal"> <i class="fa fa-edit text-xs me-2"></i> Edit</button>';
+                               ;
                                 html += '</td>';
                                 html += '</tr>';
                             });
@@ -108,7 +88,7 @@
                     var formData = new FormData(this);
 
                     $.ajax({
-                        url: '/admin/profile',
+                        url: '/admin/sejarah',
                         method: 'POST',
                         data: formData,
                         processData: false,
@@ -153,7 +133,7 @@
                 });
 
                 ClassicEditor
-                    .create(document.querySelector('#sejarah'))
+                    .create(document.querySelector('#visiMisi'))
                     .then(editor => {
                         // CKEditor #editor-4 siap, tetapkan editor ke variabel global
                         window.editor3 = editor;
@@ -161,37 +141,29 @@
                     .catch(error => {
                         console.error(error);
                     });
-                ClassicEditor
-                    .create(document.querySelector('#milestone'))
-                    .then(editor => {
-                        // CKEditor #editor-4 siap, tetapkan editor ke variabel global
-                        window.editor4 = editor;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
+
                 // Event delegation for delete button
                 $(document).on('click', '.edit-btn', function() {
                     var dataId = $(this).data('id');
                     console.log("Edit button clicked, dataId:", dataId); // Debugging
                     $.ajax({
-                        url: '/admin/profile/' + dataId + '/edit',
+                        url: '/admin/visi-misi/' + dataId + '/edit',
                         type: 'GET',
                         success: function(response) {
                             // Isi formulir modal dengan data artikel yang diterima dari server
                             $('#dataId').val(response.id);
-                            $('#emailAdress').val(response.email);
-                            $('#telepon').val(response.telp);
-                            $('#alamat').val(response.alamat);
+                            // $('#emailAdress').val(response.email);
+                            // $('#telepon').val(response.telp);
+                            // $('#alamat').val(response.alamat);
 
 
 
                             if (window.editor3) {
-                                window.editor3.setData(response.sejarah);
+                                window.editor3.setData(response.visi_misi);
                             }
-                            if (window.editor4) {
-                                window.editor4.setData(response.milestone);
-                            }
+                            // if (window.editor4) {
+                            //     window.editor4.setData(response.perkembangan);
+                            // }
 
 
                             // Setelah semua data dimuat, tampilkan modal
@@ -215,7 +187,7 @@
                     var dataId = $('#dataId').val();
 
                     $.ajax({
-                        url: '/admin/profile/' + dataId,
+                        url: '/admin/visi-misi/' + dataId,
                         method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
                         data: formData,
                         contentType: false,
@@ -253,7 +225,7 @@
                     // Saat konfirmasi hapus diklik, kirim permintaan penghapusan
                     $('#deleteBtn').off('click').on('click', function() {
                         $.ajax({
-                            url: '/admin/profile/' + dataId,
+                            url: '/admin/visi-misi/' + dataId,
                             type: 'DELETE',
                             success: function(response) {
                                 console.log(response);

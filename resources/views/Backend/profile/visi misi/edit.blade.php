@@ -13,38 +13,15 @@
                     @method('PUT')
                     @csrf
                     <input type="hidden" id="dataId" name="artikel_id" value="">
-
                     <div class="row">
                         <div class="col-md-12">
 
-                            {{-- <label>Perkembangan</label>
+                            <label>Visi Misi</label>
                             <div class="mb-3">
-                                <textarea id="perkembangan" class="form-control" name="perkembangan" placeholder="Masukkan perkembangan"></textarea>
-                            </div> --}}
-                            <label>Sejarah</label>
-                            <div class="mb-3">
-                                <textarea id="sejarah" class="form-control" name="sejarah" placeholder="Masukkan isi artikel"></textarea>
+                                <textarea id="visiMisi" class="form-control" name="visi_misi" placeholder="Masukkan isi artikel"></textarea>
                             </div>
-                            {{-- <div class="row">
-                                <div class="col-md-6">
-                                    <label>Email</label>
-                                    <div class="mb-3">
-                                        <input id="emailAdress" class="form-control" name="email"
-                                            placeholder="Masukkan i"></input>
-                                    </div>
 
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Telepon</label>
-                                    <div class="mb-3">
-                                        <input id="telepon" class="form-control" name="telp" placeholder="Masukkan isi artikel"></input>
-                                    </div>
-                                </div>
-                            </div> --}}
-                            {{-- <div class="mb-3">
-                                <textarea type="text" class="form-control" id="alamat" placeholder="masukan alamat" aria-label="Name"
-                                    aria-describedby="name-addon" name="alamat"></textarea>
-                            </div> --}}
+
                             <div class="">
                                 <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">
                                     <i class="fa fa-save me-1 text-xs"></i> Simpan

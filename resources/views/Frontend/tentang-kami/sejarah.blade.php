@@ -15,16 +15,16 @@
                     {{-- Sejarah --}}
                     <div class="tab-pane fade show active" style="padding:0px 10px" id="tab-pane-1">
                         <div class="row g-4">
-                            <div class="col-md-12" style="min-height: 350px;">
-                                <div class="position-relative h-100">
+                            <div class="col-md-12">
+                                {{-- <div class="position-relative h-100">
                                     <img class="position-absolute img-fluid"
                                         src="/../assets/img/sejarah.png" style="object-fit: cover; height: auto;" alt="">
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-md-12">
                                 <div class="row">
 
-                                    <div class="col-md-6" style="text-align: justify">
+                                    {{-- <div class="col-md-6" style="text-align: justify">
                                         <p style="font-size: 14px">
                                             Pemberlakuan Universal Health Coverage melalui program Jaminan Kesehatan
                                             Nasional
@@ -158,7 +158,7 @@
                                             fasilitas radioterapi yang sangat modern.
 
                                         </p>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

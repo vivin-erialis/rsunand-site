@@ -7,6 +7,7 @@ use App\Models\Fasilitas;
 use App\Models\KerjaSama;
 use App\Models\Layanan;
 use App\Models\Slider;
+use App\Models\TentangKami;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -161,6 +162,15 @@ class HomeController extends Controller
             'data' => $data,
             'headerStart' => 'Direksi RS Universitas Andalas',
         ]);
+    }
+
+    public function struktur() {
+        $data = TentangKami::all();
+        return view('Frontend.tentang-kami.struktur-organisasi' ,[
+            'data' => $data,
+            'headerStart' => 'Struktur Organisasi'
+        ]);
+
     }
 
 }
