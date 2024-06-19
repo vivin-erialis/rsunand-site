@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editModal">Edit Data Direksi</h5>
+          <h5 class="modal-title" id="editModal">Edit Data Manajemen</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -46,11 +46,11 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Awal Jabatan</label>
-                        <input type="date" class="form-control" name="periode_jabatan_awal" id="jabatanAwal" required>
+                        <input type="date" class="form-control" name="periode_jabatan_awal" id="jabatanAwal">
                     </div>
                     <div class="form-group col-md-6">
                         <label>Akhir Jabatan</label>
-                        <input type="date" class="form-control" name="periode_jabatan_akhir" id="jabatanAkhir" required>
+                        <input type="date" class="form-control" name="periode_jabatan_akhir" id="jabatanAkhir">
                     </div>
                 </div>
               </div>

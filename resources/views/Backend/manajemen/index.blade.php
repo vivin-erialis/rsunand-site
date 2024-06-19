@@ -101,7 +101,7 @@
                                     '" data-toggle="modal" data-target="#editModal"> <i class="fa fa-edit text-xs me-2"></i> Edit</button>';
                                 html +=
                                     '<button class="btn btn-sm btn-danger mx-2 delete-btn" data-id="' +
-                                    manajemen.id +
+                                    manajemen.id_jabatan +
                                     '" data-toggle="modal" data-target="#deleteModal"> <i class="fa fa-trash text-xs me-2"></i> Hapus</button>';
                                 html += '</td>';
                                 html += '</tr>';
@@ -212,9 +212,9 @@
                             $('#dataId').val(response.id_jabatan);
                             $('#jabatanAwal').val(response.periode_jabatan_awal);
                             $('#jabatanAkhir').val(response.periode_jabatan_awal);
-                            $('#id_bidang').val(response.id_bidang);
-                            $('#id_dokter').val(response.id_dokter);
-                            $('#id_jabatan').val(response.id_jabatan);
+                            $('[name="id_bidang"]').val(response.id_bidang).trigger('change');
+                            $('[name="pegawai"]').val(response.id_dokter).trigger('change');
+                            $('[name="jabatan"]').val(response.id_jabatan).trigger('change');
 
 
                             // Setelah semua data dimuat, tampilkan modal

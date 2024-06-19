@@ -26,7 +26,7 @@ class ManajemenController extends Controller
 
         // Menambahkan URL foto ke setiap direksi
         foreach ($manajemen as $d) {
-            $d->foto_url = asset('images/direksi/' . $d->foto);
+            $d->foto_url = asset('images/dokter/' . $d->foto);
         }
 
         return response()->json([
@@ -154,24 +154,22 @@ class ManajemenController extends Controller
         return response()->json(['message' => 'Status direksi berhasil diperbarui']);
     }
 
-    public function hapusDireksi($id)
+    public function hapusDireksi($id_jabatan)
     {
-        $direksi = Direksi::find($id);
-        if (!$direksi) {
+        $manajemen = DB::table('m_jabatan_det')
+            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', 'm_jabatan.id_jabatan')
+            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+            ->where('m_jabatan_det.id_jabatan', '=', $id_jabatan)
+            ->select('m_jabatan_det.*', 'dokters.*', 'm_jabatan.*')
+            ->first();
+        if (!$manajemen) {
             return response()->json(['message' => 'Data tidak ditemukan.'], 404);
         }
 
-        // Path foto
-        $fotoPath = $direksi->foto;
-        $filePath = public_path('images/direksi/' . $fotoPath);
-
-        // Hapus file foto jika ada
-        if (file_exists($filePath)) {
-            unlink($filePath);
-        }
-
-        // Hapus eksi dari database
-        $direksi->delete();
+        // Hapus data dari tabel m_jabatan_det
+        DB::table('m_jabatan_det')
+            ->where('id_jabatan', $id_jabatan)
+            ->delete();
 
         return response()->json(['message' => 'Data berhasil dihapus.']);
     }
