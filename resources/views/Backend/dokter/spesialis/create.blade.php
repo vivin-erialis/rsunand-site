@@ -33,7 +33,7 @@ aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3">
                                 <label>ID Hfis</label>
-                                <input type="number" class="form-control" name="idhfis" required>
+                                <input type="number" class="form-control" name="idhfis">
                             </div>
                         </div>
                         <div class="col-md-12">
