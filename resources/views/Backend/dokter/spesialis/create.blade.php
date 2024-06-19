@@ -27,7 +27,7 @@ aria-hidden="true">
                                 <select id="spesialis" name="spesialis" class="form-control">
                                     <option selected >Pilih Spesialis</option>
                                     @foreach($spesialis as $sp)
-                                        <option value="{{ $sp->id }}">{{ $sp->id }}{{ $sp->title }}</option>
+                                        <option value="{{ $sp->id }}">{{ $sp->title }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -216,12 +216,13 @@ class DokterController extends Controller
             ->get();
 
         $pegawai = Dokter::all();
+        $spesialis = DB::table('spesialis')->get();
 
         return view('Backend.dokter.spesialis.index', [
             'active' => 'admin/dokter/spesialis',
             'dokter' => $dokter,
             'pegawai' => $pegawai,
-            'spesialis' => Spesialis::all()
+            'spesialisDokter' => $spesialis
 
         ]);
     }
