@@ -85,7 +85,6 @@ Route::get('/direksi', [HomeController::class, 'direksi']);
 Route::get('/struktur-organisasi', [HomeController::class, 'struktur']);
 
 
-
 // not found
 Route::fallback(function () {
     return response()->view('Frontend.page-not-found', [], 404);
