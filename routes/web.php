@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\ArtikelController as BackendArtikelController;
 use App\Http\Controllers\Backend\ManajemenController;
 use \App\Http\Controllers\Backend\DokterController ;
+use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\FasilitasController as BackendFasilitasController;
 use App\Http\Controllers\Backend\KerjasamaController;
 use App\Http\Controllers\Backend\LayananController;
@@ -183,6 +184,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/layanan/{id}', [LayananController::class, 'updateLayanan']);
     Route::delete('/layanan/{id}', [LayananController::class, 'hapusLayanan']);
 
+    // event
+    Route::get('/event', [EventController::class, 'indexEvent']);
+    Route::post('/event', [EventController::class, 'saveEvent']);
+    Route::get('/event/{id}/edit', [EventController::class, 'getDataForEdit']);
+    Route::put('/event/{id}', [EventController::class, 'updateEvent']);
+    Route::delete('/event/{id}', [EventController::class, 'hapusEvent']);
+
 
 });
 
@@ -198,3 +206,4 @@ Route::get('/get-data-fasilitas', [BackendFasilitasController::class, 'getFasili
 Route::get('/get-data-profile', [TentangKamiController::class, 'getProfile'])->name('getProfile');
 Route::get('/get-data-video', [BackendVideoController::class, 'getVideo'])->name('getVideo');
 Route::get('/get-data-kerjasama', [KerjasamaController::class, 'getKerjasama'])->name('getKerjasama');
+Route::get('/get-data-event', [EventController::class, 'getEvent'])->name('getEvent');

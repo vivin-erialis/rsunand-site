@@ -155,6 +155,16 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link  {{ $active == 'admin/event' ? 'active' : '' }} "
+                                    href="/admin/event">
+                                    <div
+                                        class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Event</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link  {{ $active == 'admin/video' ? 'active' : '' }} "
                                     href="/admin/video">
                                     <div

@@ -140,13 +140,13 @@
                                     @endphp
 
                                     @if (!empty($gambarPertama))
-                                        <img loading="lazy" class="card-img-top"
+                                        <img loading="lazy" class="card-img-top" style="border-radius: 6px"
                                             src="{{ asset('/../images/artikel/' . $gambarPertama) }}"
                                             alt="{{ $item->title }}">
                                     @endif
                                 @endif
                                 <div class="card-body">
-                                    <div class="me-2 mb-3" style="color: #1C7C3D">
+                                    <div class="me-2 mb-2" style="color: #1C7C3D">
                                         <span style="font-size: 12px" class="post-author">
                                             {{ $item->kategori->title }} |
                                         </span>
@@ -156,10 +156,10 @@
                                         </span>
                                     </div>
                                     <a href="/berita/{{ $item->url }}">
-                                        <h2 class="card-title">{{ $item->title }}</h2>
+                                        <h3 class="card-title">{{ $item->title }}</h3>
                                     </a>
-                                    <p class="card-text">{{ Str::limit(strip_tags($item->desc), 100, '...') }}</p>
-                                    <a href="/berita/{{ $item->url }}" class="card-button">SELENGKAPNYA</a>
+                                    {{-- <p class="card-text">{{ Str::limit(strip_tags($item->desc), 100, '...') }}</p> --}}
+                                    {{-- <a href="/berita/{{ $item->url }}" class="card-button">SELENGKAPNYA</a> --}}
                                 </div>
                             </div>
                         @endforeach
@@ -171,7 +171,7 @@
                         <hr>
                         @foreach ($recentPosts as $new)
                             <div class="row news-block news-block-two-col d-flex mt-4">
-                                <div class="col-5 news-block-two-col-image-wrap">
+                                <div class="col-4 news-block-two-col-image-wrap">
                                     <a href="/blog/{{ $new->url }}">
                                         @if ($item->gambar)
                                             @php
@@ -190,7 +190,7 @@
                                     </a>
                                 </div>
 
-                                <div class="col-7 news-block-two-col-info">
+                                <div class="col-8 news-block-two-col-info">
                                     <div class="news-block-date">
                                         <p style="color: #1C7C3D">
                                             <i class="bi-calendar4 custom-icon me-1"></i>
