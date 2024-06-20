@@ -14,7 +14,7 @@
             @endif
             <div class="container-berita">
                 @foreach ($artikel as $item)
-                    <div class="card">
+                    <div class="card-beritas">
                         @if ($item->gambar)
                         @php
                             $gambarArray = json_decode($item->gambar);
