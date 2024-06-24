@@ -15,10 +15,15 @@
                 <a href="/karir" class="text-body px-2" href="">Karir</a>
             </div>
             <div class="h-100 d-inline-flex align-items-center">
-                <a class="btn btn-sm-square btn-outline-body me-1" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-sm-square btn-outline-body me-1" href="https://www.youtube.com/@rumahsakitunand4972" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a class="btn btn-sm-square btn-outline-body me-1" href="https://www.linkedin.com/company/rumah-sakit-pendidikan-universitas-andalas/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a class="btn btn-sm-square btn-outline-body me-0" href="https://www.instagram.com/rumahsakitunand/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-1" href="https://www.facebook.com/rumahsakitunand"
+                    target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-1" href="https://www.youtube.com/@rumahsakitunand4972"
+                    target="_blank"><i class="fab fa-youtube"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-1"
+                    href="https://www.linkedin.com/company/rumah-sakit-pendidikan-universitas-andalas/"
+                    target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a class="btn btn-sm-square btn-outline-body me-0" href="https://www.instagram.com/rumahsakitunand/"
+                    target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
 
         </div>
