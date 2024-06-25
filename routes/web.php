@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Backend\ArtikelController as BackendArtikelController;
 use App\Http\Controllers\Backend\ManajemenController;
-use \App\Http\Controllers\Backend\DokterController ;
+use \App\Http\Controllers\Backend\DokterController;
 use App\Http\Controllers\Backend\EventController;
 use App\Http\Controllers\Backend\FasilitasController as BackendFasilitasController;
 use App\Http\Controllers\Backend\KerjasamaController;
@@ -42,7 +42,14 @@ Route::get('bagian-instalasi', [InformasiController::class, 'bagianInstalasi']);
 Route::get('bagian-instalasi/{id}', [InformasiController::class, 'detailBagianInstalasi']);
 
 // Layanan
-Route::get('layanan/{id}', [FrontendLayananController::class, 'subLayanan']);
+Route::prefix('layanan')->middleware('auth')->group(function () {
+    Route::get('layanan-unggulan', [FrontendLayananController::class, 'layananUnggulan']);
+    Route::get('layanan-unggulan/{id}', [FrontendLayananController::class, 'detailLayananUnggulan']);
+    Route::get('layanan-kesehatan', [FrontendLayananController::class, 'layananKesehatan']);
+    Route::get('layanan-kesehatan/{id}', [FrontendLayananController::class, 'detailLayananKesehatan']);
+    Route::get('layanan-lainnya', [FrontendLayananController::class, 'layananLainnya']);
+    Route::get('layanan-lainnya/{id}', [FrontendLayananController::class, 'detailLayananLainnya']);
+});
 
 
 // Fasilitas
@@ -184,8 +191,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/event/{id}/edit', [EventController::class, 'getDataForEdit']);
     Route::put('/event/{id}', [EventController::class, 'updateEvent']);
     Route::delete('/event/{id}', [EventController::class, 'hapusEvent']);
-
-
 });
 
 

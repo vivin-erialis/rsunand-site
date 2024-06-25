@@ -12,41 +12,44 @@ class LayananController extends Controller
     //
 
 
-    public function subLayanan($id)
+    public function layananUnggulan()
     {
-        $layanan = DB::table('layanans')->where('kategori_layanan', $id)->get();
-        $headerStart = DB::table('layanans')
-        ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
-        ->where('kategori_layanan', $id)
-        ->select('m_layanan.nama_kategori')
-        ->get();
+        $layanan = DB::table('layanans')
+            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
+            ->where('kategori_layanan', '=', '1')
+            ->select('layanans.*')
+            ->get();
+
         return view('Frontend.layanan.layanan-unggulan', [
-            'headerStart' => $headerStart ,
+            'headerStart' => 'Layanan Unggulan',
             'layanan' => $layanan
         ]);
     }
 
-    public function layananRajal()
+    public function layananKesehatan()
     {
-        $layanan = DB::table('layanans')->where('kategori_layanan', '3')->get();
-        return view('Frontend.layanan.layanan-rajal', [
-            'headerStart' => 'Layanan Rawat Jalan',
-            'layanan' => $layanan
-        ]);
-    }
 
-    public function layananPenunjang()
-    {
-        $layanan = DB::table('layanans')->where('kategori_layanan', '2')->get();
-        return view('Frontend.layanan.layanan-penunjang', [
-            'headerStart' => 'Layanan Penunjang',
+        $layanan = DB::table('layanans')
+            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
+            ->where('kategori_layanan', '=', '2')
+            ->select('layanans.*')
+            ->get();
+
+        return view('Frontend.layanan.layanan-kesehatan', [
+            'headerStart' => 'Layanan Kesehatan',
             'layanan' => $layanan
         ]);
     }
 
     public function layananLainnya()
     {
-        $layanan = DB::table('layanans')->where('kategori_layanan', '4')->get();
+        $layanan = DB::table('layanans')
+            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
+            ->where('kategori_layanan', '=', '3')
+            ->select('layanans.*')
+            ->get();
+
+
         return view('Frontend.layanan.layanan-lainnya', [
             'headerStart' => 'Layanan Lainnya',
             'layanan' => $layanan
@@ -55,30 +58,54 @@ class LayananController extends Controller
 
     public function detailLayananUnggulan($id)
     {
+        $layanan = DB::table('layanans')
+            ->where('layanans.id', $id)
+            ->first();
+
+        // Melakukan query ke database
+        $headerStart = DB::table('layanans')
+            ->where('layanans.id', $id)
+            ->select('layanans.nama_layanan')
+            ->get();
+
         return view('Frontend.layanan.detail-layanan-unggulan', [
-            'headerStart' => Layanan::where('url', $id)->first()->nama_layanan,
-            'layanan' => Layanan::where('url', $id)->first(),
+            'headerStart' => $headerStart,
+            'layanan' => $layanan,
         ]);
     }
-    public function detailLayananPenunjang($id)
+    public function detailLayananKesehatan($id)
     {
-        return view('Frontend.layanan.detail-layanan-penunjang', [
-            'headerStart' => Layanan::where('url', $id)->first()->nama_layanan,
-            'layanan' => Layanan::where('url', $id)->first(),
-        ]);
-    }
-    public function detailLayananRajal($id)
-    {
-        return view('Frontend.layanan.detail-layanan-rajal', [
-            'headerStart' => Layanan::where('url', $id)->first()->nama_layanan,
-            'layanan' => Layanan::where('url', $id)->first(),
+        $layanan = DB::table('layanans')
+            ->where('layanans.id', $id)
+            ->first();
+
+        // Melakukan query ke database
+        $headerStart = DB::table('layanans')
+            ->where('layanans.id', $id)
+            ->select('layanans.nama_layanan')
+            ->get();
+
+        return view('Frontend.layanan.detail-layanan-kesehatan', [
+            'headerStart' => $headerStart,
+            'layanan' => $layanan,
         ]);
     }
     public function detailLayananLainnya($id)
     {
+
+        $layanan = DB::table('layanans')
+            ->where('layanans.id', $id)
+            ->first();
+
+        // Melakukan query ke database
+        $headerStart = DB::table('layanans')
+            ->where('layanans.id', $id)
+            ->select('layanans.nama_layanan')
+            ->get();
+
         return view('Frontend.layanan.detail-layanan-lainnya', [
-            'headerStart' => Layanan::where('url', $id)->first()->nama_layanan,
-            'layanan' => Layanan::where('url', $id)->first(),
+            'headerStart' => $headerStart,
+            'layanan' => $layanan,
         ]);
     }
 }
