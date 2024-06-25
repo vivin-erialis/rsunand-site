@@ -630,7 +630,6 @@ transition: all ease-in-out 0.8s;
     border: 0;
     overflow: hidden;
     transition: transform 0.3s ease;
-
 }
 .card-beritas {
     /* width: 300px; */

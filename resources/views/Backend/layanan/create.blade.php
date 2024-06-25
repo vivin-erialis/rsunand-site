@@ -16,26 +16,16 @@
                                 <div class="form-group">
                                     <label class="control-label">Kategori Layanan</label>
                                     <select name="kategori_layanan" id="mySelect" class="form-control">
-                                        @php
-                                            $kategori_layanan = [
-                                                (object) ['id' => "1", 'title' => 'Layanan Unggulan'],
-                                                (object) ['id' => "2", 'title' => 'LayananPenunjang'],
-                                                (object) ['id' => "3", 'title' => 'Layanan Rawat Jalan'],
-                                                (object) ['id' => "4", 'title' => 'Lainnya'],
-                                            ];
-                                        @endphp
-
-                                        @foreach ($kategori_layanan as $item)
-                                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                        @foreach ($kategoriLayanan as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
                                         @endforeach
-
                                     </select>
                                 </div>
                                 <label>Nama Layanan</label>
                                 <div class="mb-3">
                                     <input type="text" class="form-control" placeholder="masukan nama layanan"
                                         aria-label="Name" aria-describedby="name-addon" name="nama_layanan" id="title"
-                                        required>
+                                        >
                                 </div>
                                 <label>Deskripsi </label>
                                 <div class="mb-3">
@@ -50,7 +40,7 @@
                                 <label>Gambar</label>
                                 <div class="mb-3">
                                     <input type="file" class="form-control" aria-describedby="email-addon"
-                                        name="gambar[]" multiple required>
+                                        name="gambar[]" multiple >
                                 </div>
 
 

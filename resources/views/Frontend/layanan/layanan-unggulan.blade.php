@@ -1,11 +1,11 @@
 @extends('Frontend.layouts.main')
 @section('content')
-@section('title', 'Layanan Unggulan')
+@section('title', 'Layanan')
 @include('Frontend.layouts.header')
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h4 class="section-title">LAYANAN UNGGULAN</h4>
+            <h4 class="section-title">LAYANAN</h4>
             <h1 class="display-5 mb-4">Rumah Sakit Universitas Andalas</h1>
         </div>
         @if ($layanan->isEmpty())
@@ -24,7 +24,7 @@
                             @endphp
 
                             @if (!empty($gambarPertama))
-                                <a href="/layanan-unggulan/{{ $item->url }}">
+                                <a href="/layanan/{{ $item->url }}">
                                     <img class="bg-img" src="{{ asset('/../images/layanan/' . $gambarPertama) }}">
                                 </a>
                             @endif

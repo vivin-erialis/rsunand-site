@@ -20,19 +20,10 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label">Kategori Layanan</label>
-                                <select name="kategori_layanan" id="mySelect" class="form-control">
-                                    @php
-                                        $kategori_layanan = [
-                                            (object) ['id' => "1", 'title' => 'Layanan Unggulan'],
-                                            (object) ['id' => "2", 'title' => 'LayananPenunjang'],
-                                            (object) ['id' => "3", 'title' => 'Layanan Rawat Jalan'],
-                                            (object) ['id' => "4", 'title' => 'Lainnya'],
-                                        ];
-                                    @endphp
-
-                                    @foreach ($kategori_layanan as $item)
-                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                    @endforeach
+                                <select name="kategori_layanan" id="kategori_layanan" class="form-control">
+                                        @foreach ($kategoriLayanan as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                                        @endforeach
 
                                 </select>
                             </div>

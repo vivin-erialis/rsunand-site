@@ -12,16 +12,26 @@ use Illuminate\Support\Facades\Validator;
 class LayananController extends Controller
 {
     //index layanan
-    public function indexLayanan() {
+    public function indexLayanan()
+    {
+        $layanan = DB::table('layanans')
+            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
+            ->select('m_layanan.*', 'layanans.*')
+            ->get();
+        $kategoriLayanan = DB::table('m_layanan')->get();
         return view('Backend.layanan.index', [
             'active' => 'admin/layanan',
-            'layanan' => Layanan::all(),
+            'layanan' => $layanan,
+            'kategoriLayanan' => $kategoriLayanan
         ]);
     }
 
     public function getLayanan()
     {
-        $layanan = Layanan::all();
+        $layanan = DB::table('layanans')
+            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
+            ->select('m_layanan.*', 'layanans.*')
+            ->get();
 
         return response()->json([
             'active' => 'admin/layanan',
@@ -35,9 +45,7 @@ class LayananController extends Controller
         $validator = Validator::make($request->all(), [
             'kategori_layanan' => 'required',
             'nama_layanan' => 'required',
-            'desc' => 'required',
-            'isi' => 'required',
-            'gambar.*' => 'required|image',
+
         ]);
 
         $slug = Str::limit(Str::slug($request->nama_layanan), 50, '');
@@ -50,7 +58,10 @@ class LayananController extends Controller
 
         DB::beginTransaction();
 
+
         try {
+
+
             foreach ($request->file('gambar') as $gambar) {
                 $namaGambar = time() . '-' . $gambar->getClientOriginalName();
                 $gambar->move(public_path('images/layanan'), $namaGambar);
@@ -76,15 +87,15 @@ class LayananController extends Controller
         }
     }
 
-     // Cari data edit
-     public function getDataForEdit($id)
-     {
-         $layanan = Layanan::find($id);
-         return response()->json($layanan);
-     }
+    // Cari data edit
+    public function getDataForEdit($id)
+    {
+        $layanan = Layanan::find($id);
+        return response()->json($layanan);
+    }
 
 
-     // Edit Data
+    // Edit Data
     public function updateLayanan(Request $request, $id)
     {
         try {
@@ -166,5 +177,4 @@ class LayananController extends Controller
             return response()->json(['message' => 'Gagal menghapus layanan: ' . $e->getMessage()], 500);
         }
     }
-
 }

@@ -42,14 +42,8 @@ Route::get('bagian-instalasi', [InformasiController::class, 'bagianInstalasi']);
 Route::get('bagian-instalasi/{id}', [InformasiController::class, 'detailBagianInstalasi']);
 
 // Layanan
-Route::get('layanan-unggulan', [FrontendLayananController::class, 'layananUnggulan']);
-Route::get('layanan-penunjang', [FrontendLayananController::class, 'layananPenunjang']);
-Route::get('layanan-rajal', [FrontendLayananController::class, 'layananRajal']);
-Route::get('layanan-lainnya', [FrontendLayananController::class, 'layananLainnya']);
-Route::get('layanan-unggulan/{id}', [FrontendLayananController::class, 'detailLayananUnggulan']);
-Route::get('layanan-penunjang/{id}', [FrontendLayananController::class, 'detailLayananPenunjang']);
-Route::get('layanan-rajal/{id}', [FrontendLayananController::class, 'detailLayananRajal']);
-Route::get('layanan-lainnya/{id}', [FrontendLayananController::class, 'detailLayananLainnya']);
+Route::get('layanan/{id}', [FrontendLayananController::class, 'subLayanan']);
+
 
 // Fasilitas
 Route::get('fasilitas/{id}', [FasilitasController::class, 'fasilitas']);

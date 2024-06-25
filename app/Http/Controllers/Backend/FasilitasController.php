@@ -14,9 +14,11 @@ class FasilitasController extends Controller
     //
     public function indexFasilitas()
     {
+        $kategoriFasilitas = DB::table('m_fasilitas')->get();
         return view('Backend.fasilitas.index', [
             'active' => 'admin/fasilitas',
             'fasilitas' => Fasilitas::all(),
+            'kategoriFasilitas' => $kategoriFasilitas
         ]);
     }
 
@@ -36,8 +38,6 @@ class FasilitasController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'deskripsi' => 'required',
-            'gambar.*' => 'required|image',
         ]);
 
         $slug = Str::limit(Str::slug($request->nama), 50, '');
@@ -59,6 +59,7 @@ class FasilitasController extends Controller
 
             $fasilitas = Fasilitas::create([
                 'nama' => $request->nama,
+                'id_kategori' => $request->id_kategori,
                 'deskripsi' => $request->deskripsi,
                 'gambar' => json_encode($gambarPaths),
                 'url' => $slug,
@@ -117,6 +118,7 @@ class FasilitasController extends Controller
             Fasilitas::find($id)->update([
                 'nama' => $request->nama,
                 'deskripsi' => $request->deskripsi,
+                'id_kategori' => $request->id_kategori,
                 'gambar' => json_encode($gambarBaru),
                 'url' => $slug,
             ]);

@@ -70,21 +70,8 @@
                             let html = '';
                             response.layanan.forEach(function(layanan) {
                                 html += '<tr>';
-                                html += '<td><p class="px-3 mb-0">';
-
-                                if (layanan.kategori_layanan == 1) {
-                                    html += 'Unggulan';
-                                } else if (layanan.kategori_layanan == 2) {
-                                    html += 'Penunjang';
-                                } else if (layanan.kategori_layanan == 3) {
-                                    html += 'Rawat Jalan';
-                                } else if (layanan.kategori_layanan == 4) {
-                                    html += 'Lainnya';
-                                } else {
-                                    html += 'kategori tidak dikenal';
-                                }
-
-                                html += '<br></p></td>';
+                                html += '<td><p class="px-3 mb-0">' + layanan.nama_kategori +
+                                    '<br></p></td>';
 
                                 html += '<td><p class="px-3 mb-0">' + layanan.nama_layanan +
                                     '<br></p></td>';
@@ -185,6 +172,9 @@
                             $('#dataID').val(response.id);
                             $('#namaLayanan').val(response.nama_layanan);
                             $('#descLayanan').val(response.desc);
+                            $('[name="kategori_layanan"]').val(response.kategori_layanan).trigger(
+                                'change');
+
 
                             // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
 

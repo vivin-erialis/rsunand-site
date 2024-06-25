@@ -32,7 +32,8 @@
                         <div class="col-md-4">
                             <strong style="color: #1C7C3D; font-size: 13px">BIDANG</strong>
                             <hr>
-                            <p><a href="/pelayanan-medik-keperawatan" class="about-item">Pelayanan Medik dan Keperawatan</a></p>
+                            <p><a href="/pelayanan-medik-keperawatan" class="about-item">Pelayanan Medik dan
+                                    Keperawatan</a></p>
                             <p><a href="/umum-sumber-daya" class="about-item">Umum dan Sumber Daya</a></p>
                             <p><a href="/keuangan-perencanaan" class="about-item">Keuangan dan Perencanaan</a></p>
 
@@ -43,11 +44,15 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Layanan</a>
                 <div class="dropdown-menu border-0 m-0">
-                    <a href="/layanan-unggulan" class="dropdown-item">Layanan Unggulan</a>
-                    <a href="/layanan-rajal" class="dropdown-item">Layanan
-                        Rawat Jalan</a>
-                    <a href="/layanan-penunjang" class="dropdown-item">Layanan Penunjang</a>
-                    <a href="/layanan-lainnya" class="dropdown-item">Layanan Lainnya</a>
+                    @php
+                        use App\Models\M_layanan;
+
+                        $layanan = M_layanan::all();
+                    @endphp
+                    @foreach ($layanan as $item)
+                        <a href="/layanan/{{$item->url}}" class="dropdown-item text-dark">{{$item->nama_kategori}}</a>
+                    @endforeach
+
                 </div>
             </div>
             <div class="nav-item dropdown">

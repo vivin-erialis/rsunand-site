@@ -103,14 +103,13 @@ class SliderController extends Controller
         DB::beginTransaction();
 
         try {
-            // Periksa apakah file gambar baru diunggah
             if ($request->hasFile('img')) {
-                // Hapus gambar lama jika ada
+                // Hapus foto lama jika ada
                 if ($slider->img && File::exists(public_path('images/slider/' . $slider->img))) {
                     File::delete(public_path('images/slider/' . $slider->img));
                 }
 
-                // Simpan gambar baru
+                // Simpan foto baru
                 $img = time() . '_' . $request->file('img')->getClientOriginalName();
                 $request->file('img')->move(public_path('images/slider'), $img);
                 $slider->img = $img;

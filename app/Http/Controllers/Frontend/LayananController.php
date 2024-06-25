@@ -11,11 +11,17 @@ class LayananController extends Controller
 {
     //
 
-    public function layananUnggulan()
+
+    public function subLayanan($id)
     {
-        $layanan = DB::table('layanans')->where('kategori_layanan', '1')->get();
+        $layanan = DB::table('layanans')->where('kategori_layanan', $id)->get();
+        $headerStart = DB::table('layanans')
+        ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
+        ->where('kategori_layanan', $id)
+        ->select('m_layanan.nama_kategori')
+        ->get();
         return view('Frontend.layanan.layanan-unggulan', [
-            'headerStart' => 'Layanan Unggulan',
+            'headerStart' => $headerStart ,
             'layanan' => $layanan
         ]);
     }
