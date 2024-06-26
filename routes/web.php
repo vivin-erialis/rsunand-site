@@ -189,7 +189,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/event', [EventController::class, 'indexEvent']);
     Route::post('/event', [EventController::class, 'saveEvent']);
     Route::get('/event/{id}/edit', [EventController::class, 'getDataForEdit']);
-    Route::put('/event/{id}', [EventController::class, 'updateEvent']);
+    Route::post('/event/{id}', [EventController::class, 'updateEvent']);
     Route::delete('/event/{id}', [EventController::class, 'hapusEvent']);
 });
 

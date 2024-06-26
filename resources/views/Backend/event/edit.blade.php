@@ -10,7 +10,6 @@
             </div>
             <div class="modal-body">
                 <form id="artikelForm" enctype="multipart/form-data">
-                    @method('PUT')
                     @csrf
                     <input type="hidden" id="artikelId" value="">
                     <div class="row">
@@ -18,38 +17,49 @@
                             <label>Nama Event</label>
                             <div class="mb-3">
                                 <input type="text" class="form-control" placeholder="masukan nama event"
-                                    aria-label="Name" aria-describedby="name-addon" name="nama_event" id="nama_event">
+                                    aria-label="Name" aria-describedby="name-addon" name="nama_event" id="namaEvent">
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Lokasi</label>
+                                    <div class="mb-3">
+                                        <textarea type="text" class="form-control" placeholder="masukan lokasi event" aria-label="Name"
+                                            aria-describedby="name-addon" id="lokasiEvent" name="lokasi"></textarea>
+                                    </div>
 
-                            <label>Gambar</label>
-                            <div class="mb-3">
-                                <input type="file" class="form-control" aria-describedby="email-addon"
-                                    name="gambar[]" multiple>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Gambar</label>
+                                    <div class="mb-3">
+                                        <input type="file" class="form-control" aria-describedby="email-addon"
+                                            name="gambar[]" multiple>
+                                    </div>
+                                </div>
                             </div>
 
                             <label>Deskripsi</label>
                             <div class="mb-3">
                                 <textarea type="text" class="form-control" placeholder="masukan deskripsi event" aria-label="Name"
-                                    aria-describedby="name-addon" name="desc" id="desc"></textarea>
+                                    aria-describedby="name-addon" name="desc" id="descEvent"></textarea>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="">Tanggal Mulai</label>
-                                    <input class="form-control" type="date" name="tanggal_awal" id="tanggal_awal">
+                                    <input class="form-control" type="date" name="tanggal_awal" id="tanggalAwal">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Tanggal Selesai</label>
-                                    <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
+                                    <input class="form-control" type="date" name="tanggal_akhir" id="tanggalAkhir">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Jam Mulai </label>
-                                    <input class="form-control" type="time" name="jam_awal" id="jam_awal">
+                                    <input class="form-control" type="time" name="jam_awal" id="jamAwal">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Jam Selesai</label>
-                                    <input class="form-control" type="time" name="jam_akhir" id="jam_akhir">
+                                    <input class="form-control" type="time" name="jam_akhir" id="jamAkhir">
                                 </div>
 
                             </div>

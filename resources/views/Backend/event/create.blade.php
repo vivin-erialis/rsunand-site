@@ -19,56 +19,65 @@
                                         aria-label="Name" aria-describedby="name-addon" name="nama_event"
                                         id="nama_event">
                                 </div>
-
-
-                                <label>Gambar</label>
-                                <div class="mb-3">
-                                    <input type="file" class="form-control" aria-describedby="email-addon"
-                                        name="gambar[]" multiple>
-                                </div>
-
-                                <label>Deskripsi</label>
-                                <div class="mb-3">
-                                    <textarea type="text" class="form-control" placeholder="masukan deskripsi event" aria-label="Name"
-                                        aria-describedby="name-addon" id="desc" name="desc"></textarea>
-                                </div>
-
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <label for="">Tanggal Mulai</label>
-                                        <input class="form-control" type="date" name="tanggal_awal"
-                                            id="tanggal_awal">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Tanggal Selesai</label>
-                                        <input class="form-control" type="date" name="tanggal_akhir"
-                                            id="tanggal_akhir">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Jam Mulai </label>
-                                        <input class="form-control" type="time" name="jam_awal" id="jam_awal">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Jam Selesai</label>
-                                        <input class="form-control" type="time" name="jam_akhir" id="jam_akhir">
-                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Lokasi</label>
+                                        <div class="mb-3">
+                                            <textarea type="text" class="form-control" placeholder="masukan lokasi event" aria-label="Name"
+                                                aria-describedby="name-addon" id="lokasi" name="lokasi"></textarea>
+                                        </div>
 
-                                </div>
-                                <div class="">
-                                    <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">
-                                        <i class="fa fa-save me-1 text-xs"></i> Simpan
-                                    </button>
-                                </div>
-                                <div class="">
-                                    <button type="button" class="btn btn-sm btn-dark w-13 mt-4 mb-3 float-end mx-2"
-                                        data-dismiss="modal">
-                                        <i class="fa fa-times me-1 text-xs"></i> Batal
-                                    </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Gambar</label>
+                                        <div class="mb-3">
+                                            <input type="file" class="form-control" aria-describedby="email-addon"
+                                                name="gambar[]" multiple>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
+                            <label>Deskripsi</label>
+                            <div class="mb-3">
+                                <textarea type="text" class="form-control" placeholder="masukan deskripsi event" aria-label="Name"
+                                    aria-describedby="name-addon" id="desc" name="desc"></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="">Tanggal Mulai</label>
+                                    <input class="form-control" type="date" name="tanggal_awal" id="tanggal_awal">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Tanggal Selesai</label>
+                                    <input class="form-control" type="date" name="tanggal_akhir" id="tanggal_akhir">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Jam Mulai </label>
+                                    <input class="form-control" type="time" name="jam_awal" id="jam_awal">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Jam Selesai</label>
+                                    <input class="form-control" type="time" name="jam_akhir" id="jam_akhir">
+                                </div>
+
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">
+                                    <i class="fa fa-save me-1 text-xs"></i> Simpan
+                                </button>
+                            </div>
+                            <div class="">
+                                <button type="button" class="btn btn-sm btn-dark w-13 mt-4 mb-3 float-end mx-2"
+                                    data-dismiss="modal">
+                                    <i class="fa fa-times me-1 text-xs"></i> Batal
+                                </button>
+                            </div>
                         </div>
-                    </form>
                 </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>

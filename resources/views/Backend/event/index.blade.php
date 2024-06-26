@@ -179,54 +179,18 @@
                             // Isi formulir modal dengan data event yang diterima dari server
                             $('#dataId').val(response.id);
                             $('#namaEvent').val(response.nama_event);
-                            $('#desc').val(response.desc);
+                            $('#lokasiEvent').val(response.lokasi);
+                            $('#descEvent').val(response.desc);
+                            $('#tanggalAwal').val(response.tanggal_awal);
+                            $('#tanggalAkhir').val(response.tanggal_akhir);
+                            $('#jamAwal').val(response.jam_awal);
+                            $('#jamAkhir').val(response.jam_akhir);
 
                             // Setelah semua data dimuat, tampilkan modal
                             $('#editModal').modal('show');
                         },
                         error: function(xhr, status, error) {
                             console.error(xhr.responseText);
-                        }
-                    });
-                });
-
-                $('#editArtikelForm').on('submit', function(event) {
-                    event.preventDefault();
-
-                    var isi = editor3.getData();
-
-                    // Siapkan data form
-                    var formData = new FormData(this);
-                    formData.set('isi', isi);
-
-                    var artikelId = $('#artikelId').val();
-
-                    $.ajax({
-                        url: '/admin/artikel/' + artikelId,
-                        method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            // alert('Artikel berhasil diperbarui!');
-                            $('#editModal').modal('hide');
-                            $('.modal-backdrop').remove();
-                            toastr.success(response.message);
-
-                            loadArticles();
-                        },
-                        error: function(xhr) {
-                            var errors = xhr.responseJSON.errors;
-                            var errorMessage = '';
-                            for (var key in errors) {
-                                if (errors.hasOwnProperty(key)) {
-                                    errorMessage += errors[key][0] + '\n';
-                                }
-                            }
-                            alert('Terjadi kesalahan:\n' + errorMessage);
                         }
                     });
                 });
@@ -240,7 +204,7 @@
                     // Saat konfirmasi hapus diklik, kirim permintaan penghapusan
                     $('#deleteBtn').off('click').on('click', function() {
                         $.ajax({
-                            url: '/admin/artikel/' + artikelId,
+                            url: '/admin/event/' + artikelId,
                             type: 'DELETE',
                             success: function(response) {
                                 console.log(response);

@@ -172,7 +172,7 @@
                         @foreach ($recentPosts as $new)
                             <div class="row news-block news-block-two-col d-flex mt-4">
                                 <div class="col-4 news-block-two-col-image-wrap">
-                                    <a href="/blog/{{ $new->url }}">
+                                    <a href="/berita/{{ $new->url }}">
                                         @if ($item->gambar)
                                             @php
                                                 $gambarArray = json_decode($new->gambar);
