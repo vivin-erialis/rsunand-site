@@ -24,7 +24,7 @@
                             <div class="col-md-12">
                                 <div class="row">
 
-                                    {{-- <div class="col-md-6" style="text-align: justify">
+                                    <div class="col-md-6" style="text-align: justify">
                                         <p style="font-size: 14px">
                                             Pemberlakuan Universal Health Coverage melalui program Jaminan Kesehatan
                                             Nasional
@@ -158,7 +158,7 @@
                                             fasilitas radioterapi yang sangat modern.
 
                                         </p>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

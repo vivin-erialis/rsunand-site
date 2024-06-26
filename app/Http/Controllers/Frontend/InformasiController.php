@@ -94,8 +94,10 @@ class InformasiController extends Controller
     }
     public function visiMisi()
     {
+        $visimisi = TentangKami::all();
         return view('Frontend.tentang-kami.visi-misi', [
             'headerStart' => 'Visi & Misi',
+            'visimisi' => $visimisi
         ]);
     }
     public function medikKeperawatan()
