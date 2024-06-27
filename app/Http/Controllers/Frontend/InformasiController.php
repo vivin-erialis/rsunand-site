@@ -19,7 +19,7 @@ class InformasiController extends Controller
     public function jadwalDokter()
     {
         return view('Frontend.informasi.jadwal-dokter', [
-            'headerStart' => 'Jadwal Dokter'
+            'headerStart' => 'Jadwal Dokters'
         ]);
     }
     public function informasiDokter(Request $request)
