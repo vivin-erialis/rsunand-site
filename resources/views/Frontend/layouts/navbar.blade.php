@@ -48,6 +48,7 @@
                     @php
                         $layanan = \App\Models\M_layanan::all();
                         $layananDet = \App\Models\M_LayananDet::all();
+                        // $TlayananDet = \App\Models\T_LayananDet::all();
                     @endphp
                     @foreach($layanan as $item)
                         <div class="dropdown sub-layanan">
@@ -59,7 +60,7 @@
                                     @endforeach
                                 </ul>
                             @else
-                                <a href="/layanan/layanan-unggulan" class="dropdown-item text-dark">{{ $item->nama_kategori }}</a>
+                                <a href="/layanan/layanan-unggulan/" class="dropdown-item text-dark">{{ $item->nama_kategori }}</a>
                             @endif
                         </div>
                     @endforeach

@@ -27,7 +27,7 @@ class LayananController extends Controller
         $layanan = DB::table('t_layanan_det')
             ->join('m_layanan_det', 't_layanan_det.id_layanan_det', 'm_layanan_det.id')
             ->join('m_layanan', 'm_layanan_det.id_layanan', 'm_layanan.id')
-            ->select('t_layanan_det.*', 'm_layanan_det.nama_layanan', 'm_layanan.nama_kategori')
+            ->select('t_layanan_det.*', 'm_layanan_det.nama_layanan', 'm_layanan_det.url', 'm_layanan.nama_kategori')
             ->get();
 
         return response()->json([
@@ -68,6 +68,8 @@ class LayananController extends Controller
             DB::table('m_layanan_det')->insert([
                 'id_layanan' => $request->id_layanan,
                 'nama_layanan' => $request->nama_layanan,
+                'url' => $slug,
+
             ]);
 
             // Dapatkan ID dari entri yang baru dibuat di tabel m_layanan_det
@@ -78,7 +80,6 @@ class LayananController extends Controller
                 'id_layanan_det' => $mLayananDetId,
                 'desc' => $request->desc,
                 'gambar' => json_encode($gambarPaths),
-                'url' => $slug,
             ]);
 
             DB::commit();
@@ -101,7 +102,7 @@ class LayananController extends Controller
         $layanan = DB::table('t_layanan_det')
             ->join('m_layanan_det', 't_layanan_det.id_layanan_det', '=', 'm_layanan_det.id')
             ->join('m_layanan', 'm_layanan_det.id_layanan', '=', 'm_layanan.id')
-            ->select('t_layanan_det.*', 'm_layanan_det.nama_layanan', 'm_layanan_det.id_layanan', 'm_layanan.nama_kategori')
+            ->select('t_layanan_det.*', 'm_layanan_det.nama_layanan', 'm_layanan_det.id_layanan', 'm_layanan_det.url', 'm_layanan.nama_kategori')
             ->where('t_layanan_det.id', $id)
             ->first();
 
@@ -158,12 +159,12 @@ class LayananController extends Controller
             // Update data di tabel m_layanan_det
             DB::table('m_layanan_det')->where('id', $tLayananDet->id_layanan_det)->update([
                 'nama_layanan' => $request->nama_layanan,
+                'url' => $slug
             ]);
 
             // Update data di tabel t_layanan_det
             $updateData = [
                 'desc' => $request->desc,
-                'url' => $slug,
             ];
 
             if (!empty($gambarPaths)) {

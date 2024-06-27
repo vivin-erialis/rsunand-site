@@ -27,14 +27,14 @@
                                     @endphp
 
                                     @if (!empty($gambarPertama))
-                                        <a href="/layanan/layanan-lainnya/{{ $item->id }}">
+                                        <a href="/layanan/layanan-lainnya/{{ $item->url }}">
                                             <img style=" width: 90%"
                                                 src="{{ asset('/../images/layanan/' . $gambarPertama) }}">
                                         </a>
                                     @endif
                                 @endif
                             </div>
-                            <a href="/layanan/layanan-kesehatan/{{ $item->id }}">
+                            <a href="/layanan/layanan-lainnya/{{ $item->url }}">
                                 <h5 class="mb-3 card-title">{{ $item->nama_layanan }}</h5>
                             </a>
                             <p class="mb-0">{{ Str::limit($item->desc, 80, '...') }}.</p>

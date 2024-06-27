@@ -11,7 +11,7 @@
                     $gambar = json_decode($layanan->gambar);
 
                     // Split the content into paragraphs
-                    $paragraf = explode("</p>", $layanan->isi);
+                    $paragraf = explode("</p>", $layanan->desc);
 
                     // Output the first image as cover at the top
                     if (!empty($gambar)) {
@@ -42,7 +42,7 @@
                 @endif
                 <div class="mt-4">
                     <h2 class=""></h2>
-                    <a href="/layanan-unggulan" class="card-button"> <i class="fas fa-arrow-left me-2"></i>Kembali</a>
+                    <a href="/layanan-lainnya" class="card-button"> <i class="fas fa-arrow-left me-2"></i>Kembali</a>
                 </div>
             </div>
 
