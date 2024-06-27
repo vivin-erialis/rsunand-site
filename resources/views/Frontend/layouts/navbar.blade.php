@@ -42,23 +42,29 @@
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link text-dark">Layanan</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Layanan</a>
                 <div class="dropdown-menu border-0 m-0">
-                    <a href="/layanan/layanan-unggulan" class="dropdown-item text-dark">Layanan Unggulan</a>
-                    <div class="dropdown sub-layanan">
-                        <a class="dropdown-item dropdown-toggle text-dark" href="#" role="button" id="layananKesehatanDropdown">
-                            Layanan Kesehatan
-                        </a>
-                        <ul class="dropdown-menu custom-dropdown-menu custom-dropdown-menu-right" aria-labelledby="layananKesehatanDropdown">
-                            <li><a class="dropdown-item text-dark" href="/layanan/layanan-kesehatan-1">Layanan Kesehatan 1</a></li>
-                            <li><a class="dropdown-item text-dark" href="/layanan/layanan-kesehatan-2">Layanan Kesehatan 2</a></li>
-                            <li><a class="dropdown-item text-dark" href="/layanan/layanan-kesehatan-3">Layanan Kesehatan 3</a></li>
-                        </ul>
-                    </div>
-                    <a href="/layanan/layanan-lainnya" class="dropdown-item text-dark">Layanan Lainnya</a>
+
+                    @php
+                        $layanan = \App\Models\M_layanan::all();
+                        $layananDet = \App\Models\M_LayananDet::all();
+                    @endphp
+                    @foreach($layanan as $item)
+                        <div class="dropdown sub-layanan">
+                            @if($layananDet->where('id_layanan', $item->id)->count())
+                                <a href="/layanan/layanan-unggulan" class="dropdown-item text-dark dropdown-toggle">{{ $item->nama_kategori }}</a>
+                                <ul class="dropdown-menu custom-dropdown-menu custom-dropdown-menu-right" aria-labelledby="layananKesehatanDropdown">
+                                    @foreach($layananDet->where('id_layanan', $item->id) as $det)
+                                        <li><a class="dropdown-item text-dark" href="/layanan/layanan-kesehatan-1">{{ $det->nama_layanan }}</a></li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <a href="/layanan/layanan-unggulan" class="dropdown-item text-dark">{{ $item->nama_kategori }}</a>
+                            @endif
+                        </div>
+                    @endforeach
                 </div>
             </div>
-
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Dokter</a>
                 <div class="dropdown-menu border-0 m-0">
