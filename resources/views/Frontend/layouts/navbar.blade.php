@@ -42,40 +42,23 @@
                 </div>
             </div>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Layanan</a>
+                <a href="#" class="nav-link text-dark">Layanan</a>
                 <div class="dropdown-menu border-0 m-0">
-                    {{-- @php
-                        use App\Models\M_layanan;
-
-                        $layanan = M_layanan::all();
-                    @endphp --}}
-
-                    <ul class="dropdown-menu">
-                        @foreach ($menuLayanan as $layanan)
-                            <li>
-                                <a href="/layanan/{{$layanan[0]->url}}" class="dropdown-item text-dark">
-                                    {{$layanan[0]->nama_kategori}}
-                                </a>
-                                @if ($layanan->count() > 1)
-                                    <ul class="dropdown-menu">
-                                        @foreach ($layanan as $item)
-                                            @if ($item->det_id)
-                                                <li>
-                                                    <a href="/layanan/{{$item->det_url}}" class="dropdown-item text-dark">
-                                                        {{$item->det_nama_layanan}}
-                                                    </a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </li>
-                        @endforeach
-                    </ul>
-
-
+                    <a href="/layanan/layanan-unggulan" class="dropdown-item text-dark">Layanan Unggulan</a>
+                    <div class="dropdown sub-layanan">
+                        <a class="dropdown-item dropdown-toggle text-dark" href="#" role="button" id="layananKesehatanDropdown">
+                            Layanan Kesehatan
+                        </a>
+                        <ul class="dropdown-menu custom-dropdown-menu custom-dropdown-menu-right" aria-labelledby="layananKesehatanDropdown">
+                            <li><a class="dropdown-item text-dark" href="/layanan/layanan-kesehatan-1">Layanan Kesehatan 1</a></li>
+                            <li><a class="dropdown-item text-dark" href="/layanan/layanan-kesehatan-2">Layanan Kesehatan 2</a></li>
+                            <li><a class="dropdown-item text-dark" href="/layanan/layanan-kesehatan-3">Layanan Kesehatan 3</a></li>
+                        </ul>
+                    </div>
+                    <a href="/layanan/layanan-lainnya" class="dropdown-item text-dark">Layanan Lainnya</a>
                 </div>
             </div>
+
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Dokter</a>
                 <div class="dropdown-menu border-0 m-0">

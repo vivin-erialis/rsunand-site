@@ -48,18 +48,11 @@ class HomeController extends Controller
             $query->where('title', 'Deksripsi RS');
         })->get();
 
-        $menuLayanan = DB::table('m_layanan')
-        ->leftJoin('t_layanan_det', 'm_layanan.id', '=', 't_layanan_det.id_layanan_det')
-        ->select('m_layanan.*', 't_layanan_det.id as det_id', 't_layanan_det.id_layanan_det as det_id_layanan_det', 't_layanan_det.url as det_url')
-        ->get()
-        ->groupBy('id');
-
         $kerjaSama = KerjaSama::all();
 
         return view('Frontend.home', [
             'headerStart' => 'Berita',
             'artikel' => $artikel,
-            'menuLayanan' => $menuLayanan,
             'layanan' => $layanan,
             'slider' => $sliderImg,
             'recentPosts' => $recentPosts,
