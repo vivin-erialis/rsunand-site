@@ -52,10 +52,10 @@
                     @foreach($layanan as $item)
                         <div class="dropdown sub-layanan">
                             @if($layananDet->where('id_layanan', $item->id)->count())
-                                <a href="/layanan/layanan-unggulan" class="dropdown-item text-dark dropdown-toggle">{{ $item->nama_kategori }}</a>
+                                <a href="/layanan/{{ $item->url }}" class="dropdown-item text-dark dropdown-toggle">{{ $item->nama_kategori }}</a>
                                 <ul class="dropdown-menu custom-dropdown-menu custom-dropdown-menu-right" aria-labelledby="layananKesehatanDropdown">
                                     @foreach($layananDet->where('id_layanan', $item->id) as $det)
-                                        <li><a class="dropdown-item text-dark" href="/layanan/layanan-kesehatan-1">{{ $det->nama_layanan }}</a></li>
+                                        <li><a class="dropdown-item text-dark" href="/layanan/{{ $item->url }}/{{ $det->url }}">{{ $det->nama_layanan }}</a></li>
                                     @endforeach
                                 </ul>
                             @else
