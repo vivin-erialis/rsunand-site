@@ -1,6 +1,6 @@
 <!-- Form Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="background-color: whitesmoke;">
                 <h5 class="modal-title" id="editArticleModalLabel">Edit Data Artikel</h5>
@@ -18,27 +18,30 @@
                     <input type="hidden" id="isiArtikelHidden" name="isi_artikel_hidden"> --}}
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label">Kategori Layanan</label>
-                                <select name="kategori_layanan" id="kategori_layanan" class="form-control">
-                                        @foreach ($kategoriLayanan as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
-                                        @endforeach
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Kategori Layanan</label>
+                                        <select name="id_layanan" id="id_layanan" class="form-control">
+                                            @foreach ($kategoriLayanan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                                            @endforeach
 
-                                </select>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nama Layanan</label>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="namaLayanan" name="nama_layanan"
+                                            placeholder="Masukkan judul artikel">
+                                    </div>
+                                </div>
                             </div>
-                            <label>Nama Layanan</label>
+
+                            <label>Deskripsi </label>
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="namaLayanan" name="nama_layanan"
-                                    placeholder="Masukkan judul artikel">
-                            </div>
-                            <label>Deskripsi</label>
-                            <div class="mb-3">
-                                <textarea  id="descLayanan" class="form-control" name="desc" placeholder="Masukkan deskripsi artikel"></textarea>
-                            </div>
-                            <label>Isi </label>
-                            <div class="mb-3">
-                                <textarea id="isiLayanan" class="form-control" name="isi" placeholder="Masukkan isi artikel"></textarea>
+                                <textarea id="descLayanan" class="form-control" name="desc" placeholder="Masukkan isi artikel"></textarea>
                             </div>
                             <label>Gambar</label>
                             <input type="file" class="form-control mb-3" id="gambar" name="gambar[]" multiple>

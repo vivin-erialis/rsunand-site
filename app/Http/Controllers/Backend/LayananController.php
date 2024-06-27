@@ -14,23 +14,20 @@ class LayananController extends Controller
     //index layanan
     public function indexLayanan()
     {
-        $layanan = DB::table('layanans')
-            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
-            ->select('m_layanan.*', 'layanans.*')
-            ->get();
+
         $kategoriLayanan = DB::table('m_layanan')->get();
         return view('Backend.layanan.index', [
             'active' => 'admin/layanan',
-            'layanan' => $layanan,
             'kategoriLayanan' => $kategoriLayanan
         ]);
     }
 
     public function getLayanan()
     {
-        $layanan = DB::table('layanans')
-            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
-            ->select('m_layanan.*', 'layanans.*')
+        $layanan = DB::table('t_layanan_det')
+            ->join('m_layanan_det', 't_layanan_det.id_layanan_det', 'm_layanan_det.id')
+            ->join('m_layanan', 'm_layanan_det.id_layanan', 'm_layanan.id')
+            ->select('t_layanan_det.*', 'm_layanan_det.nama_layanan', 'm_layanan.nama_kategori')
             ->get();
 
         return response()->json([
@@ -42,10 +39,9 @@ class LayananController extends Controller
     // simpan data
     public function saveLayanan(Request $request)
     {
+        // Validasi input
         $validator = Validator::make($request->all(), [
-            'kategori_layanan' => 'required',
             'nama_layanan' => 'required',
-
         ]);
 
         $slug = Str::limit(Str::slug($request->nama_layanan), 50, '');
@@ -58,28 +54,38 @@ class LayananController extends Controller
 
         DB::beginTransaction();
 
-
         try {
-
-
-            foreach ($request->file('gambar') as $gambar) {
-                $namaGambar = time() . '-' . $gambar->getClientOriginalName();
-                $gambar->move(public_path('images/layanan'), $namaGambar);
-                $gambarPaths[] = $namaGambar;
+            // Proses dan simpan gambar
+            if ($request->hasFile('gambar')) {
+                foreach ($request->file('gambar') as $gambar) {
+                    $namaGambar = time() . '-' . $gambar->getClientOriginalName();
+                    $gambar->move(public_path('images/layanan'), $namaGambar);
+                    $gambarPaths[] = $namaGambar;
+                }
             }
 
-            $layanan = Layanan::create([
-                'kategori_layanan' => $request->kategori_layanan,
+            // Simpan data ke tabel m_layanan_det menggunakan query SQL
+            DB::table('m_layanan_det')->insert([
+                'id_layanan' => $request->id_layanan,
                 'nama_layanan' => $request->nama_layanan,
+            ]);
+
+            // Dapatkan ID dari entri yang baru dibuat di tabel m_layanan_det
+            $mLayananDetId = DB::getPdo()->lastInsertId();
+
+            // Simpan data ke tabel t_layanan_det menggunakan query SQL
+            DB::table('t_layanan_det')->insert([
+                'id_layanan_det' => $mLayananDetId,
                 'desc' => $request->desc,
-                'isi' => $request->isi,
                 'gambar' => json_encode($gambarPaths),
                 'url' => $slug,
             ]);
 
             DB::commit();
 
-            return response()->json(['message' => 'Data Layanan Berhasil Ditambah', 'layanan' => $layanan], 201);
+            return response()->json([
+                'message' => 'Data Layanan Berhasil Ditambah'
+            ], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::error($e); // Log the error
@@ -87,10 +93,18 @@ class LayananController extends Controller
         }
     }
 
+
     // Cari data edit
     public function getDataForEdit($id)
     {
-        $layanan = Layanan::find($id);
+
+        $layanan = DB::table('t_layanan_det')
+            ->join('m_layanan_det', 't_layanan_det.id_layanan_det', '=', 'm_layanan_det.id')
+            ->join('m_layanan', 'm_layanan_det.id_layanan', '=', 'm_layanan.id')
+            ->select('t_layanan_det.*', 'm_layanan_det.nama_layanan', 'm_layanan_det.id_layanan', 'm_layanan.nama_kategori')
+            ->where('t_layanan_det.id', $id)
+            ->first();
+
         return response()->json($layanan);
     }
 
@@ -98,83 +112,116 @@ class LayananController extends Controller
     // Edit Data
     public function updateLayanan(Request $request, $id)
     {
-        try {
-            $slug = Str::limit(Str::slug($request->nama_layanan), 50, '');
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'nama_layanan' => 'required',
+        ]);
 
-            $layanan = Layanan::find($id);
-
-            if (!$layanan) {
-                return response()->json(['error' => 'Data Layanan tidak ditemukan'], 404);
-            }
-
-            $gambarlama = json_decode($layanan->gambar, true);
-
-            // Hapus gambar-gambar lama
-            foreach ($gambarlama as $gambar) {
-                if (file_exists(public_path('images/layanan/' . $gambar))) {
-                    unlink(public_path('images/layanan/' . $gambar));
-                }
-            }
-
-            // Inisialisasi array baru untuk menyimpan nama gambar-gambar baru
-            $gambarBaru = [];
-
-            if ($request->hasFile('gambar')) {
-                foreach ($request->file('gambar') as $gambar) {
-                    $namaGambar = time() . '-' . $gambar->getClientOriginalName();
-                    $gambar->move(public_path('images/layanan'), $namaGambar);
-                    $gambarBaru[] = $namaGambar;
-                }
-            }
-
-            // Update data layanan setelah mengunggah gambar
-            Layanan::find($id)->update([
-                'kategori_layanan' => $request->kategori_layanan,
-                'nama_layanan' => $request->nama_layanan,
-                'desc' => $request->desc,
-                'isi' => $request->isi,
-                'url' => $slug,
-                'gambar' => json_encode($gambarBaru)
-            ]);
-
-            return response()->json(['message' => 'Data Layanan Berhasil Diubah']);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Gagal memperbarui data: ' . $e->getMessage()]);
-        }
-    }
-
-    public function hapusLayanan($id)
-    {
-        $layanan = Layanan::find($id);
-        if (!$layanan) {
-            return response()->json(['message' => 'Layanan tidak ditemukan.'], 404);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // Decode JSON gambar paths
-        $gambarPaths = json_decode($layanan->gambar, true);
+        $slug = Str::limit(Str::slug($request->nama_layanan), 50, '');
+        $gambarPaths = [];
 
         DB::beginTransaction();
 
         try {
-            if (is_array($gambarPaths)) {
-                // Hapus gambar terkait dari folder penyimpanan
-                foreach ($gambarPaths as $gambarPath) {
-                    $filePath = public_path('images/layanan/' . $gambarPath);
-                    if (file_exists($filePath)) {
-                        unlink($filePath);
+            // Dapatkan data dari tabel t_layanan_det berdasarkan id
+            $tLayananDet = DB::table('t_layanan_det')->where('id', $id)->first();
+
+            if (!$tLayananDet) {
+                return response()->json(['message' => 'Data tidak ditemukan'], 404);
+            }
+
+            // Proses dan simpan gambar jika ada
+            if ($request->hasFile('gambar')) {
+                // Hapus gambar lama
+                $oldGambarPaths = json_decode($tLayananDet->gambar, true);
+                if ($oldGambarPaths) {
+                    foreach ($oldGambarPaths as $oldGambar) {
+                        $oldGambarPath = public_path('images/layanan') . '/' . $oldGambar;
+                        if (file_exists($oldGambarPath)) {
+                            unlink($oldGambarPath);
+                        }
+                    }
+                }
+
+                // Simpan gambar baru
+                foreach ($request->file('gambar') as $gambar) {
+                    $namaGambar = time() . '-' . $gambar->getClientOriginalName();
+                    $gambar->move(public_path('images/layanan'), $namaGambar);
+                    $gambarPaths[] = $namaGambar;
+                }
+            }
+
+            // Update data di tabel m_layanan_det
+            DB::table('m_layanan_det')->where('id', $tLayananDet->id_layanan_det)->update([
+                'nama_layanan' => $request->nama_layanan,
+            ]);
+
+            // Update data di tabel t_layanan_det
+            $updateData = [
+                'desc' => $request->desc,
+                'url' => $slug,
+            ];
+
+            if (!empty($gambarPaths)) {
+                $updateData['gambar'] = json_encode($gambarPaths);
+            }
+
+            DB::table('t_layanan_det')->where('id', $id)->update($updateData);
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Data Layanan Berhasil Diupdate'
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error($e); // Log the error
+            return response()->json(['message' => 'Terjadi kesalahan saat mengupdate data.'], 500);
+        }
+    }
+    public function hapusLayanan($id)
+    {
+        DB::beginTransaction();
+
+        try {
+            // Dapatkan data dari tabel t_layanan_det berdasarkan id
+            $tLayananDet = DB::table('t_layanan_det')->where('id', $id)->first();
+
+            if (!$tLayananDet) {
+                return response()->json(['message' => 'Data tidak ditemukan'], 404);
+            }
+
+            // Hapus gambar terkait jika ada
+            $gambarPaths = json_decode($tLayananDet->gambar, true);
+            if ($gambarPaths) {
+                foreach ($gambarPaths as $gambar) {
+                    $gambarPath = public_path('images/layanan') . '/' . $gambar;
+                    if (file_exists($gambarPath)) {
+                        unlink($gambarPath);
                     }
                 }
             }
 
-            // Hapus layanan dari database
-            $layanan->delete();
+            // Hapus data dari tabel t_layanan_det
+            DB::table('t_layanan_det')->where('id', $id)->delete();
+
+            // Hapus data dari tabel m_layanan_det
+            DB::table('m_layanan_det')->where('id', $tLayananDet->id_layanan_det)->delete();
 
             DB::commit();
 
-            return response()->json(['message' => 'Layanan berhasil dihapus.']);
+            return response()->json([
+                'message' => 'Data Layanan Berhasil Dihapus'
+            ], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Gagal menghapus layanan: ' . $e->getMessage()], 500);
+            \Log::error($e); // Log the error
+            return response()->json(['message' => 'Terjadi kesalahan saat menghapus data.'], 500);
         }
     }
+
 }

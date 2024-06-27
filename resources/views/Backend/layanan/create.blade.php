@@ -1,6 +1,6 @@
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addArticleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: whitesmoke;">
                     <h5 class="modal-title" id="addArticleModalLabel">Tambah Data Layanan</h5>
@@ -13,37 +13,38 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label">Kategori Layanan</label>
-                                    <select name="kategori_layanan" id="mySelect" class="form-control">
-                                        @foreach ($kategoriLayanan as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <label>Nama Layanan</label>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="masukan nama layanan"
-                                        aria-label="Name" aria-describedby="name-addon" name="nama_layanan" id="title"
-                                        >
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Kategori Layanan</label>
+                                            <select name="id_layanan" id="mySelect" class="form-control">
+                                                @foreach ($kategoriLayanan as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->nama_kategori }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Nama Layanan</label>
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control"
+                                                placeholder="masukan nama layanan" aria-label="Name"
+                                                aria-describedby="name-addon" name="nama_layanan" id="title">
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <label>Deskripsi </label>
                                 <div class="mb-3">
-                                    <textarea type="text" class="form-control" placeholder="masukan deskripsi " aria-label="Name"
-                                        aria-describedby="name-addon" name="desc"></textarea>
-                                </div>
-                                <label>Isi </label>
-                                <div class="mb-3">
-                                    <textarea type="text" id="editor-2" aria-label="Name"
-                                        aria-describedby="name-addon" name="isi"></textarea>
+                                    <textarea type="text" id="editor-2" aria-label="Name" aria-describedby="name-addon" name="desc"></textarea>
                                 </div>
                                 <label>Gambar</label>
                                 <div class="mb-3">
                                     <input type="file" class="form-control" aria-describedby="email-addon"
-                                        name="gambar[]" multiple >
+                                        name="gambar[]" multiple>
                                 </div>
-
-
                                 <div class="">
                                     <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">
                                         <i class="fa fa-save me-1 text-xs"></i> Simpan

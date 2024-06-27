@@ -34,20 +34,32 @@ class HomeController extends Controller
 
         $fasilitas = Fasilitas::all();
 
-        $layanan = DB::table('layanans')->where('kategori_layanan', '1')->get();
+        $layanan = DB::table('t_layanan_det')
+            ->join('m_layanan_det', 't_layanan_det.id_layanan_det', 'm_layanan_det.id')
+            ->join('m_layanan', 'm_layanan_det.id_layanan', 'm_layanan.id')
+            ->where('m_layanan_det.id_layanan', '=', '1')
+            ->select('t_layanan_det.*', 'm_layanan_det.*', 'm_layanan.*')
+            ->get();
 
 
-        $sliderImg = Slider::where('status' , '=', '0')->get();
+        $sliderImg = Slider::where('status', '=', '0')->get();
 
         $about = Artikel::whereHas('kategori', function ($query) {
             $query->where('title', 'Deksripsi RS');
         })->get();
+
+        $menuLayanan = DB::table('m_layanan')
+        ->leftJoin('t_layanan_det', 'm_layanan.id', '=', 't_layanan_det.id_layanan_det')
+        ->select('m_layanan.*', 't_layanan_det.id as det_id', 't_layanan_det.id_layanan_det as det_id_layanan_det', 't_layanan_det.url as det_url')
+        ->get()
+        ->groupBy('id');
 
         $kerjaSama = KerjaSama::all();
 
         return view('Frontend.home', [
             'headerStart' => 'Berita',
             'artikel' => $artikel,
+            'menuLayanan' => $menuLayanan,
             'layanan' => $layanan,
             'slider' => $sliderImg,
             'recentPosts' => $recentPosts,
@@ -58,6 +70,7 @@ class HomeController extends Controller
             'kerjaSama' => $kerjaSama
         ]);
     }
+
     // public function getHomePage()
     // {
     //     $artikelBerita = Artikel::whereHas('kategori', function ($query) {
@@ -75,7 +88,8 @@ class HomeController extends Controller
     //     ]);
     // }
 
-    public function indexHomePage() {
+    public function indexHomePage()
+    {
         $artikelBerita = Artikel::whereHas('kategori', function ($query) {
             $query->where('title', 'Berita');
         })->latest()->take(3)->get();
@@ -109,7 +123,8 @@ class HomeController extends Controller
         ]);
     }
 
-    public function rektor() {
+    public function rektor()
+    {
 
         $data = DB::table('m_jabatan_det')
             ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
@@ -127,7 +142,8 @@ class HomeController extends Controller
             'headerStart' => 'Rektor Universitas Andalas',
         ]);
     }
-    public function dewanPengawas() {
+    public function dewanPengawas()
+    {
 
         $data = DB::table('m_jabatan_det')
             ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
@@ -145,7 +161,8 @@ class HomeController extends Controller
             'headerStart' => 'Dewan Pengawas RS Universitas Andalas',
         ]);
     }
-    public function direksi() {
+    public function direksi()
+    {
 
         $data = DB::table('m_jabatan_det')
             ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
@@ -164,13 +181,12 @@ class HomeController extends Controller
         ]);
     }
 
-    public function struktur() {
+    public function struktur()
+    {
         $data = TentangKami::all();
-        return view('Frontend.tentang-kami.struktur-organisasi' ,[
+        return view('Frontend.tentang-kami.struktur-organisasi', [
             'data' => $data,
             'headerStart' => 'Struktur Organisasi'
         ]);
-
     }
-
 }

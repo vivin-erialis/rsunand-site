@@ -152,7 +152,7 @@
                 });
 
                 ClassicEditor
-                    .create(document.querySelector('#isiLayanan'))
+                    .create(document.querySelector('#descLayanan'))
                     .then(editor => {
                         // CKEditor #editor-4 siap, tetapkan editor ke variabel global
                         window.editorLayanan = editor;
@@ -171,16 +171,11 @@
                             // Isi formulir modal dengan data artikel yang diterima dari server
                             $('#dataID').val(response.id);
                             $('#namaLayanan').val(response.nama_layanan);
-                            $('#descLayanan').val(response.desc);
-                            $('[name="kategori_layanan"]').val(response.kategori_layanan).trigger(
+                            $('[name="id_layanan"]').val(response.id_layanan).trigger(
                                 'change');
 
-
-                            // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
-
-
                             if (window.editorLayanan) {
-                                window.editorLayanan.setData(response.isi);
+                                window.editorLayanan.setData(response.desc);
                             }
 
 
@@ -196,11 +191,9 @@
                 $('#editArtikelForm').on('submit', function(event) {
                     event.preventDefault();
 
-                    var isi = editorLayanan.getData();
 
                     // Siapkan data form
                     var formData = new FormData(this);
-                    formData.set('isi', isi);
 
                     var dataID = $('#dataID').val();
 

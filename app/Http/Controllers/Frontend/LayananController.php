@@ -14,11 +14,19 @@ class LayananController extends Controller
 
     public function layananUnggulan()
     {
-        $layanan = DB::table('layanans')
-            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
-            ->where('kategori_layanan', '=', '1')
-            ->select('layanans.*')
-            ->get();
+        // $layanan = DB::table('layanans')
+        //     ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
+        //     ->where('kategori_layanan', '=', '1')
+        //     ->select('layanans.*')
+        //     ->get();
+
+        $layanan = DB::table('t_layanan_det')
+        ->join('m_layanan_det', 't_layanan_det.id_layanan_det', 'm_layanan_det.id')
+        ->join('m_layanan', 'm_layanan_det.id_layanan', 'm_layanan.id')
+        ->where( 'm_layanan_det.id_layanan', '=', '1')
+        ->select('t_layanan_det.*', 'm_layanan_det.*', 'm_layanan.*')
+        ->get();
+
 
         return view('Frontend.layanan.layanan-unggulan', [
             'headerStart' => 'Layanan Unggulan',
@@ -28,12 +36,12 @@ class LayananController extends Controller
 
     public function layananKesehatan()
     {
-
-        $layanan = DB::table('layanans')
-            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
-            ->where('kategori_layanan', '=', '2')
-            ->select('layanans.*')
-            ->get();
+        $layanan = DB::table('t_layanan_det')
+        ->join('m_layanan_det', 't_layanan_det.id_layanan_det', 'm_layanan_det.id')
+        ->join('m_layanan', 'm_layanan_det.id_layanan', 'm_layanan.id')
+        ->where( 'm_layanan_det.id_layanan', '=', '2')
+        ->select('t_layanan_det.*', 'm_layanan_det.*', 'm_layanan.*')
+        ->get();
 
         return view('Frontend.layanan.layanan-kesehatan', [
             'headerStart' => 'Layanan Kesehatan',
@@ -43,12 +51,12 @@ class LayananController extends Controller
 
     public function layananLainnya()
     {
-        $layanan = DB::table('layanans')
-            ->join('m_layanan', 'layanans.kategori_layanan', 'm_layanan.id')
-            ->where('kategori_layanan', '=', '3')
-            ->select('layanans.*')
-            ->get();
-
+        $layanan = DB::table('t_layanan_det')
+        ->join('m_layanan_det', 't_layanan_det.id_layanan_det', 'm_layanan_det.id')
+        ->join('m_layanan', 'm_layanan_det.id_layanan', 'm_layanan.id')
+        ->where( 'm_layanan_det.id_layanan', '=', '3')
+        ->select('t_layanan_det.*', 'm_layanan_det.*', 'm_layanan.*')
+        ->get();
 
         return view('Frontend.layanan.layanan-lainnya', [
             'headerStart' => 'Layanan Lainnya',

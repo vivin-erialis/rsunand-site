@@ -44,14 +44,34 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Layanan</a>
                 <div class="dropdown-menu border-0 m-0">
-                    @php
+                    {{-- @php
                         use App\Models\M_layanan;
 
                         $layanan = M_layanan::all();
-                    @endphp
-                    @foreach ($layanan as $item)
-                        <a href="/layanan/{{$item->url}}" class="dropdown-item text-dark">{{$item->nama_kategori}}</a>
-                    @endforeach
+                    @endphp --}}
+                    <ul class="dropdown-menu">
+                        @foreach ($menuLayanan as $layanan)
+                            <li>
+                                <a href="/layanan/{{$layanan[0]->url}}" class="dropdown-item text-dark">
+                                    {{$layanan[0]->nama_kategori}}
+                                </a>
+                                @if ($layanan->count() > 1)
+                                    <ul class="dropdown-menu">
+                                        @foreach ($layanan as $item)
+                                            @if ($item->det_id)
+                                                <li>
+                                                    <a href="/layanan/{{$item->det_url}}" class="dropdown-item text-dark">
+                                                        {{$item->det_nama_layanan}}
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </li>
+                        @endforeach
+                    </ul>
+
 
                 </div>
             </div>
