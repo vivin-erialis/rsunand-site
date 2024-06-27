@@ -174,6 +174,10 @@
                             $('[name="id_layanan"]').val(response.id_layanan).trigger(
                                 'change');
 
+
+                            // Atur nilai menggunakan metode setData dari CKEditor setelah CKEditor sepenuhnya diinisialisasi
+
+
                             if (window.editorLayanan) {
                                 window.editorLayanan.setData(response.desc);
                             }
@@ -191,9 +195,11 @@
                 $('#editArtikelForm').on('submit', function(event) {
                     event.preventDefault();
 
+                    var isi = editorLayanan.getData();
 
                     // Siapkan data form
                     var formData = new FormData(this);
+                    formData.set('isi', isi);
 
                     var dataID = $('#dataID').val();
 
