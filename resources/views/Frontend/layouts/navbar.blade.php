@@ -18,7 +18,7 @@
                             <hr>
                             <p><a href="/sejarah" class="about-item">Sejarah</a></p>
                             <p> <a href="/visi-misi" class="about-item">Visi & Misi</a> </p>
-                            <p><a href="/visi-misi" class="about-item">Perkembangan Rs Unand</a></p>
+                            <p><a href="/perkembangan-rumah-sakit-unand" class="about-item">Perkembangan Rs Unand</a></p>
 
                         </div>
                         <div class="col-md-4">

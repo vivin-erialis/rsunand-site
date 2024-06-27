@@ -853,7 +853,7 @@ transition: all ease-in-out 0.8s;
 }
 
 /* End CSS Menu Dokter */
- .sub-layanan .custom-dropdown-menu {
+    .sub-layanan .custom-dropdown-menu {
         display: none !important;
         position: absolute;
         background-color: #ffffff;
@@ -866,8 +866,8 @@ transition: all ease-in-out 0.8s;
     }
 
     .custom-dropdown-menu.custom-dropdown-menu-right {
-        left: 95%; /* Menggeser dropdown ke kanan 100% dari posisi parent */
-        top: -30% !important;
+        left: 100%; /* Menggeser dropdown ke kanan 100% dari posisi parent */
+        top: -25% !important;
     }
 
     .custom-dropdown-menu a {

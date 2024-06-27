@@ -100,6 +100,15 @@ class InformasiController extends Controller
             'visimisi' => $visimisi
         ]);
     }
+
+    public function perkembanganRs() {
+        $perkembangan = TentangKami::all();
+        return view('Frontend.tentang-kami.perkembangan-rs', [
+            'headerStart' => 'Perkembangan Rumah Sakit Universitas Andalas',
+            'perkembangan' => $perkembangan
+        ]);
+    }
+
     public function medikKeperawatan()
     {
         $data = DB::table('m_jabatan_det')

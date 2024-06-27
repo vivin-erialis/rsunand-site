@@ -35,6 +35,7 @@ Route::get('/', [HomeController::class, 'HomePage']);
 // Informasi
 Route::get('sejarah', [InformasiController::class, 'sejarah']);
 Route::get('visi-misi', [InformasiController::class, 'visiMisi']);
+Route::get('perkembangan-rumah-sakit-unand', [InformasiController::class, 'perkembanganRs']);
 Route::get('tentang-kami', [InformasiController::class, 'tentangKami']);
 Route::get('jadwal-dokter', [InformasiController::class, 'jadwalDokter']);
 Route::get('informasi-dokter', [InformasiController::class, 'informasiDokter']);
