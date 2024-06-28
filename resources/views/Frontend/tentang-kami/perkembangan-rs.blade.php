@@ -13,7 +13,7 @@
                     @endforeach -->
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         @foreach($perkembangan as $index => $data)
-                            <div class="accordion-item">
+                            <div class="accordion-item mt-3" style="border-radius: 7px">
                                 <h2 class="accordion-header" id="panelsStayOpen-heading{{ $index }}">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse{{ $index }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse{{ $index }}">
                                         {!! $data->title_perkembangan !!}
