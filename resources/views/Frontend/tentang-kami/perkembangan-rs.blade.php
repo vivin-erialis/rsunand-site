@@ -1,6 +1,6 @@
 @extends('Frontend.layouts.main')
 @section('content')
-@section('title', 'Perkembangan Rumah Sakit Univeristas Andalas')
+@section('title', 'Perkembangan Rumah Sakit Univeristas Andalass')
 @include('Frontend.layouts.header')
 <div class="container-xxl project py-5">
     <div class="container">
