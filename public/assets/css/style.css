@@ -246,7 +246,7 @@ h6,
     height: 45px;
     margin: 5px 0;
     background: var(--dark);
-    transition: .5s;
+    transition: transform 0.3s ease;
 }
 
 .header-carousel .owl-dots .owl-dot.active {
@@ -260,7 +260,7 @@ h6,
     height: 100%;
     object-fit: cover;
     padding: 2px;
-    transition: .5s;
+    transition: transform 0.3s ease;
     opacity: .3;
 }
 
@@ -905,4 +905,94 @@ h6,
 
 .custom-dropdown-menu a:hover {
     background-color: #f1f1f1;
+}
+
+/* Slider */
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 100;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}
+
+.slides {
+    flex: 0 0 19.33%;
+    /* width: 26%; */
+}
+
+
+.slides img {
+    width: 100% !important;
+    height: auto !important;
+
+}
+
+@media (max-width: 1300px) {
+    .slides {
+        flex: 0 0 20.33%;
+        /* 3 gambar dalam satu slide */
+    }
+}
+
+@media (max-width: 768px) {
+    .slides {
+        flex: 0 0 40%;
+        /* 2 gambar dalam satu slide */
+    }
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 100;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
 }

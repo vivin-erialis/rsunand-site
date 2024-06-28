@@ -38,94 +38,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <style>
-        .slider-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
 
-        .slider {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        .prev,
-        .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 100;
-        }
-
-        .prev {
-            left: 0;
-        }
-
-        .next {
-            right: 0;
-        }
-
-        .slider-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .slider {
-            display: flex;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .slides {
-            flex: 0 0 auto;
-            width: 26%;
-        }
-
-
-        .slides img {
-            width: 100% !important;
-            height: auto !important;
-
-        }
-
-        @media (max-width: 1200px) {
-            .slides {
-                flex: 0 0 33.33%;
-                /* 3 gambar dalam satu slide */
-            }
-        }
-
-        @media (max-width: 768px) {
-            .slides {
-                flex: 0 0 50%;
-                /* 2 gambar dalam satu slide */
-            }
-        }
-
-        .prev,
-        .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 100;
-        }
-
-        .prev {
-            left: 0;
-        }
-
-        .next {
-            right: 0;
-        }
     </style>
 </head>
 
@@ -208,7 +121,7 @@
         }
 
         // Autoplay
-        let autoplayInterval = setInterval(nextSlide, 5000);
+        let autoplayInterval = setInterval(nextSlide, 3000);
 
         // Pause autoplay on button hover
         const buttons = document.querySelectorAll('.prev, .next');
@@ -217,7 +130,7 @@
                 clearInterval(autoplayInterval);
             });
             button.addEventListener('mouseleave', () => {
-                autoplayInterval = setInterval(nextSlide, 5000);
+                autoplayInterval = setInterval(nextSlide, 3000);
             });
         });
 
