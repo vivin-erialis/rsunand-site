@@ -42,7 +42,7 @@
                 @endif
                 <div class="mt-4">
                     <h2 class=""></h2>
-                    <a href="/layanan-lainnya" class="card-button"> <i class="fas fa-arrow-left me-2"></i>Kembali</a>
+                    {{-- <a href="/laya nan-lainnya" class="card-button"> <i class="fas fa-arrow-left me-2"></i>Kembali</a> --}}
                 </div>
             </div>
 

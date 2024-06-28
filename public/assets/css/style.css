@@ -15,7 +15,8 @@ h2,
 
 .video-container {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio (tinggi / lebar * 100) */
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio (tinggi / lebar * 100) */
     height: 0;
     overflow: hidden;
 }
@@ -188,6 +189,7 @@ h6,
     align-items: center;
     /* background: rgba(57, 64, 56, 0.5); */
 }
+
 .home-img {
     align-items: center;
     background: rgba(14, 14, 14, 0.358);
@@ -198,12 +200,12 @@ h6,
     color: white;
 }
 
-.btn-home:hover{
-background-color: white;
-border: none;
-color: #1C7C3D;
-font-weight: bold;
-transition: all ease-in-out 0.8s;
+.btn-home:hover {
+    background-color: white;
+    border: none;
+    color: #1C7C3D;
+    font-weight: bold;
+    transition: all ease-in-out 0.8s;
 }
 
 
@@ -270,6 +272,7 @@ transition: all ease-in-out 0.8s;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(86, 109, 86, 0.5)), url(../img/slide-3.jpeg) center center no-repeat;
     background-size: cover;
 }
+
 .page-header-1 {
     background: linear-gradient(rgba(18, 18, 18, 0.5), rgba(176, 176, 176, 0.5)), url(../img/slide-4.jpeg) center center no-repeat;
     background-size: cover;
@@ -291,10 +294,14 @@ transition: all ease-in-out 0.8s;
 
 
 /*** Facts ***/
+
+.fact-item {
+    border: rgb(221, 221, 221) solid 2px;
+    /* border-radius: 5px; */
+}
+
 .fact-item .fact-icon {
-    width: 180px;
-    height: 130px;
-    margin-top: -40px;
+
     margin-bottom: 1.5rem;
     display: inline-flex;
     align-items: center;
@@ -303,8 +310,23 @@ transition: all ease-in-out 0.8s;
     transition: .5s;
 }
 
-.fact-item:hover .fact-icon {
-    background: var(--primary);
+.card-button-1 {
+    background-color: #1C7C3D;
+    padding: 9px;
+    border-radius: 5px;
+    color: white;
+}
+.card-button-1:hover {
+    background-color: #1C7C3D;
+    padding: 9px;
+    border-radius: 5px;
+    color: white;
+}
+
+.fact-item:hover {
+    transform: scale(1.06);
+    transition: transform 0.6s ease;
+
 }
 
 .fact-item .fact-icon i {
@@ -315,7 +337,6 @@ transition: all ease-in-out 0.8s;
 .fact-item:hover .fact-icon i {
     color: #FFFFFF;
 }
-
 
 /*** About & Feature ***/
 .about-img,
@@ -361,6 +382,7 @@ transition: all ease-in-out 0.8s;
     border-radius: 6px;
 
 }
+
 .service-item-1 .bg-img {
     position: absolute;
     width: 100%;
@@ -630,6 +652,7 @@ transition: all ease-in-out 0.8s;
     overflow: hidden;
     transition: transform 0.3s ease;
 }
+
 .card-beritas {
     /* width: 300px; */
     background-color: #fff;
@@ -672,6 +695,7 @@ transition: all ease-in-out 0.8s;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     /* Menambahkan sedikit shadow saat hover */
 }
+
 .card-beritas:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -743,6 +767,7 @@ transition: all ease-in-out 0.8s;
     .container-berita-home {
         grid-template-columns: 1fr 1fr;
     }
+
     .card img {
         width: 100%;
         height: 220px;
@@ -756,6 +781,7 @@ transition: all ease-in-out 0.8s;
     .container-berita-home {
         grid-template-columns: 1fr;
     }
+
     .card img {
         width: 100%;
         height: 280px;
@@ -838,9 +864,7 @@ transition: all ease-in-out 0.8s;
     transition: 0.5s;
 }
 
-.detail-berita {
-
-}
+.detail-berita {}
 
 /* Hover effect untuk item dropdown */
 .dropdown-item:hover {
@@ -849,34 +873,36 @@ transition: all ease-in-out 0.8s;
 }
 
 .card-dokter {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan box */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /* Menambahkan bayangan box */
 }
 
 /* End CSS Menu Dokter */
-    .sub-layanan .custom-dropdown-menu {
-        display: none !important;
-        position: absolute;
-        background-color: #ffffff;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
+.sub-layanan .custom-dropdown-menu {
+    display: none !important;
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
 
-    .sub-layanan:hover .custom-dropdown-menu {
-        display: block !important;
-    }
+.sub-layanan:hover .custom-dropdown-menu {
+    display: block !important;
+}
 
-    .custom-dropdown-menu.custom-dropdown-menu-right {
-        left: 100%; /* Menggeser dropdown ke kanan 100% dari posisi parent */
-        top: -25% !important;
-    }
+.custom-dropdown-menu.custom-dropdown-menu-right {
+    left: 100%;
+    /* Menggeser dropdown ke kanan 100% dari posisi parent */
+    top: -25% !important;
+}
 
-    .custom-dropdown-menu a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
+.custom-dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
 
-    .custom-dropdown-menu a:hover {
-        background-color: #f1f1f1;
-    }
+.custom-dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}

@@ -15,34 +15,36 @@
         <div class="mt-3">
             <div class="row g-3">
                 @foreach ($layanan as $item)
-                    <div class="col-lg-3 col-md-6 wow fadeInUp mt-3" data-wow-delay="0.1s">
-                        <div class="fact-item text-center bg-light h-100 p-5 pt-0">
-                            <div class="fact-icon">
-                                {{-- <i class="fa fa-hospital fs-5"></i> --}}
-                                @if ($item->gambar)
-                                    @php
-                                        $gambarArray = json_decode($item->gambar);
-                                        if ($gambarArray) {
-                                            $gambarPertama = reset($gambarArray);
-                                        }
-                                    @endphp
+                <div class="col-lg-3 col-md-6 wow fadeInUp mt-3" data-wow-delay="0.1s">
+                    <div class="fact-item text-center p-4 h-100pt-0">
+                        <div class="fact-icon">
+                            {{-- <i class="fa fa-hospital fs-5"></i> --}}
+                            @if ($item->gambar)
+                                @php
+                                    $gambarArray = json_decode($item->gambar);
+                                    if ($gambarArray) {
+                                        $gambarPertama = reset($gambarArray);
+                                    }
+                                @endphp
 
-                                    @if (!empty($gambarPertama))
-                                        <a href="/layanan/layanan-lainnya/{{ $item->url }}">
-                                            <img style=" width: 90%"
-                                                src="{{ asset('/../images/layanan/' . $gambarPertama) }}">
-                                        </a>
-                                    @endif
+                                @if (!empty($gambarPertama))
+                                    <a href="/layanan/layanan-lainnya/{{ $item->url }}">
+                                        <img  style="width: 100%; height: 100%; object-fit: cover;"
+                                            src="{{ asset('/../images/layanan/' . $gambarPertama) }}">
+                                    </a>
                                 @endif
-                            </div>
-                            <a href="/layanan/layanan-kesehatan/{{ $item->url }}">
-                                <h5 class="mb-3 card-title">{{ $item->nama_layanan }}</h5>
-                            </a>
-                            <p class="mb-0">{{ Str::limit($item->desc, 80, '...') }}.</p>
-
+                            @endif
                         </div>
+                        <a href="/layanan/layanan-kesehatan/{{ $item->url  }}">
+                            <h5 class=" card-title">{{ $item->nama_layanan }}</h5>
+                        </a>
+                        <p class="">{!! Str::limit($item->desc, 80, '...') !!}</p>
+                        <a href="/layanan/layanan-kesehatan/{{ $item->url  }}" class="card-button-1">Read More</a>
+
+
                     </div>
-                @endforeach
+                </div>
+            @endforeach
             </div>
         </div>
     </div>
