@@ -88,7 +88,6 @@
                                 html += '</td>';
                                 html += '</tr>';
                             });
-
                             // Kosongkan DataTables dan isi dengan data baru
                             table.clear().draw();
                             table.rows.add($(html)).draw();
