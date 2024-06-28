@@ -1,11 +1,12 @@
 @extends('Frontend.layouts.main')
 @section('content')
-@section('title', 'Layanan Lainnya')
+@section('title', 'Layanan')
 @include('Frontend.layouts.header')
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h4 class="section-title">LAYANAN lainnya</h4>
+
+            <h4 class="section-title">{{ $headerStart }}</h4>
             <h1 class="display-5 mb-4">Rumah Sakit Universitas Andalas</h1>
         </div>
         @if ($layanan->isEmpty())
@@ -18,24 +19,24 @@
                     <div class="fact-item text-center p-4 h-100pt-0">
                         <div class="fact-icon">
                             {{-- <i class="fa fa-hospital fs-5"></i> --}}
-                            <a href="/layanan/layanan-lainnya/{{ $item->url }}">
+                            <a href="/layanan/layanan-unggulan/{{ $item->url }}">
                                 <img  style="width: 100%; height: 100%; object-fit: cover;"
                                     src="{{ asset('/../images/layanan/' . $item->thumbnail) }}">
                             </a>
+
                         </div>
-                        <a href="/layanan/layanan-lainnya/{{ $item->url  }}">
+                        <a href="/layanan/layanan-unggulan/{{ $item->url  }}">
                             <h5 class=" card-title">{{ $item->nama_layanan }}</h5>
                         </a>
                         <p class="">{!! Str::limit($item->desc, 80, '...') !!}</p>
-                        <a href="/layanan/layanan-lainnya/{{ $item->url  }}" class="card-button-1">Read More</a>
+                        <a href="/layanan/layanan-unggulan/{{ $item->url  }}" class="card-button-1">Read More</a>
 
 
                     </div>
                 </div>
             @endforeach
             </div>
-           </div>
+        </div>
     </div>
 </div>
-
 @endsection
