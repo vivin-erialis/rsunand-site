@@ -13,8 +13,7 @@
             </div>
 
             <div class="artikel-layanan">
-                <p>{!! $layanan->desc !!}
-                </p>
+                <p>{!! $layanan->desc !!}</p>
             </div>
         </div>
     </section>
