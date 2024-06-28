@@ -157,19 +157,31 @@ class HomeController extends Controller
     public function direksi()
     {
 
+        // $data = DB::table('m_jabatan_det')
+        //     ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+        //     ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
+        //     ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
+        //     ->where('m_jabatan.aliase_jabatan', '=', 'Direksi')
+        //     ->select('dokters.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
+        //     ->get();
         $data = DB::table('m_jabatan_det')
-            ->join('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
-            ->join('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
-            ->join('m_bidang', 'm_jabatan_det.id_bidang', '=', 'm_bidang.id_bidang')
-            ->where('m_jabatan.aliase_jabatan', '=', 'Direksi')
-            ->select('dokters.*', 'm_jabatan.*', 'm_jabatan_det.*', 'm_bidang.*')
+            ->leftJoin('dokters', 'm_jabatan_det.id_dokter', '=', 'dokters.id')
+            ->leftJoin('m_jabatan', 'm_jabatan_det.id_jabatan', '=', 'm_jabatan.id_jabatan')
+            ->select(
+                'm_jabatan_det.id_jabatan_det',
+                'dokters.*',
+                'm_jabatan.id_jabatan',
+                'm_jabatan.desc_jabatan',
+                'm_jabatan.aliase_jabatan'
+            )
+            ->where('m_jabatan.isdireksi', '=', 1)
+            ->orderBy('m_jabatan.id_jabatan', 'ASC')
             ->get();
-
 
         // return $data;
 
         return view('Frontend.manajemen.direksi', [
-            'data' => $data,
+            'direksi' => $data,
             'headerStart' => 'Direksi RS Universitas Andalas',
         ]);
     }

@@ -11,7 +11,7 @@
                                 <h6 class="font-weight-semibold text-lg mb-0">Data Perkembangan</h6>
                                 <p class="text-sm">Perkembangan RS Unand</p>
                             </div>
-                            {{-- <div class="ms-auto d-flex">
+                            <div class="ms-auto d-flex">
                                 <button class="btn btn-sm btn-dark btn-icon d-flex align-items-center" data-toggle="modal"
                                     data-target="#addModal">
                                     <span class="btn-inner--icon">
@@ -19,7 +19,7 @@
                                     </span>
                                     <span class="btn-inner--text">Tambah Data</span>
                                 </button>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                     <div class="container p-3">
@@ -27,7 +27,8 @@
                         <table id="myTable" class="display">
                             <thead>
                                 <tr>
-                                    <th class="text-dark text-xs font-weight-semibold">Sejarah</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Title</th>
+                                    <th class="text-dark text-xs font-weight-semibold">Deskripsi</th>
 
                                     <th class="text-dark text-xs font-weight-semibold">Aksi</th>
                                 </tr>
@@ -41,6 +42,7 @@
                 </div>
             </div>
         </div>
+        @include('Backend.profile.perkembangan.create')
         @include('Backend.profile.perkembangan.edit')
         <script>
             $(document).ready(function() {
@@ -65,15 +67,17 @@
                         success: function(response) {
                             console.log('Success:', response); // Debugging
                             let html = '';
-                            response.profile.forEach(function(profile) {
+                            response.perkembangan.forEach(function(item) {
                                 html += '<tr>';
-                                html += '<td><p class="px-3 mb-0">' + profile.perkembangan +
+                                html += '<td><p class="px-3 mb-0">' + item.title_perkembangan  +
+                                    '</td>';
+                                html += '<td><p class="px-3 mb-0">' + item.desc_perkembangan.substr(0, 100) + '...'  +
                                     '</td>';
 
                                 html += '<td>';
                                 html +=
                                     '<button class="btn btn-sm btn-warning edit-btn" data-id="' +
-                                    profile.id +
+                                    item.id +
                                     '" data-toggle="modal" data-target="#editModal"> <i class="fa fa-edit text-xs me-2"></i> Edit</button>';
                                ;
                                 html += '</td>';
@@ -166,8 +170,13 @@
                         url: '/admin/perkembangan/' + dataId + '/edit',
                         type: 'GET',
                         success: function(response) {
+
+                            // Setelah semua data dimuat, tampilkan modal
+                            $('#editModal').modal('show');
+                            console.log(response.desc_perkembangan)
                             // Isi formulir modal dengan data artikel yang diterima dari server
                             $('#dataId').val(response.id);
+                            $('#title_perkembangan').val(response.title_perkembangan);
                             // $('#emailAdress').val(response.email);
                             // $('#telepon').val(response.telp);
                             // $('#alamat').val(response.alamat);
@@ -178,12 +187,8 @@
                             //     window.editor3.setData(response.sejarah);
                             // }
                             if (window.editor4) {
-                                window.editor4.setData(response.perkembangan);
+                                window.editor4.setData(response.desc_perkembangan);
                             }
-
-
-                            // Setelah semua data dimuat, tampilkan modal
-                            $('#editModal').modal('show');
                         },
                         error: function(xhr, status, error) {
                             console.error(xhr.responseText);
@@ -214,6 +219,44 @@
                         success: function(response) {
                             // alert('Artikel berhasil diperbarui!');
                             $('#editModal').modal('hide');
+                            $('.modal-backdrop').remove();
+                            toastr.success(response.message);
+
+                            loadData();
+                        },
+                        error: function(xhr) {
+                            var errors = xhr.responseJSON.errors;
+                            var errorMessage = '';
+                            for (var key in errors) {
+                                if (errors.hasOwnProperty(key)) {
+                                    errorMessage += errors[key][0] + '\n';
+                                }
+                            }
+                            alert('Terjadi kesalahan:\n' + errorMessage);
+                        }
+                    });
+                });
+
+
+                $('#addArtikelForm').on('submit', function(event) {
+                    event.preventDefault();
+
+                    var isi = editor4.getData();
+
+                    // Siapkan data form
+                    var formData = new FormData(this);
+
+                    $.ajax({
+                        url: '/admin/perkembangan/add',
+                        method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            $('#addModal').modal('hide');
                             $('.modal-backdrop').remove();
                             toastr.success(response.message);
 

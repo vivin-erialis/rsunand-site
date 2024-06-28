@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\TentangKami;
+use App\Models\M_Perkembangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -29,6 +30,7 @@ class TentangKamiController extends Controller
     public function getProfile()
     {
         $profile = TentangKami::all();
+        $perkembangan = M_Perkembangan::all();
         foreach ($profile as $d) {
             $d->foto_url = asset('images/profile/' . $d->struktur_organisasi);
         }
@@ -36,6 +38,7 @@ class TentangKamiController extends Controller
         return response()->json([
             'active' => 'admin/profile',
             'profile' => $profile,
+            'perkembangan'  => $perkembangan
         ]);
     }
 
@@ -91,8 +94,8 @@ class TentangKamiController extends Controller
     // Cari data edit
     public function getDataForEdit($id)
     {
-        $profile = TentangKami::find($id);
-        return response()->json($profile);
+        $perkembangan = M_Perkembangan::find($id);
+        return response()->json($perkembangan);
     }
 
     // Edit Data
@@ -254,10 +257,47 @@ class TentangKamiController extends Controller
         ]);
     }
 
+    public function addPerkembangan(Request $request) {
+        DB::beginTransaction();
+        try {
+            // Validasi request
+            $validated = $request->validate([
+                'title_perkembangan' => 'required|string|max:255',
+                'perkembangan' => 'required|string',
+            ]);
+
+            // Inisialisasi objek data
+            $data = new M_Perkembangan();  // Ganti Perkembangan dengan nama model yang sesuai
+
+            // Set properti dari request
+            $data->title_perkembangan = $validated['title_perkembangan'];
+            $data->desc_perkembangan = $validated['perkembangan'];
+
+            // Simpan data ke database
+            $data->save();
+
+            // Komit transaksi jika berhasil
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data saved successfully',
+                'data' => $data,
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Error saving data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     public function updatePerkembangan(Request $request, $id)
     {
         // Temukan data berdasarkan ID
-        $data = TentangKami::find($id);
+        $data = M_Perkembangan::find($id);
 
         // Jika data tidak ditemukan, kembalikan respon JSON dengan pesan error
         if (!$data) {

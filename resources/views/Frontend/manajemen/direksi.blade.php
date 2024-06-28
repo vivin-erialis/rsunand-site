@@ -4,34 +4,44 @@
     @include('Frontend.layouts.header')
     <div class="container-xxl project py-5">
         <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h4 class="section-title"> Direksi</h4>
-                <h1 class="display-5 mb-4">Rs Universitas Andalas</h1>
-            </div>
             <div class="container-xxl py-5">
                 <div class="container">
-                    <div class="row g-0 team-items">
-                        @forelse ($data as $data)
-                            <div class=" col-md-4 p-3 wow fadeInUp " data-wow-delay="0.3s">
-                                <div class="row team-item position-relative card-dokter">
-                                    <div class="col-md-5 position-relative text-center">
-                                        <img class="img-fluid m-2"
-                                            src="{{ empty($data->foto) ? asset('assets/img/rsunandlogo.png') : asset('images/dokter/' . $data->foto) }}">
-                                    </div>
-                                    <div class="col-md-7 bg-light p-3">
-                                        <h5 class="mt-1">{{ $data->gelar_depan  ?? '' }} {{ $data->nama ?? '' }}
-                                            {{ $data->gelar_belakang }}</h5>
-                                        <h5 class="mt-1">{{ $data->desc_jabatan }}</h5>
+                    @foreach ($direksi as $item)
+                        @if ($item->id_jabatan == 1)
+                            <div class="row g-5">
+                                <div class="col-lg-8 wow fadeIn" data-wow-delay="0.5s">
+                                    <h3 class="section-title" style="letter-spacing: 1px;">{{ $item->desc_jabatan }}</h3>
+                                    <div style="font-size: 14px; text-align: justify">
+                                        <h3 style=""> {{ $item->gelar_depan }} {{ $item->nama }} {{ $item->gelar_belakang }}</h3>
+                                        <p class="mb-4">{!! $item->pendidikan !!}</p>
                                     </div>
                                 </div>
+                                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                                    <!-- <div class="about-img"> -->
+                                        <img class="img-fluid" src="{{ asset('/../images/dokter/' . $item->foto) }}" alt="{{ $item->gelar_depan }} {{ $item->nama }} {{ $item->gelar_belakang }}" style="width: 250px; border-radius: 10px;">
+                                    <!-- </div> -->
+                                </div>
                             </div>
-                        @empty
-                            <h4 class="text-center"><strong>Data Belum Tersedia</strong></h4>
-                        @endforelse
-                    </div>
+                        @else
+                        <hr>
+                        <div class="row g-5">
+                            <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                                <!-- <div class="card"> -->
+                                    <img class="img-fluid" src="{{ asset('/../images/dokter/' . $item->foto) }}" alt="{{ $item->gelar_depan }} {{ $item->nama }} {{ $item->gelar_belakang }}" style="width: 250px; border-radius: 10px;">
+                                <!-- </div> -->
+                            </div>
+                            <div class="col-lg-8 wow fadeIn" data-wow-delay="0.5s">
+                                <div style="text-align: justify; padding-top: 20px;">
+                                    <h3 class="section-title">{{ $item->desc_jabatan }}</h3>
+                                    <h3 style=""> {{ $item->gelar_depan }} {{ $item->nama }} {{ $item->gelar_belakang }}</h3>
+                                    <p class="mb-4">{{ $item->pendidikan }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

@@ -9,6 +9,7 @@ use App\Models\Dokter;
 use App\Models\KategoriArtikel;
 use App\Models\Spesialis;
 use App\Models\TentangKami;
+use App\Models\M_Perkembangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -102,7 +103,7 @@ class InformasiController extends Controller
     }
 
     public function perkembanganRs() {
-        $perkembangan = TentangKami::all();
+        $perkembangan = M_Perkembangan::orderBy('created_at', 'desc')->get();
         return view('Frontend.tentang-kami.perkembangan-rs', [
             'headerStart' => 'Perkembangan Rumah Sakit Universitas Andalas',
             'perkembangan' => $perkembangan

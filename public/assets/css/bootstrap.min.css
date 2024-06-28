@@ -4995,10 +4995,10 @@ fieldset:disabled .btn {
     align-items: center;
     width: 100%;
     padding: 1rem 1.25rem;
-    font-size: 1rem;
-    color: #777;
+    font-size: 1.4rem;
+    color: #575555;
     text-align: left;
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.03);
     border: 0;
     border-radius: 0;
     overflow-anchor: none;
@@ -5012,8 +5012,8 @@ fieldset:disabled .btn {
 }
 
 .accordion-button:not(.collapsed) {
-    color: #a57f5b;
-    background-color: #f8f4f0;
+    color: #1C7C3D;
+    background-color: rgba(0, 0, 0, 0.03);
     box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125)
 }
 
@@ -5090,7 +5090,8 @@ fieldset:disabled .btn {
 }
 
 .accordion-body {
-    padding: 1rem 1.25rem
+    padding: 1rem 1.25rem;
+    font-size: 14px;
 }
 
 .accordion-flush .accordion-collapse {

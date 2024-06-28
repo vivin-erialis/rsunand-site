@@ -145,7 +145,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::put('/sejarah/{id}', [TentangKamiController::class, 'updateSejarah']);
 
     // perkembangan
-    Route::get('/perkembangan', [TentangKamiController::class, 'indexPerkembangan']);
+    Route::get('/perkembangan', [TentangKamiController::class, 'indexPerkembangan'])->name('indexPerkembangan');
+    Route::post('/perkembangan/add', [TentangKamiController::class, 'addPerkembangan']);
     Route::get('/perkembangan/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
     Route::put('/perkembangan/{id}', [TentangKamiController::class, 'updatePerkembangan']);
 
