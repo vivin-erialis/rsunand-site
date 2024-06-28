@@ -15,6 +15,22 @@
             <div class="artikel-layanan">
                 <p>{!! $layanan->desc !!}</p>
             </div>
+
+            <div class="mt-2 px-2">
+                @if(!empty($gambar))
+                    <h3>Foto Lainnya</h3>
+                    <div class="slider-wrapper">
+                        @foreach($gambar as $index => $img)
+                            @if($index > 0) <!-- Skip the first image -->
+                                <div class="slider-item">
+                                    <img loading="lazy" style="width: 100%" src="{{ asset('/../images/layanan/' . $img) }}" alt="Foto Layanan {{ $index + 1 }}">
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                @endif
+
+            </div>
         </div>
     </section>
     <style>
@@ -28,6 +44,15 @@
         .artikel-layanan {
             text-align: justify;
             padding-top: 30px;
+        }
+        .slider-wrapper {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+        }
+        .slider-item {
+            flex: 0 0 auto;
+            width: 300px;
         }
     </style>
 @endsection
