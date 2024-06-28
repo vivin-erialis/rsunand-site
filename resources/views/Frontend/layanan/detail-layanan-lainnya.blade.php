@@ -1,49 +1,63 @@
 @extends('Frontend.layouts.main')
 @section('title', 'Berita')
 @section('content')
-@include('Frontend.layanan.header-layanan')
-<div class="">
-    <div class="container">
-        <div class="">
-            <div class="p-2" style="font-size: 15px !important;">
-                <img  style="width: 100%; height: 100%; object-fit: cover;"
-                src="{{ asset('/../images/layanan/' . $layanan->thumbnail) }}">
-               <p>{!! $layanan->desc !!}</p>
-
+    @include('Frontend.layanan.header-layanan')
+    <section id="layanan" class="layanan bg-section">
+        <div class="container" style="font-size: 15px !important;">
+            @php
+                // Ambil path gambar dari database ya
+                $gambar = $layanan->thumbnail;
+                $backgroundImage = asset('/../images/layanan/' . $gambar);
+            @endphp
+            <div class="background-div"
+                style="background-image: url('{{ $backgroundImage }}'); height: 400px; width: 100%; background-size: cover; background-position: center;">
             </div>
-            <div class="mt-2 px-2">
+
+            <div class="artikel-layanan">
+                <p>{!! $layanan->desc !!}</p>
+            </div>
+
+            <div class="mt-2">
                 @php
                     $gambarList = json_decode($layanan->gambar, true);
                 @endphp
 
-                @if(!empty($gambarList) && is_array($gambarList))
+                @if (!empty($gambarList) && is_array($gambarList))
                     <h3>Galeri Foto</h3>
                     <div class="slider-wrapper">
-                        @foreach($gambarList as $index => $img)
+                        @foreach ($gambarList as $index => $img)
                             <div class="slider-item">
-                                <img loading="lazy" style="width: 100%" src="{{ asset('images/layanan/' . $img) }}" alt="Foto Layanan {{ $index + 1 }}">
+                                <img loading="lazy" style="width: 100%" src="{{ asset('images/layanan/' . $img) }}"
+                                    alt="Foto Layanan {{ $index + 1 }}">
                             </div>
                         @endforeach
                     </div>
                 @endif
             </div>
 
-
-        </div>
-    </div>
-
-    <!-- Tambahkan gaya dan skrip untuk slider -->
+    </section>
     <style>
+        #layanan {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 73%;
+        }
+
+        .artikel-layanan {
+            text-align: justify;
+            padding-top: 30px;
+        }
+
         .slider-wrapper {
             display: flex;
             overflow-x: auto;
             gap: 10px;
         }
+
         .slider-item {
             flex: 0 0 auto;
             width: 300px;
         }
     </style>
-
-</div>
 @endsection
