@@ -43,7 +43,7 @@ Route::get('bagian-instalasi', [InformasiController::class, 'bagianInstalasi']);
 Route::get('bagian-instalasi/{id}', [InformasiController::class, 'detailBagianInstalasi']);
 
 // Layanan
-Route::prefix('layanan')->middleware('auth')->group(function () {
+Route::prefix('layanan')->group(function () {
     Route::get('layanan-unggulan', [FrontendLayananController::class, 'layananUnggulan']);
     Route::get('layanan-unggulan/{id}', [FrontendLayananController::class, 'detailLayananUnggulan']);
     Route::get('layanan-kesehatan', [FrontendLayananController::class, 'layananKesehatan']);
