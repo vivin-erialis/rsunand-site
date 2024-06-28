@@ -1,5 +1,5 @@
 @extends('Frontend.layouts.main')
-@section('title', 'Berita')
+@section('title', 'Layanan Rs Unand')
 @section('content')
     @include('Frontend.layanan.header-layanan')
     <section id="layanan" class="layanan bg-section">
@@ -47,6 +47,7 @@
         .artikel-layanan {
             text-align: justify;
             padding-top: 30px;
+            padding-bottom: 30px;
         }
 
         .slider-wrapper {
