@@ -87,14 +87,11 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">fasilitas</a>
                 <div class="dropdown-menu border-0 m-0">
                     @php
-                        use App\Models\Fasilitas;
-
-                        $fasilitas = Fasilitas::all();
+                        // Lakukan query langsung di Blade
+                        $fasilitas = DB::table('m_fasilitas')->get();
                     @endphp
                     @foreach ($fasilitas as $item)
-                        @if (is_object($item) && !empty($item->url))
-                            <a href="/fasilitas/{{ $item->url }}" class="dropdown-item mt-0">{{ $item->nama }}</a>
-                        @endif
+                        <a href="/fasilitas" class="dropdown-item mt-0">{{ $item->nama }}</a>
                     @endforeach
 
 
