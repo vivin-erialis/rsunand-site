@@ -24,6 +24,16 @@
                                     src="{{ asset('/../images/layanan/' . $item->thumbnail) }}">
                             </a>
 
+<<<<<<< Updated upstream
+=======
+                                @if (!empty($gambarPertama))
+                                    <a href="/layanan/layanan-unggulan/{{ $item->url }}">
+                                        <img  style="width: 100%; height: 100%; object-fit: cover;"
+                                            src="{{ asset('/../images/layanan/' . $gambarPertama) }}">
+                                    </a>
+                                @endif
+                            @endif
+>>>>>>> Stashed changes
                         </div>
                         <a href="/layanan/layanan-unggulan/{{ $item->url  }}">
                             <h5 class=" card-title">{{ $item->nama_layanan }}</h5>
