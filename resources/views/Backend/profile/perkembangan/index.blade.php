@@ -44,6 +44,7 @@
         </div>
         @include('Backend.profile.perkembangan.create')
         @include('Backend.profile.perkembangan.edit')
+        @include('Backend.profile.perkembangan.hapus')
         <script>
             $(document).ready(function() {
                 // Setup CSRF token
@@ -69,17 +70,22 @@
                             let html = '';
                             response.perkembangan.forEach(function(item) {
                                 html += '<tr>';
-                                html += '<td><p class="px-3 mb-0">' + item.title_perkembangan  +
+                                html += '<td><p class="px-3 mb-0">' + item.title_perkembangan +
                                     '</td>';
-                                html += '<td><p class="px-3 mb-0">' + item.desc_perkembangan.substr(0, 100) + '...'  +
+                                html += '<td><p class="px-3 mb-0">' + item.desc_perkembangan.substr(
+                                        0, 100) + '...' +
                                     '</td>';
 
+                                html += '<td>';
                                 html += '<td>';
                                 html +=
                                     '<button class="btn btn-sm btn-warning edit-btn" data-id="' +
                                     item.id +
                                     '" data-toggle="modal" data-target="#editModal"> <i class="fa fa-edit text-xs me-2"></i> Edit</button>';
-                               ;
+                                html +=
+                                    '<button class="btn btn-sm btn-danger mx-2 delete-btn" data-id="' +
+                                    item.id +
+                                    '" data-toggle="modal" data-target="#deleteModal"> <i class="fa fa-trash text-xs me-2"></i> Hapus</button>';
                                 html += '</td>';
                                 html += '</tr>';
                             });
@@ -154,10 +160,10 @@
                 //         console.error(error);
                 //     });
                 ClassicEditor
-                    .create(document.querySelector('#perkembangan'))
+                    .create(document.querySelector('#descPerkembangan'))
                     .then(editor => {
                         // CKEditor #editor-4 siap, tetapkan editor ke variabel global
-                        window.editor4 = editor;
+                        window.editor = editor;
                     })
                     .catch(error => {
                         console.error(error);
@@ -176,18 +182,10 @@
                             console.log(response.desc_perkembangan)
                             // Isi formulir modal dengan data artikel yang diterima dari server
                             $('#dataId').val(response.id);
-                            $('#title_perkembangan').val(response.title_perkembangan);
-                            // $('#emailAdress').val(response.email);
-                            // $('#telepon').val(response.telp);
-                            // $('#alamat').val(response.alamat);
+                            $('#titlePerkembangan').val(response.title_perkembangan);
 
-
-
-                            // if (window.editor3) {
-                            //     window.editor3.setData(response.sejarah);
-                            // }
-                            if (window.editor4) {
-                                window.editor4.setData(response.desc_perkembangan);
+                            if (window.editor) {
+                                window.editor.setData(response.desc_perkembangan);
                             }
                         },
                         error: function(xhr, status, error) {
@@ -199,7 +197,7 @@
                 $('#editArtikelForm').on('submit', function(event) {
                     event.preventDefault();
 
-                    var isi = editor4.getData();
+                    var isi = editor.getData();
 
                     // Siapkan data form
                     var formData = new FormData(this);
@@ -241,7 +239,7 @@
                 $('#addArtikelForm').on('submit', function(event) {
                     event.preventDefault();
 
-                    var isi = editor4.getData();
+                    var isi = editor.getData();
 
                     // Siapkan data form
                     var formData = new FormData(this);
@@ -281,11 +279,15 @@
                     console.log("Delete button clicked, dataId:", dataId); // Debugging
                     $('#deleteModal').modal('show');
 
+                    // Dapatkan URL route dari laravel menggunakan name route
+                    var deleteUrl = "{{ route('perkembangan.hapus', ['id' => 'dataIdPlaceholder']) }}";
+                    deleteUrl = deleteUrl.replace('dataIdPlaceholder', dataId);
+
                     // Saat konfirmasi hapus diklik, kirim permintaan penghapusan
                     $('#deleteBtn').off('click').on('click', function() {
                         $.ajax({
-                            url: '/admin/perkembangan/' + dataId,
-                            type: 'DELETE',
+                            url: deleteUrl,
+                            type: 'PUT',
                             success: function(response) {
                                 console.log(response);
                                 // Tampilkan pesan toast
@@ -303,7 +305,6 @@
                         });
                     });
                 });
-
                 loadData();
             });
         </script>

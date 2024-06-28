@@ -30,7 +30,7 @@ class TentangKamiController extends Controller
     public function getProfile()
     {
         $profile = TentangKami::all();
-        $perkembangan = M_Perkembangan::all();
+        $perkembangan = M_Perkembangan::where('statusenabled', 1)->get();
         foreach ($profile as $d) {
             $d->foto_url = asset('images/profile/' . $d->struktur_organisasi);
         }
@@ -263,7 +263,7 @@ class TentangKamiController extends Controller
             // Validasi request
             $validated = $request->validate([
                 'title_perkembangan' => 'required|string|max:255',
-                'perkembangan' => 'required|string',
+                'desc_perkembangan' => 'required|string',
             ]);
 
             // Inisialisasi objek data
@@ -271,7 +271,7 @@ class TentangKamiController extends Controller
 
             // Set properti dari request
             $data->title_perkembangan = $validated['title_perkembangan'];
-            $data->desc_perkembangan = $validated['perkembangan'];
+            $data->desc_perkembangan = $validated['desc_perkembangan'];
 
             // Simpan data ke database
             $data->save();
@@ -311,7 +311,8 @@ class TentangKamiController extends Controller
         DB::beginTransaction();
         try {
 
-            $data->perkembangan = $request->input('perkembangan');
+            $data->title_perkembangan = $request->input('title_perkembangan');
+            $data->desc_perkembangan = $request->input('desc_perkembangan');
 
             $data->save();
 
@@ -332,6 +333,41 @@ class TentangKamiController extends Controller
             ], 500);
         }
     }
+
+    public function hapusPerkembangan(Request $request, $id)
+    {
+        // Temukan data berdasarkan ID
+        $data = M_Perkembangan::find($id);
+
+        // Jika data tidak ditemukan, kembalikan respon JSON dengan pesan error
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data not found',
+            ], 404);
+        }
+
+        DB::beginTransaction();
+        try {
+            $data->update(['statusenabled' => 0]);
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data deleted successfully',
+                'data' => $data,
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'success' => false,
+                'message' => 'Error updating data',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     public function indexVisiMisi()
     {
         return view('Backend.profile.visi misi.index', [

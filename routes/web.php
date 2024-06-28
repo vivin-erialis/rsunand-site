@@ -149,6 +149,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/perkembangan/add', [TentangKamiController::class, 'addPerkembangan']);
     Route::get('/perkembangan/{id}/edit', [TentangKamiController::class, 'getDataforEdit']);
     Route::put('/perkembangan/{id}', [TentangKamiController::class, 'updatePerkembangan']);
+    Route::put('/admin/perkembangan/{id}', [TentangKamiController::class, 'hapusPerkembangan'])->name('perkembangan.hapus');
 
     // struktur organisasi
     Route::get('/struktur-organisasi', [TentangKamiController::class, 'indexStrukturOrganisasi']);

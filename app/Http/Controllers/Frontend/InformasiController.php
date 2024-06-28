@@ -103,7 +103,9 @@ class InformasiController extends Controller
     }
 
     public function perkembanganRs() {
-        $perkembangan = M_Perkembangan::orderBy('created_at', 'desc')->get();
+        $perkembangan = M_Perkembangan::orderBy('created_at', 'desc')
+        ->where('statusenabled', '=', 1)
+        ->get();
         return view('Frontend.tentang-kami.perkembangan-rs', [
             'headerStart' => 'Perkembangan Rumah Sakit Universitas Andalas',
             'perkembangan' => $perkembangan

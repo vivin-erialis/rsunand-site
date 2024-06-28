@@ -18,14 +18,14 @@
                         <div class="col-md-12">
                             <label>Heading Perkembangan</label>
                             <div class="mb-3">
-                                <input id="title_perkembangan" class="form-control" name="title_perkembangan" placeholder="Tahun 2024"></input>
+                                <input id="titlePerkembangan" class="form-control" name="title_perkembangan" placeholder="Tahun 2024"></input>
                             </div>
                         </div>
                         <div class="col-md-12">
 
                             <label>Perkembangan</label>
                             <div class="mb-3">
-                                <textarea id="perkembangan" class="form-control" name="perkembangan" placeholder="Masukkan perkembangan"></textarea>
+                                <textarea id="descPerkembangan" class="form-control" name="desc_perkembangan" placeholder="Masukkan perkembangan"></textarea>
                             </div>
                             <div class="">
                                 <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">
