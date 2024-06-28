@@ -5,7 +5,7 @@
     <section id="layanan" class="layanan bg-section">
         <div class="container" style="font-size: 15px !important;">
             @php
-                // Ambil path gambar dari database
+                // Ambil path gambar dari database ya
                 $gambar = $layanan->thumbnail;
                 $backgroundImage = asset('/../images/layanan/' . $gambar);
             @endphp
