@@ -19,27 +19,17 @@
                     <div class="fact-item text-center p-4 h-100pt-0">
                         <div class="fact-icon">
                             {{-- <i class="fa fa-hospital fs-5"></i> --}}
-                            @if ($item->gambar)
-                                @php
-                                    $gambarArray = json_decode($item->gambar);
-                                    if ($gambarArray) {
-                                        $gambarPertama = reset($gambarArray);
-                                    }
-                                @endphp
+                            <a href="/layanan/layanan-unggulan/{{ $item->url }}">
+                                <img  style="width: 100%; height: 100%; object-fit: cover;"
+                                    src="{{ asset('/../images/layanan/' . $item->thumbnail) }}">
+                            </a>
 
-                                @if (!empty($gambarPertama))
-                                    <a href="/layanan/layanan-lainnya/{{ $item->url }}">
-                                        <img  style="width: 100%; height: 100%; object-fit: cover;"
-                                            src="{{ asset('/../images/layanan/' . $gambarPertama) }}">
-                                    </a>
-                                @endif
-                            @endif
                         </div>
-                        <a href="/layanan/layanan-kesehatan/{{ $item->url  }}">
+                        <a href="/layanan/layanan-unggulan/{{ $item->url  }}">
                             <h5 class=" card-title">{{ $item->nama_layanan }}</h5>
                         </a>
                         <p class="">{!! Str::limit($item->desc, 80, '...') !!}</p>
-                        <a href="/layanan/layanan-kesehatan/{{ $item->url  }}" class="card-button-1">Read More</a>
+                        <a href="/layanan/layanan-unggulan/{{ $item->url  }}" class="card-button-1">Read More</a>
 
 
                     </div>

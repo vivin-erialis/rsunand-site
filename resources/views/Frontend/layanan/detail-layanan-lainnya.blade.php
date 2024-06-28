@@ -6,45 +6,28 @@
     <div class="container">
         <div class="">
             <div class="p-2" style="font-size: 15px !important;">
-                @php
-                    // Decode the JSON containing the image file names
-                    $gambar = json_decode($layanan->gambar);
-
-                    // Split the content into paragraphs
-                    $paragraf = explode("</p>", $layanan->desc);
-
-                    // Output the first image as cover at the top
-                    if (!empty($gambar)) {
-                        echo '<div class="cover-image mb-4">';
-                        echo '<img loading="lazy" class="" style="width: 100%" src="' . asset('/../images/layanan/' . $gambar[0]) . '">';
-                        echo '</div>';
-                    }
-
-                    // Output paragraphs
-                    for ($i = 0; $i < count($paragraf); $i++) {
-                        echo '<p class="">' . $paragraf[$i] . '</p>';
-                    }
-                @endphp
+                <img  style="width: 100%; height: 100%; object-fit: cover;"
+                src="{{ asset('/../images/layanan/' . $layanan->thumbnail) }}">
+               <p>{!! $layanan->desc !!}</p>
 
             </div>
-            <div class="slider mt-2 px-2">
-                @if(!empty($gambar))
-                    <h3>Foto Lainnya</h3>
+            <div class="mt-2 px-2">
+                @php
+                    $gambarList = json_decode($layanan->gambar, true);
+                @endphp
+
+                @if(!empty($gambarList) && is_array($gambarList))
+                    <h3>Galeri Foto</h3>
                     <div class="slider-wrapper">
-                        @foreach($gambar as $index => $img)
-                            @if($index > 0) <!-- Skip the first image -->
-                                <div class="slider-item">
-                                    <img loading="lazy" style="width: 100%" src="{{ asset('/../images/layanan/' . $img) }}" alt="Foto Layanan {{ $index + 1 }}">
-                                </div>
-                            @endif
+                        @foreach($gambarList as $index => $img)
+                            <div class="slider-item">
+                                <img loading="lazy" style="width: 100%" src="{{ asset('images/layanan/' . $img) }}" alt="Foto Layanan {{ $index + 1 }}">
+                            </div>
                         @endforeach
                     </div>
                 @endif
-                <div class="mt-4">
-                    <h2 class=""></h2>
-                    {{-- <a href="/laya nan-lainnya" class="card-button"> <i class="fas fa-arrow-left me-2"></i>Kembali</a> --}}
-                </div>
             </div>
+
 
         </div>
     </div>

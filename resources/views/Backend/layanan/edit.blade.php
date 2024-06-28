@@ -43,9 +43,20 @@
                             <div class="mb-3">
                                 <textarea id="descLayanan" class="form-control" name="desc" placeholder="Masukkan isi artikel"></textarea>
                             </div>
-                            <label>Gambar</label>
-                            <input type="file" class="form-control mb-3" id="gambar" name="gambar[]" multiple>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Thumbnail</label>
+                                    <input type="file" class="form-control mb-3" id="thumbnail" name="thumbnail"
+                                        >
 
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Gambar</label>
+                                    <input type="file" class="form-control mb-3" id="gambar" name="gambar[]"
+                                        multiple>
+
+                                </div>
+                            </div>
                             <div class="">
                                 <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">
                                     <i class="fa fa-save me-1 text-xs"></i> Simpan

@@ -63,6 +63,10 @@ class LayananController extends Controller
                     $gambarPaths[] = $namaGambar;
                 }
             }
+            if ($request->hasFile('thumbnail')) {
+                $thumbnail = time() . '_' . $request->file('thumbnail')->getClientOriginalName();
+                $request->file('thumbnail')->move(public_path('images/layanan'), $thumbnail);
+            }
 
             // Simpan data ke tabel m_layanan_det menggunakan query SQL
             DB::table('m_layanan_det')->insert([
@@ -80,6 +84,7 @@ class LayananController extends Controller
                 'id_layanan_det' => $mLayananDetId,
                 'desc' => $request->desc,
                 'gambar' => json_encode($gambarPaths),
+                'thumbnail' => $thumbnail,
             ]);
 
             DB::commit();
@@ -124,6 +129,7 @@ class LayananController extends Controller
 
         $slug = Str::limit(Str::slug($request->nama_layanan), 50, '');
         $gambarPaths = [];
+        $thumbnail = null;
 
         DB::beginTransaction();
 
@@ -156,6 +162,21 @@ class LayananController extends Controller
                 }
             }
 
+            // Proses dan simpan thumbnail jika ada
+            if ($request->hasFile('thumbnail')) {
+                // Hapus thumbnail lama
+                if ($tLayananDet->thumbnail) {
+                    $oldThumbnailPath = public_path('images/layanan') . '/' . $tLayananDet->thumbnail;
+                    if (file_exists($oldThumbnailPath)) {
+                        unlink($oldThumbnailPath);
+                    }
+                }
+
+                // Simpan thumbnail baru
+                $thumbnail = time() . '_' . $request->file('thumbnail')->getClientOriginalName();
+                $request->file('thumbnail')->move(public_path('images/layanan'), $thumbnail);
+            }
+
             // Update data di tabel m_layanan_det
             DB::table('m_layanan_det')->where('id', $tLayananDet->id_layanan_det)->update([
                 'nama_layanan' => $request->nama_layanan,
@@ -171,6 +192,10 @@ class LayananController extends Controller
                 $updateData['gambar'] = json_encode($gambarPaths);
             }
 
+            if ($thumbnail) {
+                $updateData['thumbnail'] = $thumbnail;
+            }
+
             DB::table('t_layanan_det')->where('id', $id)->update($updateData);
 
             DB::commit();
@@ -184,6 +209,7 @@ class LayananController extends Controller
             return response()->json(['message' => 'Terjadi kesalahan saat mengupdate data.'], 500);
         }
     }
+
     public function hapusLayanan($id)
     {
         DB::beginTransaction();
@@ -224,5 +250,4 @@ class LayananController extends Controller
             return response()->json(['message' => 'Terjadi kesalahan saat menghapus data.'], 500);
         }
     }
-
 }

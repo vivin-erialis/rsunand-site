@@ -40,10 +40,22 @@
                                 <div class="mb-3">
                                     <textarea type="text" id="editor-2" aria-label="Name" aria-describedby="name-addon" name="desc"></textarea>
                                 </div>
-                                <label>Gambar</label>
-                                <div class="mb-3">
-                                    <input type="file" class="form-control" aria-describedby="email-addon"
-                                        name="gambar[]" multiple>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Thumbnail</label>
+                                        <div class="mb-3">
+                                            <input type="file" class="form-control" aria-describedby="email-addon"
+                                                name="thumbnail">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Gambar</label>
+                                        <div class="mb-3">
+                                            <input type="file" class="form-control" aria-describedby="email-addon"
+                                                name="gambar[]" multiple>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="">
                                     <button type="submit" class="btn btn-sm btn-success w-13 mt-4 mb-3 float-end">

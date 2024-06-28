@@ -19,7 +19,7 @@ class LayananController extends Controller
         ->join('m_layanan_det', 't_layanan_det.id_layanan_det', 'm_layanan_det.id')
         ->join('m_layanan', 'm_layanan_det.id_layanan', 'm_layanan.id')
         ->where('m_layanan_det.id_layanan', '=', '1')
-        ->select('t_layanan_det.gambar', 't_layanan_det.desc', 'm_layanan_det.*', 'm_layanan.nama_kategori')
+        ->select('t_layanan_det.thumbnail', 't_layanan_det.desc', 'm_layanan_det.*', 'm_layanan.nama_kategori')
         ->get();
 
 
@@ -36,7 +36,7 @@ class LayananController extends Controller
             ->join('m_layanan_det', 't_layanan_det.id_layanan_det', 'm_layanan_det.id')
             ->join('m_layanan', 'm_layanan_det.id_layanan', 'm_layanan.id')
             ->where('m_layanan_det.id_layanan', '=', '2')
-            ->select('t_layanan_det.gambar', 't_layanan_det.desc', 'm_layanan_det.*', 'm_layanan.nama_kategori')
+            ->select('t_layanan_det.thumbnail', 't_layanan_det.desc', 'm_layanan_det.*', 'm_layanan.nama_kategori')
             ->get();
 
 
@@ -53,7 +53,7 @@ class LayananController extends Controller
             ->join('m_layanan_det', 't_layanan_det.id_layanan_det', 'm_layanan_det.id')
             ->join('m_layanan', 'm_layanan_det.id_layanan', 'm_layanan.id')
             ->where('m_layanan_det.id_layanan', '=', '3')
-            ->select('t_layanan_det.gambar', 't_layanan_det.desc', 'm_layanan_det.*', 'm_layanan.nama_kategori')
+            ->select('t_layanan_det.thumbnail', 't_layanan_det.desc', 'm_layanan_det.*', 'm_layanan.nama_kategori')
             ->get();
 
 
