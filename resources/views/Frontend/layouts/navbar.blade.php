@@ -47,7 +47,7 @@
 
                     @php
                         $layanan = \App\Models\M_layanan::all();
-                        $layananDet = \App\Models\M_lsayananDet::all();
+                        $layananDet = \App\Models\M_layananDet::all();
                     @endphp
                     @foreach($layanan as $item)
                         <div class="dropdown sub-layanan">
