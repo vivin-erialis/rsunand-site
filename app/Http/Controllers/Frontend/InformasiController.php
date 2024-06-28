@@ -9,7 +9,7 @@ use App\Models\Dokter;
 use App\Models\KategoriArtikel;
 use App\Models\Spesialis;
 use App\Models\TentangKami;
-use App\Models\M_Perkembangan;
+use App\Models\M_perkembangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -103,7 +103,7 @@ class InformasiController extends Controller
     }
 
     public function perkembanganRs() {
-        $perkembangan = M_Perkembangan::orderBy('created_at', 'desc')
+        $perkembangan = M_perkembangan::orderBy('created_at', 'desc')
         ->where('statusenabled', '=', 1)
         ->get();
         return view('Frontend.tentang-kami.perkembangan-rs', [
