@@ -23,19 +23,7 @@
                         </div>
                     </div>
                     <div class="container p-3">
-                        {{-- <table id="myTable" class="display">
-                            <thead>
-                                <tr>
-                                    <th class="text-dark text-xs font-weight-semibold">Status</th>
-                                    <th class="text-dark text-xs font-weight-semibold">Judul Artikel</th>
-                                    <th class="text-dark text-xs font-weight-semibold">Deskripsi</th>
-                                    <th class="text-dark text-xs font-weight-semibold">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="artikel-table-body">
-                                <!-- Data akan dimuat di sini menggunakan AJAX -->
-                            </tbody>
-                        </table> --}}
+
                         <table id="myTable" class="display">
                             <thead>
                                 <tr>
@@ -168,7 +156,7 @@
                     });
                 });
 
-                // Event delegation for delete button
+                // Event delegation for edit button
                 $(document).on('click', '.edit-btn', function() {
                     var dataId = $(this).data('id');
                     console.log("Edit button clicked, dataId:", dataId); // Debugging
@@ -194,6 +182,49 @@
                         }
                     });
                 });
+
+
+                $('#editArtikelForm').on('submit', function(event) {
+                    event.preventDefault();
+
+                    // var descEvent = editor3.getData();
+
+                    // Siapkan data form
+                    var formData = new FormData(this);
+                    // formData.set('descEvent', descEvent);
+
+                    var dataId = $('#dataId').val();
+
+                    $.ajax({
+                        url: '/admin/event/' + dataId,
+                        method: 'POST', // Sesuaikan dengan metode yang digunakan di rute, bisa 'PUT' atau 'PATCH'
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // alert('Artikel berhasil diperbarui!');
+                            $('#editModal').modal('hide');
+                            $('.modal-backdrop').remove();
+                            toastr.success(response.message);
+
+                            loadArticles();
+                        },
+                        error: function(xhr) {
+                            var errors = xhr.responseJSON.errors;
+                            var errorMessage = '';
+                            for (var key in errors) {
+                                if (errors.hasOwnProperty(key)) {
+                                    errorMessage += errors[key][0] + '\n';
+                                }
+                            }
+                            alert('Terjadi kesalahan:\n' + errorMessage);
+                        }
+                    });
+                });
+
 
                 // Event delegation for delete button
                 $(document).on('click', '.delete-btn', function() {

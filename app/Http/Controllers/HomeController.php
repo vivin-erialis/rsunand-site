@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
+use App\Models\Event;
 use App\Models\Fasilitas;
 use App\Models\KerjaSama;
 use App\Models\Layanan;
@@ -80,6 +81,18 @@ class HomeController extends Controller
     //         'bagianInstalasi' => $bagianInstalasi
     //     ]);
     // }
+
+
+    public function upcomingEvent()
+    {
+        $currentDate = now();
+        $data = Event::where('tanggal_akhir', '>', $currentDate)->get();
+
+        return view('Frontend.event.event', [
+            'headerStart' => 'Upcoming Event',
+            'data' => $data
+        ]);
+    }
 
     public function indexHomePage()
     {

@@ -9,9 +9,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="artikelForm" enctype="multipart/form-data">
+                <form id="editArtikelForm" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" id="artikelId" value="">
+                    <input type="hidden" id="dataId" value="">
                     <div class="row">
                         <div class="col-md-12">
                             <label>Nama Event</label>

@@ -110,37 +110,36 @@ class EventController extends Controller
                     }
                 }
 
-                // Hapus data event
-                $event->delete();
-            }
-
-            // Menangani upload gambar baru
-            $gambarPaths = [];
-            if ($request->hasFile('gambar')) {
-                foreach ($request->file('gambar') as $gambar) {
-                    $namaGambar = time() . '-' . $gambar->getClientOriginalName();
-                    $gambar->move(public_path('images/event'), $namaGambar);
-                    $gambarPaths[] = $namaGambar;
+                // Menangani upload gambar baru
+                $newGambarPaths = [];
+                if ($request->hasFile('gambar')) {
+                    foreach ($request->file('gambar') as $gambar) {
+                        $namaGambar = time() . '-' . $gambar->getClientOriginalName();
+                        $gambar->move(public_path('images/event'), $namaGambar);
+                        $newGambarPaths[] = $namaGambar;
+                    }
                 }
-            }
 
-            // Masukkan data baru
-            $newEvent = Event::create([
-                'nama_event' => $request->nama_event,
-                'lokasi' => $request->lokasi,
-                'desc' => $request->desc,
-                'tanggal_awal' => $request->tanggal_awal,
-                'tanggal_akhir' => $request->tanggal_akhir,
-                'jam_awal' => $request->jam_awal,
-                'jam_akhir' => $request->jam_akhir,
-                'gambar' => json_encode($gambarPaths),
-            ]);
+                // Update data event
+                $event->update([
+                    'nama_event' => $request->nama_event,
+                    'lokasi' => $request->lokasi,
+                    'desc' => $request->desc,
+                    'tanggal_awal' => $request->tanggal_awal,
+                    'tanggal_akhir' => $request->tanggal_akhir,
+                    'jam_awal' => $request->jam_awal,
+                    'jam_akhir' => $request->jam_akhir,
+                    'gambar' => json_encode($newGambarPaths),
+                ]);
+            } else {
+                return response()->json(['message' => 'Event tidak ditemukan.'], 404);
+            }
 
             DB::commit();
 
             return response()->json([
                 'message' => 'Data Event Berhasil Diperbarui',
-                'event' => $newEvent
+                'event' => $event
             ], 200);
         } catch (\Exception $e) {
             DB::rollBack();
