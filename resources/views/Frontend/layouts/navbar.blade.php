@@ -83,6 +83,25 @@
                 </div>
             </div>
             <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pasien & Pengunjung</a>
+                <div class="dropdown-menu border-0 m-0 ">
+                    <div class="row mx-2" style="width: 590px">
+                        <div class="col-md-6">
+                            <hr>
+                            <p><a href="{{ route('petunjukLokasi') }}" class="about-item">Petunjuk Lokasi</a></p>
+                            <p><a href="{{ route('fasilitas') }}" class="about-item">Fasilitas</a> </p>
+
+                        </div>
+                        <div class="col-md-6">
+                            <hr>
+                            <p><a href="{{ route('rawatInap') }}" class="about-item">Rawat Inap</a></p>
+                            <p><a href="{{ route('jamBezuk') }}" class="about-item">Jam Bezuk</a></p>
+                            <p><a href="{{ route('faq') }}" class="about-item">FAQ</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">fasilitas</a>
                 <div class="dropdown-menu border-0 m-0">
                     @php
@@ -95,7 +114,7 @@
 
 
                 </div>
-            </div>
+            </div> -->
             <a href="/upcoming-event"
                 class="nav-item nav-link  {{ Request::is('upcoming-event') ? 'active' : '' }}">Upcoming Event</a>
             <a href="/pendidikan-penelitian"

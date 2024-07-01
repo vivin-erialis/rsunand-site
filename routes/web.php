@@ -12,7 +12,7 @@ use App\Http\Controllers\Frontend\ArtikelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Frontend\InformasiController;
 use App\Http\Controllers\Backend\SliderController;
-use App\Http\Controllers\Frontend\FasilitasController;
+use App\Http\Controllers\Frontend\PasienPengunjungController;
 use App\Http\Controllers\Frontend\LayananController as FrontendLayananController;
 use App\Http\Controllers\Backend\TentangKamiController;
 use App\Http\Controllers\Backend\VideoController as BackendVideoController;
@@ -43,18 +43,13 @@ Route::get('bagian-instalasi', [InformasiController::class, 'bagianInstalasi']);
 Route::get('bagian-instalasi/{id}', [InformasiController::class, 'detailBagianInstalasi']);
 
 // Layanan
-Route::prefix('layanan')->group(function () {
-    Route::get('layanan-unggulan', [FrontendLayananController::class, 'layananUnggulan']);
-    Route::get('layanan-unggulan/{id}', [FrontendLayananController::class, 'detailLayananUnggulan']);
-    Route::get('layanan-kesehatan', [FrontendLayananController::class, 'layananKesehatan']);
-    Route::get('layanan-kesehatan/{id}', [FrontendLayananController::class, 'detailLayananKesehatan']);
-    Route::get('layanan-lainnya', [FrontendLayananController::class, 'layananLainnya']);
-    Route::get('layanan-lainnya/{id}', [FrontendLayananController::class, 'detailLayananLainnya']);
+Route::prefix('pasien-pengunjung')->group(function () {
+    Route::get('/petunjuk-lokasi', [PasienPengunjungController::class, 'petunjukLokasi'])->name('petunjukLokasi');
+    Route::get('/fasilitas', [PasienPengunjungController::class, 'fasilitas'])->name('fasilitas');
+    Route::get('/rawat-inap', [PasienPengunjungController::class, 'rawatInap'])->name('rawatInap');
+    Route::get('/informasi-jam-bezuk', [PasienPengunjungController::class, 'jamBezuk'])->name('jamBezuk');
+    Route::get('/landingpage#faq', [PasienPengunjungController::class, 'faq'])->name('faq');
 });
-
-
-// Fasilitas
-Route::get('fasilitas/{id}', [FasilitasController::class, 'fasilitas']);
 
 // Artikel
 Route::get('berita', [ArtikelController::class, 'berita']);
@@ -62,6 +57,15 @@ Route::get('/berita/{id}', [ArtikelController::class, 'detailBerita']);
 Route::get('/ilmiah/{id}', [ArtikelController::class, 'detailIlmiah']);
 Route::get('/pendidikan-penelitian/{id}', [ArtikelController::class, 'detailPendidikanPelatihan']);
 Route::get('/penyakit-pengobatan/{id}', [ArtikelController::class, 'detailPenyakitPengobatan']);
+
+Route::prefix('pasien-pengunjung')->group(function () {
+    Route::get('layanan-unggulan', [FrontendLayananController::class, 'layananUnggulan']);
+    Route::get('layanan-unggulan/{id}', [FrontendLayananController::class, 'detailLayananUnggulan']);
+    Route::get('layanan-kesehatan', [FrontendLayananController::class, 'layananKesehatan']);
+    Route::get('layanan-kesehatan/{id}', [FrontendLayananController::class, 'detailLayananKesehatan']);
+    Route::get('layanan-lainnya', [FrontendLayananController::class, 'layananLainnya']);
+    Route::get('layanan-lainnya/{id}', [FrontendLayananController::class, 'detailLayananLainnya']);
+});
 
 Route::get('ilmiah', [ArtikelController::class, 'ilmiah']);
 Route::get('pendidikan-penelitian', [ArtikelController::class, 'pendidikanPelatihan']);
