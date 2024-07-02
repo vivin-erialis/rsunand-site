@@ -58,7 +58,7 @@ Route::get('/ilmiah/{id}', [ArtikelController::class, 'detailIlmiah']);
 Route::get('/pendidikan-penelitian/{id}', [ArtikelController::class, 'detailPendidikanPelatihan']);
 Route::get('/penyakit-pengobatan/{id}', [ArtikelController::class, 'detailPenyakitPengobatan']);
 
-Route::prefix('pasien-pengunjung')->group(function () {
+Route::prefix('layanan')->group(function () {
     Route::get('layanan-unggulan', [FrontendLayananController::class, 'layananUnggulan']);
     Route::get('layanan-unggulan/{id}', [FrontendLayananController::class, 'detailLayananUnggulan']);
     Route::get('layanan-kesehatan', [FrontendLayananController::class, 'layananKesehatan']);
