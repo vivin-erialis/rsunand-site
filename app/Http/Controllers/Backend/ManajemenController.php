@@ -105,8 +105,7 @@ class ManajemenController extends Controller
             'id_bidang'               => 'required',
             'pegawai'                 => 'required|string',
             'jabatan'                 => 'required|string',
-            'periode_jabatan_awal'    => 'required',
-            'periode_jabatan_akhir'   => 'required'
+
         ]);
 
         if ($validator->fails()) {

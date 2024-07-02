@@ -54,16 +54,14 @@
                 <h1 class="display-5 mb-4">Rumah Sakit Universitas Andalas</h1>
             </div>
 
-            <div class="slider-container">
-                <div class="slider" id="slider">
+            <div class="container-kerjasama">
                     @foreach ($kerjaSama as $item)
-                        <div class="slides" style="margin: auto !important">
+                        <div class="icon-kerjasama" style="margin: auto !important">
                             <img style="width: 100%; height: 100%; object-fit: cover; padding: 5px;"
                                 src="{{ asset('images/kerjasama/' . $item->gambar) }}" class="mx-1"
                                 alt="{{ $item->nama_kerjasama }}">
                         </div>
                     @endforeach
-                </div>
                 <button class="prev" onclick="prevSlide()">&#10094;</button>
                 <button class="next" onclick="nextSlide()">&#10095;</button>
             </div>
@@ -100,10 +98,10 @@
                                 @endif
                             @endif
                             <div class="service-text p-5">
-                                <i class="fa fa-hospital flex-shrink-0 mb-4" style="color: white; font-size: 40px"></i>
-                                <h2 class="mb-3" style="color: white">{{ $item->nama_layanan }}</h2>
-                                <p class="mb-4" style="font-size: 14px">{{ Str::limit($item->desc, 80, '...') }}.
-                                </p>
+                                <i class="fa fa-hospital flex-shrink-0 mb-4" style="color: white; font-size: 20px"></i>
+                                <h2 class="" style="color: white">{{ $item->nama_layanan }}</h2>
+                                <span class="mb-4" style="font-size: 14px">{!! Str::limit($item->desc, 80, '...') !!}
+                                </span>
                                 <a class="btn" href="/layanan-unggulan/{{ $item->url }}"><i
                                         class="fa fa-plus text-primary me-3"></i>Read
                                     More</a>

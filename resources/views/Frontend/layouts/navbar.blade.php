@@ -118,7 +118,7 @@
             <a href="/upcoming-event"
                 class="nav-item nav-link  {{ Request::is('upcoming-event') ? 'active' : '' }}">Upcoming Event</a>
             <a href="/pendidikan-penelitian"
-                class="nav-item nav-link  {{ Request::is('pendidikan-penelitian') ? 'active' : '' }}">Pendidikan dan
+                class="nav-item nav-link  {{ Request::is('pendidikan-penelitian') ? 'active' : '' }}">Pendidikan &
                 Penelitian</a>
 
             <a href="/kontak" class="nav-item nav-link  {{ Request::is('kontak') ? 'active' : '' }}">Kontak</a>
