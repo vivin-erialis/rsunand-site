@@ -4,7 +4,7 @@ use App\Http\Controllers\Backend\ArtikelController as BackendArtikelController;
 use App\Http\Controllers\Backend\ManajemenController;
 use \App\Http\Controllers\Backend\DokterController;
 use App\Http\Controllers\Backend\EventController;
-use App\Http\Controllers\Backend\FasilitasController as BackendFasilitasController;
+use App\Http\Controllers\Backend\PasienPengunjungController as BackendPasienPengunjungController;
 use App\Http\Controllers\Backend\KerjasamaController;
 use App\Http\Controllers\Backend\LayananController;
 use App\Http\Controllers\Backend\LoginController;
@@ -48,7 +48,7 @@ Route::prefix('pasien-pengunjung')->group(function () {
     Route::get('/fasilitas', [PasienPengunjungController::class, 'fasilitas'])->name('fasilitas');
     Route::get('/rawat-inap', [PasienPengunjungController::class, 'rawatInap'])->name('rawatInap');
     Route::get('/informasi-jam-bezuk', [PasienPengunjungController::class, 'jamBezuk'])->name('jamBezuk');
-    Route::get('/landingpage#faq', [PasienPengunjungController::class, 'faq'])->name('faq');
+    Route::get('/faq', [PasienPengunjungController::class, 'faq'])->name('faq');
 });
 
 // Artikel
@@ -129,11 +129,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/kerjasama/{id}', [KerjasamaController::class, 'hapusKerjasama']);
 
     // fasilitas
-    Route::get('/fasilitas', [BackendFasilitasController::class, 'indexFasilitas']);
-    Route::post('/fasilitas', [BackendFasilitasController::class, 'saveFasilitas']);
-    Route::get('/fasilitas/{id}/edit', [BackendFasilitasController::class, 'getDataforEdit']);
-    Route::put('/fasilitas/{id}', [BackendFasilitasController::class, 'updateFasilitas']);
-    Route::delete('/fasilitas/{id}', [BackendFasilitasController::class, 'hapusFasilitas']);
+    Route::get('/pasien-pengunjung', [BackendPasienPengunjungController::class, 'indexPasienPengunjung']);
+    // Route::post('/fasilitas', [BackendFasilitasController::class, 'saveFasilitas']);
+    // Route::get('/fasilitas/{id}/edit', [BackendFasilitasController::class, 'getDataforEdit']);
+    // Route::put('/fasilitas/{id}', [BackendFasilitasController::class, 'updateFasilitas']);
+    // Route::delete('/fasilitas/{id}', [BackendFasilitasController::class, 'hapusFasilitas']);
 
     // slider
     Route::get('/slider', [SliderController::class, 'indexSlider']);

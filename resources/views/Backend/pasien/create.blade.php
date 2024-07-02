@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="background-color: whitesmoke;">
-                <h5 class="modal-title" id="addArticleModalLabel">Tambah Data Fasilitas</h5>
+                <h5 class="modal-title" id="addArticleModalLabel">Tambah Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,23 +15,25 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Nama Fasilitas</label>
+                                    <label>Jenis Data</label>
+                                    <div class="mb-3">
+                                        <select name="nama_value" id="nama_value" class="form-control">
+                                            <option value="1">Petunjuk Lokasi</option>
+                                            <option value="2">Fasilitas</option>
+                                            <option value="3">Rawat Inap</option>
+                                            <option value="4">Jam Bezuk</option>
+                                            <option value="5">FAQ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Judul Data</label>
                                     <div class="mb-3">
                                         <input type="text" class="form-control" placeholder="masukan judul fasilitas"
                                             aria-label="Name" aria-describedby="name-addon" name="nama"
                                             id="title" required>
                                     </div>
 
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Kategori Fasilitas</label>
-                                    <div class="mb-3">
-                                        <select name="" id="" class="form-control">
-                                            @foreach ($kategoriFasilitas as $item)
-                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
                                 </div>
 
                             </div>

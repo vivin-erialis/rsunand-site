@@ -41,9 +41,9 @@
                 </div>
             </div>
         </div>
-        @include('Backend.fasilitas.create')
-        @include('Backend.fasilitas.edit')
-        @include('Backend.fasilitas.hapus')
+        @include('Backend.pasien.create')
+        @include('Backend.pasien.edit')
+        @include('Backend.pasien.hapus')
         <script>
             $(document).ready(function() {
                 // Setup CSRF token

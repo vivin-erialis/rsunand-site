@@ -175,13 +175,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link  {{ $active == 'admin/fasilitas' ? 'active' : '' }} "
-                                    href="/admin/fasilitas">
+                                <a class="nav-link  {{ $active == 'admin/pasien-pengunjung' ? 'active' : '' }} "
+                                    href="/admin/pasien-pengunjung">
                                     <div
                                         class="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                                         <i class="fa fa-building"></i>
                                     </div>
-                                    <span class="nav-link-text ms-1">Fasilitas</span>
+                                    <span class="nav-link-text ms-1">Pasien & Pengunjung</span>
                                 </a>
                             </li>
                             <li class="nav-item">

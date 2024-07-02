@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class FasilitasController extends Controller
+class PasienPengunjungController extends Controller
 {
     //
-    public function indexFasilitas()
+    public function indexPasienPengunjung()
     {
         $kategoriFasilitas = DB::table('m_fasilitas')->get();
-        return view('Backend.fasilitas.index', [
-            'active' => 'admin/fasilitas',
+        return view('Backend.pasien.index', [
+            'active' => 'admin/pasien-pengunjung',
             'fasilitas' => Fasilitas::all(),
             'kategoriFasilitas' => $kategoriFasilitas
         ]);
