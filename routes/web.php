@@ -129,7 +129,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/kerjasama/{id}', [KerjasamaController::class, 'hapusKerjasama']);
 
     // fasilitas
-    Route::get('/pasien-pengunjung', [BackendPasienPengunjungController::class, 'indexPasienPengunjung']);
+    Route::get('/data/pasien-pengunjung', [BackendPasienPengunjungController::class, 'indexPasienPengunjung']);
     // Route::post('/fasilitas', [BackendFasilitasController::class, 'saveFasilitas']);
     // Route::get('/fasilitas/{id}/edit', [BackendFasilitasController::class, 'getDataforEdit']);
     // Route::put('/fasilitas/{id}', [BackendFasilitasController::class, 'updateFasilitas']);
